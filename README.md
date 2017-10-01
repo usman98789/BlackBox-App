@@ -67,4 +67,5 @@ some questions for the client to get a better understanding of how to proceed
 with the current project.
   -> Requesting a meeting with the client (Professor) some time next week
      for some clarification of end-user requirements.
+
 |---------------------------------(end #2)---------------------------------------|
