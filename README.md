@@ -9,6 +9,7 @@ Finalized the team setup and team agreement.
 See the Working_Agreement.pdf for more details.
 
   Team Setup for first round phase:
+
     Julie - Development Leader
       - In charge of:
         - design patterns
@@ -58,12 +59,12 @@ See the Working_Agreement.pdf for more details.
 
 Meeting 2 (September 30, 2017):
 Started on creating some user stories (Prof and student). Visit 'Trello Board'
-to see the written user stories on backlog card. Narrowed down the main idea 
-of how the project will precede during the development by reviewing the current 
+to see the written user stories on backlog card. Narrowed down the main idea
+of how the project will precede during the development by reviewing the current
 stories with overlapping features directly or indirectly.
 
 Ran into some complications with user stories/requirements and came up with
-some questions for the client to get a better understanding of how to proceed 
+some questions for the client to get a better understanding of how to proceed
 with the current project.
   -> Requesting a meeting with the client (Professor) some time next week
      for some clarification of end-user requirements.
