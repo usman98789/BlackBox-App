@@ -55,6 +55,9 @@ See the Working_Agreement.pdf for more details.
       - branching separate features
       - merging branches with master
       - quality of commit messages
+
+ Duration (Hour:Minute:Second) := 1:16:37
+
 |---------------------------------(end #1)---------------------------------------|
 
 Meeting 2 (September 30, 2017):
@@ -69,4 +72,39 @@ with the current project.
   -> Requesting a meeting with the client (Professor) some time next week
      for some clarification of end-user requirements.
 
+ Duration (Hour:Minute:Second) := 0:50:58
+
 |---------------------------------(end #2)---------------------------------------|
+
+Meeting 3 (October 14, 2017):
+Started on creating and finalizing the personas based on the user stories from 
+last meeting. See Available document from the path linked above. Narrowed down 
+all personas by revising all created personas to match a realistic sense who 
+will be using the application that ties in with the corresponding course (in this
+case it will be stats).
+
+		- For the professor personas, one of them must have some attributes that
+		  relate to Professor Sohee Kang, e.g. her method to teaching, attitude
+		  towards using software, perferences, daily activity (avg time to 
+		  respond to email, frequency of uploading course notes and problem sets).
+		  As for the other pofessor personas, they must have some other traits that
+		  contrasts (can have some overlaying traits) a persona like Sohee Kang but 
+		  must be based off realistic sense of other professors that teach the same 
+		  course.
+
+		- For the students personas there must be 3 unique types. One of the 
+		  peresonas must be an average student who's traits represents most of the 
+		  students who takes the course by underlining how he/she works, preferences 
+		  (methods of contacting the professor/TA), methods of studying, attitude 
+		  towards online based applications/resources that might be used in the 
+		  course etc...
+		  The other student personas that constrasts the student mentioned above 
+		  must be one that reflects a persona who is struggling in the course with 
+		  realistic cases that might explain why and the other persona is the one 
+		  who reflect a student who excels in the course and/or is hard working.
+
+		**Each personas holds a full complete description
+
+ Duration (Hour:Minute:Second) := 1:51:33
+
+|---------------------------------(end #3)---------------------------------------|
