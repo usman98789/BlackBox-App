@@ -2,6 +2,9 @@
 To find the team working agreement PDF,
 go to: L02_06/Team/Working_Agreement.pdf
 
+To find the Project Requiements PDF,
+go to: L02_06/Requirements/Personas_UserStories.pdf
+
 <--------------------------------(Meetings)------------------------------>
 
 Meeting 1 (September 22, 2017):
@@ -103,8 +106,30 @@ case it will be stats).
 		  realistic cases that might explain why and the other persona is the one 
 		  who reflect a student who excels in the course and/or is hard working.
 
-		**Each personas holds a full complete description
+		**Each personas must holds a full complete description
+
+Complete only the main points of the personas and only the details of the personas 
+are not yet finalized and will be completed on the next meeting.
 
  Duration (Hour:Minute:Second) := 1:51:33
 
 |---------------------------------(end #3)---------------------------------------|
+
+Meeting 4 (October 14, 2017):
+Started to finalize and fix up the personas that were created from the last 
+meeting, and updated the 'Personas_UserStories.pdf' file. Removed un-needed
+details with ones that realistically reflect users who will be using the 
+developed application. Captured some personas attributes that reflects Sohee 
+Kang along with one other persona who contrasts a bit to Sohee as stats professor.
+
+Also managed to finalize the 3 contrasting student personas to help develop this 
+appication, e.g. 
+      - a student who struggles in the class
+      - an average student that represents the fair majority of the class
+      - a student who excels in the class
+
+View the metioned file at: L02_06/Requirements/Personas_UserStories.pdf
+
+ Duration (Hour:Minute:Second) := 1:12:16
+
+|---------------------------------(end #4)---------------------------------------|
