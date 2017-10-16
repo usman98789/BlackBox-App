@@ -108,7 +108,7 @@ case it will be stats).
 
 		**Each personas must holds a full complete description
 
-Complete only the main points of the personas and only the details of the personas 
+Completed only the main points of the personas and only the details of the personas 
 are not yet finalized and will be completed on the next meeting.
 
  Duration (Hour:Minute:Second) := 1:51:33
@@ -124,6 +124,7 @@ Kang along with one other persona who contrasts a bit to Sohee as stats professo
 
 Also managed to finalize the 3 contrasting student personas to help develop this 
 appication, e.g. 
+
       - a student who struggles in the class
       - an average student that represents the fair majority of the class
       - a student who excels in the class
