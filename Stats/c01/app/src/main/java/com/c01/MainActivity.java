@@ -10,12 +10,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import Database.DatabaseDriver.DatabaseSelectHelper;
+import android.widget.Toast;
+import Database.DatabaseDriver.DatabaseInsertHelper;
+
+import android.content.Context;
+import Exceptions.InvalidNameException;
+import android.text.TextUtils;
+import generics.EnumMapRoles;
+import generics.Roles;
+import user.*;
+
+
 
 
 public class MainActivity extends AppCompatActivity {
-    TextView loginInput;
-    TextView passwordInput;
-    Button loginButton;
+
+    String strUsernum;
+    String strPass;
+    Context context;
 
 
     public void showAlert() {
@@ -34,30 +47,92 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this.getApplicationContext();
 
+        if (DatabaseSelectHelper.getRoles(this.getApplicationContext()).size() < 1) {
+            try {
+                DatabaseInsertHelper.insertRole("PROF", this.getApplicationContext());
+                DatabaseInsertHelper.insertRole("STUDENT", this.getApplicationContext());
+                EnumMapRoles roleMap = new EnumMapRoles(this.getApplicationContext());
+                int id = DatabaseInsertHelper.insertNewUser("ProfA", 40, "123street", roleMap.get(Roles.PROF), "123", this.getApplicationContext());
+                int id3 = DatabaseInsertHelper.insertNewUser("StudentA", 19, "123street", roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
+                Toast.makeText(getApplicationContext(), String.valueOf(id), Toast.LENGTH_LONG).show();
+            } catch (InvalidNameException e) {
+                Toast.makeText(getApplicationContext(), String.valueOf(e), Toast.LENGTH_LONG).show();
+            }
+        }
 
-        loginInput = (TextView) findViewById(R.id.loginInput);
-        passwordInput = (TextView) findViewById(R.id.passwordInput);
-
-        loginButton = (Button) findViewById(R.id.loginButton);
-
+        Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Integer id = Integer.parseInt(loginInput.getText().toString());
-                String password = passwordInput.getText().toString();
                 Intent nextpage;
-                //TODO put in database stuff here for login
-                if (id == 1 && password.equals("one")) {
+                if (useridauthen1(context)) {
                     nextpage = new Intent(MainActivity.this, MainMenu.class);
                     startActivity(nextpage);
-//                    displayInformation("adfad");
-                } else {
-                    showAlert();
                 }
-
             }
         });
+    }
+
+    private boolean useridauthen1(Context context) {
+        EditText etUserName = (EditText) findViewById(R.id.loginInput);
+        strUsernum = etUserName.getText().toString();
+        EditText etUserPass = (EditText) findViewById(R.id.passwordInput);
+        strPass = etUserPass.getText().toString();
+        boolean useridauthen = true;
+        boolean passwordauthen = true;
+        if (TextUtils.isEmpty(strUsernum)) {
+            etUserName.setError("No UserId");
+            useridauthen = false;
+        }
+        if (TextUtils.isEmpty(strPass)) {
+            etUserPass.setError("No password");
+            passwordauthen = false;
+        }
+        boolean passed = false;
+        if (passwordauthen && useridauthen) {
+            passed = login(context);
+        }
+        return (passed);
+    }
+
+    private boolean login(Context context) {
+        int id = 0;
+        String pass;
+        EditText etUserName = (EditText) findViewById(R.id.loginInput);
+        id = Integer.valueOf(etUserName.getText().toString());
+        //Toast.makeText(getApplicationContext(), String.valueOf(id), Toast.LENGTH_LONG).show();
+        EditText etUserPass = (EditText) findViewById(R.id.passwordInput);
+        pass = etUserPass.getText().toString();
+        // Create a map of all roles in the database
+        EnumMapRoles roleMap = new EnumMapRoles(context);
+        User user = DatabaseSelectHelper.getUserDetails(id, context);
+        //Toast.makeText(getApplicationContext(), String.valueOf(user), Toast.LENGTH_LONG).show();
+        if ((user != null) && (user.getRoleId() == roleMap.get(Roles.PROF))) {
+            // Authenticate inputed password
+            Prof prof = (Prof) DatabaseSelectHelper.getUserDetails
+                    (id, context);
+            boolean passed = prof.authenticate(pass, context);
+            if (passed) {
+                // Allow Prof
+                return true;
+            } else {
+                etUserPass.setError("Invalid Prof password");
+            }
+        } else if ((user != null) && (user.getRoleId() == roleMap.get(Roles.STUDENT))) {
+            // Authenticate inputed password
+            Student student = (Student) DatabaseSelectHelper.getUserDetails
+                    (id, context);
+            boolean passed = student.authenticate(pass, context);
+            if (passed) {
+                // Allow student
+                return true;
+            } else {
+                etUserPass.setError("Invalid Student password");
+            }
+        }
+        return false;
     }
 
 
@@ -81,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         layout.setOrientation(LinearLayout.VERTICAL);
 
         final EditText idBox = new EditText(this);
-        idBox.setHint("Enter ID of Customer");
+        idBox.setHint("Enter ID of Student");
         layout.addView(idBox);
 
         final EditText passwordBox = new EditText(this);

@@ -6,20 +6,20 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer extends User {
+public class Student extends User {
 
   private String address;
   private int roleId;
 
   /**
-   * create a Customer object under User
+   * create a Student object under User
    * 
    * @param id of customer
    * @param name of customer
    * @param age of customer
    * @param address of customer
    */
-  public Customer(int id, String name, int age, String address, Context context) {
+  public Student(int id, String name, int age, String address, Context context) {
     this.setId(id);
     this.setName(name);
     this.setAge(age);
@@ -36,8 +36,8 @@ public class Customer extends User {
    * @param address of customer
    * @param authenticated if the customer is authenticated or not
    */
-  public Customer(int id, String name, int age, String address, boolean authenticated,
-                  Context context) {
+  public Student(int id, String name, int age, String address, boolean authenticated,
+                 Context context) {
     this.setId(id);
     this.setName(name);
     this.setAge(age);

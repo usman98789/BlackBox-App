@@ -4,23 +4,23 @@ import Database.DatabaseDriver.*;
 import android.content.Context;
 
 /**
- * Admin object that extends User
+ * Prof object that extends User
  * 
  */
-public class Admin extends User {
+public class Prof extends User {
 
   private String address;
   private int roleId;
 
   /**
-   * create a Admin.
+   * create a Prof.
    * 
    * @param id which is the integer given
    * @param name of the admin
    * @param age of admin
    * @param address of admin
    */
-  public Admin(int id, String name, int age, String address, Context context) {
+  public Prof(int id, String name, int age, String address, Context context) {
     // set id,name,address and get role id.
     this.setId(id);
     this.setName(name);
@@ -38,8 +38,8 @@ public class Admin extends User {
    * @param address of admin
    * @param authenticated of admin
    */
-  public Admin(int id, String name, int age, String address, boolean authenticated,
-               Context context) {
+  public Prof(int id, String name, int age, String address, boolean authenticated,
+              Context context) {
     this.setId(id);
     this.setName(name);
     this.setAge(age);

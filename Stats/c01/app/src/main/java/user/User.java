@@ -9,8 +9,6 @@ import android.content.Context;
 
 /**
  * creates a abstract User
- * 
- * @author vidur
  *
  */
 public abstract class User implements Authenticate, Serializable {

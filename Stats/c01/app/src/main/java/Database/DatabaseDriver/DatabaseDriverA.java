@@ -27,37 +27,39 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.execSQL("CREATE TABLE ROLES "
         + "(ID INTEGER PRIMARY KEY NOT NULL,"
         + "NAME TEXT NOT NULL)");
-//    sqLiteDatabase.execSQL("CREATE TABLE ACCOUNTTYPES "
-//        + "(ID INTEGER PRIMARY KEY NOT NULL,"
-//        + "NAME TEXT NOT NULL,"
-//        + "INTERESTRATE TEXT)");
-//    sqLiteDatabase.execSQL("CREATE TABLE ACCOUNTS "
-//        + "(ID INTEGER PRIMARY KEY NOT NULL,"
-//        + "NAME TEXT NOT NULL,"
-//        + "BALANCE TEXT,"
-//        + "TYPE INTEGER NOT NULL,"
-//        + "FOREIGN KEY(TYPE) REFERENCES ACCOUNTTYPES(ID))");
-    sqLiteDatabase.execSQL("CREATE TABLE USERS "
+    sqLiteDatabase.execSQL("CREATE TABLE ACCOUNTTYPES "
         + "(ID INTEGER PRIMARY KEY NOT NULL,"
         + "NAME TEXT NOT NULL,"
-        + "AGE INTEGER NOT NULL,"
-        + "ADDRESS CHAR(100),");
-//    sqLiteDatabase.execSQL("CREATE TABLE USERACCOUNT "
-//        + "(USERID INTEGER NOT NULL,"
-//        + "ACCOUNTID INTEGER NOT NULL,"
-//        + "FOREIGN KEY(USERID) REFERENCES USER(ID),"
-//        + "FOREIGN KEY(ACCOUNTID) REFERENCES ACOUNT(ID),"
-//        + "PRIMARY KEY(USERID, ACCOUNTID))");
+        + "INTERESTRATE TEXT)");
+    sqLiteDatabase.execSQL("CREATE TABLE ACCOUNTS "
+        + "(ID INTEGER PRIMARY KEY NOT NULL,"
+        + "NAME TEXT NOT NULL,"
+        + "BALANCE TEXT,"
+        + "TYPE INTEGER NOT NULL,"
+        + "FOREIGN KEY(TYPE) REFERENCES ACCOUNTTYPES(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE USERS "
+            + "(ID INTEGER PRIMARY KEY NOT NULL,"
+            + "NAME TEXT NOT NULL,"
+            + "AGE INTEGER NOT NULL,"
+            + "ADDRESS CHAR(100),"
+            + "ROLEID INTEGER,"
+            + "FOREIGN KEY(ROLEID) REFERENCES ROLE(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE USERACCOUNT "
+        + "(USERID INTEGER NOT NULL,"
+        + "ACCOUNTID INTEGER NOT NULL,"
+        + "FOREIGN KEY(USERID) REFERENCES USER(ID),"
+        + "FOREIGN KEY(ACCOUNTID) REFERENCES ACOUNT(ID),"
+        + "PRIMARY KEY(USERID, ACCOUNTID))");
     sqLiteDatabase.execSQL("CREATE TABLE USERPW "
         + "(USERID INTEGER NOT NULL,"
         + "PASSWORD CHAR(64),"
         + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
-//    sqLiteDatabase.execSQL("CREATE TABLE USERMESSAGES "
-//        + "(ID INTEGER PRIMARY KEY NOT NULL,"
-//        + "USERID INTEGER NOT NULL,"
-//        + "MESSAGE CHAR(512) NOT NULL,"
-//        + "VIEWED CHAR(1) NOT NULL,"
-//        + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE USERMESSAGES "
+        + "(ID INTEGER PRIMARY KEY NOT NULL,"
+        + "USERID INTEGER NOT NULL,"
+        + "MESSAGE CHAR(512) NOT NULL,"
+        + "VIEWED CHAR(1) NOT NULL,"
+        + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
   }
 
   @Override

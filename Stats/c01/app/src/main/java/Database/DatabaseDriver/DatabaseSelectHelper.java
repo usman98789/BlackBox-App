@@ -7,7 +7,6 @@ import java.util.List;
 import user.*;
 import android.content.Context;
 import android.database.Cursor;
-import android.widget.Toast;
 
 public class DatabaseSelectHelper {
 
@@ -58,16 +57,12 @@ public class DatabaseSelectHelper {
       int roleId = results.getInt(results.getColumnIndex("ROLEID"));
       String role = mydb.getRole(roleId);
       // check which user it is and create the users
-      if (role.equals("ADMIN")) {
-        user = new Admin(userId, results.getString(results.getColumnIndex("NAME")),
+      if (role.equals("PROF")) {
+        user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
             results.getInt(results.getColumnIndex("AGE")),
             results.getString(results.getColumnIndex("ADDRESS")), context);
-      } else if (role.equals("TELLER")) {
-        user = new Teller(userId, results.getString(results.getColumnIndex("NAME")),
-            results.getInt(results.getColumnIndex("AGE")),
-            results.getString(results.getColumnIndex("ADDRESS")), context);
-      } else if (role.equals("CUSTOMER")) {
-        user = new Customer(userId, results.getString(results.getColumnIndex("NAME")),
+      }  else if (role.equals("STUDENT")) {
+        user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
             results.getInt(results.getColumnIndex("AGE")),
             results.getString(results.getColumnIndex("ADDRESS")), context);
       }

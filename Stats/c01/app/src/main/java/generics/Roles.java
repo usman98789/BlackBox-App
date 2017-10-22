@@ -4,5 +4,5 @@ package generics;
  * enumerator of all types of roles
  */
 public enum Roles {
-  ADMIN, TELLER, CUSTOMER
+  PROF, STUDENT
 }
