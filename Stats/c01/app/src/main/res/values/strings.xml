@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">c01</string>
+    <string name="title_activity_add_student">AddStudent</string>
 </resources>
