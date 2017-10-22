@@ -134,3 +134,23 @@ View the metioned file at: L02_06/Requirements/Personas_UserStories.pdf
  Duration (Hour:Minute:Second) := 1:12:16
 
 |---------------------------------(end #4)---------------------------------------|
+
+Meeting 5 (October 21, 2017):
+Broken down user-stories into what needs to be broken down into separate tasks 
+first along with their corresponding task descriptions, dependency, and story 
+points. Each story point is worth ~1 hour of work. Created "Product Backlog" card 
+to hold all the personas, user-stories and decomposition of the user-stories into
+tasks.
+
+Visit trello to see updated changes metioned above.
+
+Started on creating the burndown chart according to the ideal setup to accommodate
+team work flow into always having something to be develop on each day and/or 
+finishing some assigned task -> (ensuring there is some progress to be made each 
+day).
+
+Visit the mentioned burndown chart and development setup linked on Google Docs.
+
+ Duration (Hour:Minute:Second) := 2:13:01
+
+|---------------------------------(end #5)---------------------------------------|
