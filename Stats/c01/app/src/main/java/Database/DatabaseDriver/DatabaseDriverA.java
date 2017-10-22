@@ -24,9 +24,9 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
 
   @Override
   public void onCreate(SQLiteDatabase sqLiteDatabase) {
-//    sqLiteDatabase.execSQL("CREATE TABLE ROLES "
-//        + "(ID INTEGER PRIMARY KEY NOT NULL,"
-//        + "NAME TEXT NOT NULL)");
+    sqLiteDatabase.execSQL("CREATE TABLE ROLES "
+        + "(ID INTEGER PRIMARY KEY NOT NULL,"
+        + "NAME TEXT NOT NULL)");
 //    sqLiteDatabase.execSQL("CREATE TABLE ACCOUNTTYPES "
 //        + "(ID INTEGER PRIMARY KEY NOT NULL,"
 //        + "NAME TEXT NOT NULL,"
@@ -48,10 +48,10 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
 //        + "FOREIGN KEY(USERID) REFERENCES USER(ID),"
 //        + "FOREIGN KEY(ACCOUNTID) REFERENCES ACOUNT(ID),"
 //        + "PRIMARY KEY(USERID, ACCOUNTID))");
-//    sqLiteDatabase.execSQL("CREATE TABLE USERPW "
-//        + "(USERID INTEGER NOT NULL,"
-//        + "PASSWORD CHAR(64),"
-//        + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE USERPW "
+        + "(USERID INTEGER NOT NULL,"
+        + "PASSWORD CHAR(64),"
+        + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
 //    sqLiteDatabase.execSQL("CREATE TABLE USERMESSAGES "
 //        + "(ID INTEGER PRIMARY KEY NOT NULL,"
 //        + "USERID INTEGER NOT NULL,"
