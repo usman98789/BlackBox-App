@@ -13,6 +13,7 @@ buildscript {
 }
 
 allprojects {
+
     repositories {
         jcenter()
     }
@@ -21,3 +22,4 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
