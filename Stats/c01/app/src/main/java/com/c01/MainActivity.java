@@ -68,8 +68,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent nextpage;
                 if (useridauthen1(context)) {
-                    nextpage = new Intent(MainActivity.this, MainMenu.class);
-                    startActivity(nextpage);
+                    EditText etUserName = (EditText) findViewById(R.id.loginInput);
+                    int id = Integer.valueOf(etUserName.getText().toString());
+                    EnumMapRoles roleMap = new EnumMapRoles(context);
+                    User user = DatabaseSelectHelper.getUserDetails(id, context);
+                    if (user.getRoleId() == roleMap.get(Roles.PROF)) {
+                        nextpage = new Intent(MainActivity.this, InstructorMenu.class);
+                        startActivity(nextpage);
+                    } else if (user.getRoleId() == roleMap.get(Roles.STUDENT)) {
+                        nextpage = new Intent(MainActivity.this, MainMenu.class);
+                        startActivity(nextpage);
+                    }
                 }
             }
         });

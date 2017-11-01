@@ -5,9 +5,16 @@ go to: L02_06/Team/Working_Agreement.pdf
 To find the Project Requiements PDF,
 go to: L02_06/Requirements/Personas_UserStories.pdf
 
+To find the Project Backlog PDF,
+go to: L02_06/Backlogs/Project_Backlog.pdf
+
+To find the Project Requiements PDF,
+go to: L02_06/Backlogs/Sprint_Backlog.pdf
+
 <--------------------------------(Meetings)------------------------------>
 
 Meeting 1 (September 22, 2017):
+
 Finalized the team setup and team agreement.
 See the Working_Agreement.pdf for more details.
 
@@ -64,6 +71,7 @@ See the Working_Agreement.pdf for more details.
 |---------------------------------(end #1)---------------------------------------|
 
 Meeting 2 (September 30, 2017):
+
 Started on creating some user stories (Prof and student). Visit 'Trello Board'
 to see the written user stories on backlog card. Narrowed down the main idea
 of how the project will precede during the development by reviewing the current
@@ -80,6 +88,7 @@ with the current project.
 |---------------------------------(end #2)---------------------------------------|
 
 Meeting 3 (October 14, 2017):
+
 Started on creating and finalizing the personas based on the user stories from
 last meeting. See Available document from the path linked above. Narrowed down
 all personas by revising all created personas to match a realistic sense who
@@ -116,6 +125,7 @@ are not yet finalized and will be completed on the next meeting.
 |---------------------------------(end #3)---------------------------------------|
 
 Meeting 4 (October 14, 2017):
+
 Started to finalize and fix up the personas that were created from the last
 meeting, and updated the 'Personas_UserStories.pdf' file. Removed un-needed
 details with ones that realistically reflect users who will be using the
@@ -136,6 +146,7 @@ View the metioned file at: L02_06/Requirements/Personas_UserStories.pdf
 |---------------------------------(end #4)---------------------------------------|
 
 Meeting 5 (October 21, 2017):
+
 Broken down user-stories into what needs to be broken down into separate tasks
 first along with their corresponding task descriptions, dependency, and story
 points. Each story point is worth ~1 hour of work. Created "Product Backlog" card
@@ -156,6 +167,7 @@ Visit the mentioned burndown chart and development setup linked on Google Docs.
 |---------------------------------(end #5)---------------------------------------|
 
 Meeting 6 (October 22, 2017):
+
 Discussed all the programming that has been done or need to be finished regarding
 the user stories for the week 1 sprint and helped each other solve the problems
 that each person faced while completing his or her task.
@@ -171,6 +183,26 @@ chart for week 1 sprint.
 
 Pushed all changes including the android app to GitHub.
 
-Duration (Hour:Minute:Second) := 2:01:30
+ Duration (Hour:Minute:Second) := 2:01:30
 
 |---------------------------------(end #6)---------------------------------------|
+
+Meeting 7 (October 24, 2017):
+
+Updated the current file to show the path for the project and sprint backlog 
+located on the top of the current 'README.md' file.
+
+Discussed about the constraints with the development project as the database and
+back-end needs to be updated for user-messaging and file/photo upload. Readjust-
+ments to the plan had to be made.
+
+Discussed about the next sprint plan for the upcoming development cycle. Updated 
+the project and sprint backlogs to accommodate the next development cycle. The 
+sprint burndown chart is updated and made agreements to accommodate for team-
+members having other actives which reduces the amount of developments per-cycle.
+
+Visit Google Docs to see updated sprint plan for more information.
+
+ Duration (Hour:Minute:Second) := 0:55:45
+
+|---------------------------------(end #7)---------------------------------------|

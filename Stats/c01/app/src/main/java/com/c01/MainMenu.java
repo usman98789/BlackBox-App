@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Button;
 
 
@@ -16,16 +14,16 @@ public class MainMenu extends AppCompatActivity {
     String address;
     int age;
     String password;
-    Button addStudent;
+    Button messageStudent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        addStudent = (Button) findViewById(R.id.addStudentButton);
+        messageStudent = (Button) findViewById(R.id.messageStudentButton);
 
-        addStudent.setOnClickListener(new View.OnClickListener() {
+        messageStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainMenu.this, addStudent.class);
