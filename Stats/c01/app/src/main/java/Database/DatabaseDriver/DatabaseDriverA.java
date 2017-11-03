@@ -54,16 +54,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         + "(USERID INTEGER NOT NULL,"
         + "PASSWORD CHAR(64),"
         + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
-    sqLiteDatabase.execSQL("CREATE TABLE USERMESSAGES "
-        + "(ID INTEGER PRIMARY KEY NOT NULL,"
-        + "USERID INTEGER NOT NULL,"
-        + "MESSAGE CHAR(512) NOT NULL,"
-        + "VIEWED CHAR(1) NOT NULL,"
-        + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
-     sqLiteDatabase.execSQL("CREATE TABLE PICTURES "
-        + "(ID INTEGER PRIMARY KEY NOT NULL,"
-        + "NAME VARCHAR(0),"
-        + "PHOTO BLOB");
   }
 
   @Override
