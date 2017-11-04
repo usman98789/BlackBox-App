@@ -86,7 +86,8 @@ public class InstructorMenu extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_manage) {
-
+            Intent i = new Intent(InstructorMenu.this, PostAnnouncement.class);
+            startActivity(i);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
