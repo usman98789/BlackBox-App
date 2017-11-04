@@ -106,7 +106,7 @@ public class Browsing extends AppCompatActivity {
                     DocumentsContract.deleteDocument(getContentResolver(), uri);
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             cursor.close();
