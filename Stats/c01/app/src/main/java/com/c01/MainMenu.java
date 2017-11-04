@@ -9,18 +9,23 @@ import android.view.View;
 import android.widget.Button;
 
 
+
+
 public class MainMenu extends AppCompatActivity {
     String name;
     String address;
     int age;
     String password;
     Button messageStudent;
+    Button viewNotes;
+    Intent nextpage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        viewNotes = (Button) findViewById(R.id.viewNotesButton);
         messageStudent = (Button) findViewById(R.id.messageStudentButton);
 
         messageStudent.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +33,14 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainMenu.this, addStudent.class);
                 startActivity(i);
+            }
+        });
+
+        viewNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextpage = new Intent(MainMenu.this, ViewNotes.class);
+                startActivity(nextpage);
             }
         });
     }
