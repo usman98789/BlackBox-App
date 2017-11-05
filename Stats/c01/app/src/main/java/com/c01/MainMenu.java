@@ -15,18 +15,29 @@ public class MainMenu extends AppCompatActivity {
     int age;
     String password;
     Button messageStudent;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
+        id = getIntent().getStringExtra("id");
         messageStudent = (Button) findViewById(R.id.messageStudentButton);
 
         messageStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainMenu.this, addStudent.class);
+                startActivity(i);
+            }
+        });
+
+        Button inbox = (Button) findViewById(R.id.email);
+        inbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainMenu.this, ViewAnnouncements.class);
+                i.putExtra("id", id);
                 startActivity(i);
             }
         });

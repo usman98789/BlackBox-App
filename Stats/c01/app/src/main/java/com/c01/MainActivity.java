@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(nextpage);
                     } else if (user.getRoleId() == roleMap.get(Roles.STUDENT)) {
                         nextpage = new Intent(MainActivity.this, MainMenu.class);
+                        nextpage.putExtra("id", etUserName.getText().toString());
                         startActivity(nextpage);
                     }
                 }

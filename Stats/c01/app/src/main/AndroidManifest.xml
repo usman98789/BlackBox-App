@@ -27,7 +27,8 @@
             android:label="@string/title_activity_email"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Browsing" />
-        <activity android:name=".PostAnnouncement"></activity>
+        <activity android:name=".PostAnnouncement" />
+        <activity android:name=".ViewAnnouncements"></activity>
     </application>
 
 </manifest>
