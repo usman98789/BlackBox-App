@@ -101,7 +101,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="MyGrades" />
-                </LinearLayout>
+
+                <Button
+                    android:id="@+id/viewNotesButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:text="View Notes" />
+            </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

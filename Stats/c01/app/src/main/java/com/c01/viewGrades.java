@@ -35,13 +35,7 @@ public class viewGrades extends AppCompatActivity {
 
     public void displayListView(Context context){
         ArrayList<String> listData = new ArrayList<>();
-        int studentRoleid = 0;
-        // get student ROle id
-        for (int i = 0; i < DatabaseSelectHelper.getRoles(context).size(); i++){
-            if (DatabaseSelectHelper.getRoles(context).get(i).toString().equalsIgnoreCase("STUDENT")){
-                studentRoleid = DatabaseSelectHelper.getRoles(context).get(i);
-            }
-        }
+
 
         // loop over students and add to list
 
