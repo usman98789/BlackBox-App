@@ -7,6 +7,7 @@ import java.util.List;
 import user.*;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 public class DatabaseSelectHelper {
 
@@ -22,6 +23,7 @@ public class DatabaseSelectHelper {
     DatabaseDriverA mydb = new DatabaseDriverA(context);
     return mydb.getRole(id);
   }
+
 
   /**
    * get the hashed version of the password.

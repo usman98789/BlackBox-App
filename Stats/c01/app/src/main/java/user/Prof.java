@@ -11,6 +11,7 @@ public class Prof extends User {
 
   private String address;
   private int roleId;
+  private float mark;
 
   /**
    * create a Prof.
@@ -58,4 +59,5 @@ public class Prof extends User {
     // return the string which is the address
     return this.address;
   }
+
 }

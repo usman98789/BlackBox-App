@@ -38,6 +38,11 @@
             android:id="@+id/nav_edit_grades"
             android:icon="@drawable/ic_menu_manage"
             android:title="Edit Grades" />
+
+        <item
+            android:id="@+id/nav_view_grades"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="View Grades" />
     </group>
 
     <item android:title="Communicate">

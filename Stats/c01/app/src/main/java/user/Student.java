@@ -10,6 +10,7 @@ public class Student extends User {
 
   private String address;
   private int roleId;
+  private float mark;
 
   /**
    * create a Student object under User
@@ -57,6 +58,8 @@ public class Student extends User {
     return this.roleId;
   }
 
-
+  public float getMark(){
+    return this.mark;
+  }
 
 }

@@ -139,6 +139,13 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.insert("USERPW", null, contentValues);
   }
 
+  private void insertMark(float mark, int userId){
+    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put("USERID", userId);
+    contentValues.put("MARK", mark);
+    sqLiteDatabase.insert("MARK", null, contentValues);
+  }
   //SELECT METHODS
   protected Cursor getRoles() {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
@@ -183,6 +190,16 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         new String[]{String.valueOf(userId)});
     cursor.moveToFirst();
     String result = cursor.getString(cursor.getColumnIndex("PASSWORD"));
+    cursor.close();
+    return result;
+  }
+
+  protected float getMark(int userId) {
+    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+    Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARK FROM MARK WHERE USERID = ?",
+            new String[]{String.valueOf(userId)});
+    cursor.moveToFirst();
+    float result = cursor.getFloat(cursor.getColumnIndex("MARK"));
     cursor.close();
     return result;
   }
