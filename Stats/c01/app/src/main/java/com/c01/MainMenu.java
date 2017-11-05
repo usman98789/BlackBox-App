@@ -9,19 +9,30 @@ import android.view.View;
 import android.widget.Button;
 
 
+
+
 public class MainMenu extends AppCompatActivity {
     String name;
     String address;
     int age;
     String password;
     Button messageStudent;
+
     String id;
+
+    Button viewNotes;
+    Intent nextpage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
         id = getIntent().getStringExtra("id");
+
+        viewNotes = (Button) findViewById(R.id.viewNotesButton);
+
         messageStudent = (Button) findViewById(R.id.messageStudentButton);
 
         messageStudent.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +43,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+
         Button inbox = (Button) findViewById(R.id.email);
         inbox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,20 +53,28 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
 
-
-    public void displayInformation(String info) {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage(info);
-        myAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        viewNotes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
+            public void onClick(View v) {
+                nextpage = new Intent(MainMenu.this, ViewNotes.class);
+                startActivity(nextpage);
+
             }
         });
-        myAlert.show();
-    }
+
+
+//    public void displayInformation(String info) {
+//        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+//        myAlert.setMessage(info);
+//        myAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                dialogInterface.dismiss();
+//            }
+//        });
+//        myAlert.show();
+//    }
 
 //    public void getCreds() {
 //        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -74,6 +94,6 @@ public class MainMenu extends AppCompatActivity {
 //        });
 //        dialog.show();
 //    }
-
-
+    }
 }
+
