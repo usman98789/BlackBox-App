@@ -272,57 +272,6 @@ public class Editor extends AppCompatActivity {
 
     ProgressDialog progress;
 
-    protected void uploadFile(int requestCode, int resultCode, final Intent data) {
-        if(requestCode == 10 && resultCode == RESULT_OK) {
-            progress = new ProgressDialog(Editor.this);
-            progress.setTitle("Uploading");
-            progress.setMessage("Please wait...");
-            progress.show();
-
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    File f = new File(data.getStringExtra((FilePickerActivity.RESULT_FILE_PATH)));
-                    String content_type = getMimeType(f.getPath());
-                    Log.d("warblegarble", f.getPath());
-
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody file_body = RequestBody.create(MediaType.parse(content_type), f);
-                    String file_path = f.getAbsolutePath();
-
-                    RequestBody request_body = new MultipartBody.Builder()
-                            .setType(MultipartBody.FORM)
-                            .addFormDataPart("type", content_type)
-                            .addFormDataPart("uploaded_file", file_path.substring(file_path.lastIndexOf("/") + 1), file_body)
-                            .build();
-
-                    Log.d("warblegarble", "woah");
-                    Request request = new Request.Builder()
-                            .url("https://shev:Biscut123@megumin.ga/stats/save_file_assignment.php")
-                            .post(request_body)
-                            .build();
-
-                    try {
-                        Log.d("warblegarble", "running request");
-                        Response response = client.newCall(request).execute();
-
-                        if (!response.isSuccessful()) {
-                            throw new IOException("Error : " +response);
-                        }
-                        Log.d("warblegarble", "request passed");
-                        progress.dismiss();
-                    } catch (IOException e) {
-                        Log.d("warblegarble", "request failed");
-                        e.printStackTrace();
-                    }
-
-
-                }
-            });
-
-            t.start();
-        }
-    }
 
 
     private String getMimeType(String path) {
