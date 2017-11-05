@@ -32,6 +32,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Browsing" />
         <activity android:name=".ViewNotes"></activity>
+        <activity android:name=".PostAnnouncement"></activity>
     </application>
 
 </manifest>
