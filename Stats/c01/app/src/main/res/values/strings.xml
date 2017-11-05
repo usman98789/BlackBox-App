@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Statistics (STAB22/52)</string>
-    <string name="title_activity_add_student">AddStudent</string>
     <string name="title_activity_instructor_menu">Instructor Menu</string>
+    <string name="title_activity_create_problem_set">Problem Set</string>
+    <string name="title_activity_editor">Editor</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -97,4 +99,11 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="title_activity_example">ExampleActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="title_activity_example_fragment">ExampleFragment</string>
 </resources>

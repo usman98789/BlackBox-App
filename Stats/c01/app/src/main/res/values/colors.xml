@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#000080</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="white">#00000000</color>
-    <color name="uoftShade">#00000000</color>
+    <color name="white">#fffefe</color>
+    <color name="uoftShade">#fffefe</color>
+    <color name="light">#35b5ff</color>
+    <color name="grey">#b7b7b7</color>
 </resources>

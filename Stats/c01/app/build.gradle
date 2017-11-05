@@ -37,11 +37,16 @@ dependencies {
     })
     compile project(':mysql-connector-java-5.1.44-bin')
     compile files('libs/javax.servlet-api-3.1.0.jar')
+    compile 'io.github.kexanie.library:MathView:0.0.6'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:26.+'
+    compile 'com.github.Nishant-Pathak:MathView:v1.1'
     testCompile 'junit:junit:4.12'
+    compile files('libs/jlatexmath-0.9.6.jar')
 }
+
+
 
 
 

@@ -3,17 +3,35 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_add_assignments"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Add Assignments" />
+
+        <item
+            android:id="@+id/nav_add_lecture"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Add Lecture" />
+
+        <item
+            android:id="@+id/nav_add_lecture_notes"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Add Lecture" />
+
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Gallery" />
+
         <item
-            android:id="@+id/nav_add_lecture"
+            android:id="@+id/nav_view_lecture_slides"
             android:icon="@drawable/ic_menu_lecture"
             android:title="Lecture" />
+
+        <item
+            android:id="@+id/nav_view_lecture_notes"
+            android:icon="@drawable/ic_menu_lecture"
+            android:title="Lecture" />
+
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
@@ -28,11 +46,6 @@
             android:id="@+id/nav_add_notes"
             android:icon="@drawable/ic_menu_manage"
             android:title="Add Notes" />
-
-        <item
-            android:id="@+id/nav_add_assignments"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Add Assignments" />
 
         <item
             android:id="@+id/nav_edit_grades"

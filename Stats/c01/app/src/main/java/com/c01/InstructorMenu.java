@@ -81,8 +81,20 @@ public class InstructorMenu extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_add_lecture) {
+
+        } else if (id == R.id.nav_add_lecture_notes) {
+            Intent i = new Intent(InstructorMenu.this, Browsing.class);
+            startActivity(i);
+        } else if (id == R.id.nav_view_lecture_slides) {
+            Intent i = new Intent(InstructorMenu.this, Browsing.class);
+            startActivity(i);
+        } else if (id == R.id.nav_view_lecture_notes) {
+            Intent i = new Intent(InstructorMenu.this, Browsing.class);
+            startActivity(i);
+        } else if (id == R.id.nav_add_assignments) {
+            Intent i = new Intent(InstructorMenu.this, CreateProblemSet.class);
+            startActivity(i);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_manage) {
@@ -91,9 +103,6 @@ public class InstructorMenu extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        } else if (id == R.id.nav_add_lecture) {
-            Intent i = new Intent(InstructorMenu.this, Browsing.class);
-            startActivity(i);
         } else if (id == R.id.nav_add_student) {
             Intent i = new Intent(InstructorMenu.this, addStudent.class);
             startActivity(i);

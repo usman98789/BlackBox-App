@@ -23,6 +23,14 @@
             android:label="@string/title_activity_instructor_menu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".CreateProblemSet"
+            android:label="@string/title_activity_create_problem_set"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Editor"
+            android:label="@string/title_activity_create_problem_set"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Email"
             android:label="@string/title_activity_email"
             android:theme="@style/AppTheme.NoActionBar" />
