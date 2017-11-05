@@ -37,6 +37,7 @@ dependencies {
     })
     compile project(':mysql-connector-java-5.1.44-bin')
     compile files('libs/javax.servlet-api-3.1.0.jar')
+    compile files('libs/jlatexmath-0.9.6.jar')
     compile 'com.android.support:appcompat-v7:25.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.+'
