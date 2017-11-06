@@ -19,7 +19,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
 
   public DatabaseDriverA(Context context) {
     super(context, DATABASE_NAME, null, 1);
-
   }
 
   @Override
@@ -54,9 +53,9 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         + "(USERID INTEGER NOT NULL,"
         + "PASSWORD CHAR(64),"
         + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
-    sqLiteDatabase.execSQL("CREATE TABLE MARKS "
+    sqLiteDatabase.execSQL("CREATE TABLE MARK "
             + "(USERID INTEGER NOT NULL,"
-            + "MARKS NOT NULL,"
+            + "MARKS REAL NOT NULL,"
             + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
   }
 
@@ -143,25 +142,24 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.insert("USERPW", null, contentValues);
   }
 
-  protected void insertMark(int userId, float mark){
+  protected void insertMark(int userId, double mark){
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("USERID", userId);
-    contentValues.put("MARK", mark);
-    sqLiteDatabase.insert("MARKS", null, contentValues);
+    contentValues.put("MARKS", mark);
+    sqLiteDatabase.insert("MARK", null, contentValues);
   }
 
 
   //SELECT METHODS
-  protected float getMark(int userId) {
+  protected double getMark(int userId) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-    Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM USERS WHERE USERID = ?",
+    Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM MARK WHERE USERID = ?",
             new String[]{String.valueOf(userId)});
     cursor.moveToFirst();
-    float value = cursor.getFloat(cursor.getColumnIndex("MARKS"));
+    double value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
     cursor.close();
     return value;
-
   }
 
   protected Cursor getRoles() {

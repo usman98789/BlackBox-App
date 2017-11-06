@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 EnumMapRoles roleMap = new EnumMapRoles(this.getApplicationContext());
                 int id = DatabaseInsertHelper.insertNewUser("ProfA", 40, "123street", roleMap.get(Roles.PROF), "123", this.getApplicationContext());
                 int id3 = DatabaseInsertHelper.insertNewUser("StudentA", 19, "123street", roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
+                DatabaseInsertHelper.insertMark(id3, 69.9, context);
                 Toast.makeText(getApplicationContext(), String.valueOf(id), Toast.LENGTH_LONG).show();
             } catch (InvalidNameException e) {
                 Toast.makeText(getApplicationContext(), String.valueOf(e), Toast.LENGTH_LONG).show();
@@ -185,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
         });
         dialog.show();
     }
-
 
 }
 

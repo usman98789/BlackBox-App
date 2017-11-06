@@ -221,9 +221,9 @@ public class DatabaseSelectHelper {
     return type1;
   }
 
-  public static float getMark(int userId, Context context) {
+  public static double getMark(int userId, Context context) {
     DatabaseDriverA mydb = new DatabaseDriverA(context);
-    float mark = -1;
+    double mark = -1;
     try {
       mark = mydb.getMark(userId);
     } catch (IllegalAccessError e) {
