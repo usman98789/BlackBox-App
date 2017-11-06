@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.c01.Editor">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/Editor"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.c01.Editor"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <com.nishant.math.MathView
+            android:id="@+id/math_view"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.nishant.math.MathView>
+
+        <EditText
+            android:id="@+id/input_view"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:inputType="textNoSuggestions|textMultiLine"
+            android:hint="When \\(a \\ne 0\\), there are two solutions to \\(ax^2 + bx + c = 0\\)
+        and they are $$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$"
+            tools:ignore="LabelFor"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:paddingBottom="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="450dp" >
+
+        <Button
+            android:id="@+id/generate_question"
+            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Generate Question" />
+        <Button
+            android:id="@+id/generate_problem_set"
+            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Finalized Problem Set" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -11,6 +11,9 @@ go to: L02_06/Backlogs/Project_Backlog.pdf
 To find the Project Requiements PDF,
 go to: L02_06/Backlogs/Sprint_Backlog.pdf
 
+To find mentioned Google Docs from text below,
+go to: https://docs.google.com/document/d/1Vw7xkpTeNbBVYAAwfDZXO0HxPGIfN_DJiqYeaho3VwU/edit
+
 <--------------------------------(Meetings)------------------------------>
 
 Meeting 1 (September 22, 2017):
@@ -206,3 +209,33 @@ Visit Google Docs to see updated sprint plan for more information.
  Duration (Hour:Minute:Second) := 0:55:45
 
 |---------------------------------(end #7)---------------------------------------|
+
+Meeting 8 (November 1, 2017):
+
+Discussed about revisiting the implemenation of the database as a solution was found 
+for the online database and local host. A full detail replanning for what must be 
+changed and implemented for userstory tasks that depends on the remote database.
+
+Assigned new task to each developer finalizing the what functions need to be changed
+now that the database is added. e.g.
+
+      - announcemnts
+      - redsign the backend for the database to work with the remote server
+      - creating problem sets and uploading them
+      - downloading problem sets
+      - uploading lecture notes 
+        ... etc
+
+        **Each feature has it's own branch -> branch by feature
+
+Updated the sprint plan development cycle, product and sprint backlog with the 
+most recent update changes, and burndown charts (with planned curve). Discussed 
+about the current sprint plan as alot of changes need to be made with the remodeling
+of the application that needs to work with the remote database without any major 
+obstacles preventing/slowing down the progress of the project.
+
+Visit Google Docs to view these changes.
+
+ Duration (Hour:Minute:Second) := 1:20:49
+
+|---------------------------------(end #8)---------------------------------------|
