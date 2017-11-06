@@ -106,4 +106,5 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_example_fragment">ExampleFragment</string>
+    <string name="title_activity_view_announcements">ViewAnnouncements</string>
 </resources>

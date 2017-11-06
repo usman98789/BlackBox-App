@@ -63,8 +63,8 @@ public class Editor extends AppCompatActivity {
     private static Button question;
     private static Button problemSet;
     private static TextView text;
-    private static int assign = 0;
-    private static int assign_question = 0;
+    private static int assign = 1;
+    private static int assign_question = 1;
     Boolean canDo = false;
     String name;
     File f;
@@ -108,30 +108,29 @@ public class Editor extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(context.getApplicationContext(), "Creating problem",
                         Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), "Problem_Set_" + assign + ".txt",
+                Toast.makeText(context.getApplicationContext(), "Problem_Set_" + assign + "_Q_" + assign_question + ".txt",
                         Toast.LENGTH_LONG).show();
                 try {
-                    name = "Problem_Set_" + assign + ".txt";
-                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("Problem_Set_" + assign + ".txt", Context.MODE_PRIVATE));
+                    name = "Problem_Set_" + assign + "_Q_" + assign_question;
+                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt", Context.MODE_PRIVATE));
                     outputStreamWriter.write(text.getText().toString());
                     outputStreamWriter.close();
 
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     Log.e("Exception", "File write failed: " + e.toString());
                 }
 
                 String ret = "";
                 try {
-                    InputStream inputStream = context.openFileInput("Problem_Set_" + assign + ".txt");
+                    InputStream inputStream = context.openFileInput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt");
                     is = inputStream;
-                    if ( inputStream != null ) {
+                    if (inputStream != null) {
                         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                         String receiveString = "";
                         StringBuilder stringBuilder = new StringBuilder();
 
-                        while ( (receiveString = bufferedReader.readLine()) != null ) {
+                        while ((receiveString = bufferedReader.readLine()) != null) {
                             stringBuilder.append(receiveString);
                         }
 
@@ -140,28 +139,28 @@ public class Editor extends AppCompatActivity {
                         Toast.makeText(context.getApplicationContext(), ret,
                                 Toast.LENGTH_LONG).show();
                     }
-                }
-                catch (FileNotFoundException e) {
+                } catch (FileNotFoundException e) {
                     Log.e("login activity", "File not found: " + e.toString());
                 } catch (IOException e) {
                     Log.e("login activity", "Can not read file: " + e.toString());
                 }
 
+                assign_question++;
+
                 //Uploading txt to server
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if(ActivityCompat.checkSelfPermission(Editor.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ActivityCompat.checkSelfPermission(Editor.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
                     } else {
                         canDo = true;
                     }
                 }
 
-                if(canDo) {
+                if (canDo) {
                     Log.d("supertest", "running");
 //                    new MaterialFilePicker().withActivity(Editor.this).withRequestCode(10).start();
-
                     try {
-                        f = File.createTempFile(name, ".txt");
+                        f = File.createTempFile(name, "");
                         is = context.openFileInput(name);
                         FileUtils.copyInputStreamToFile(is, f);
 
@@ -201,7 +200,6 @@ public class Editor extends AppCompatActivity {
                                         .url("https://shev:Biscut123@megumin.ga/stats/save_file_assignment.php")
                                         .post(request_body)
                                         .build();
-
                                 try {
                                     Log.d("warblegarble", "running request");
                                     Response response = client.newCall(request).execute();
@@ -215,52 +213,47 @@ public class Editor extends AppCompatActivity {
                                     Log.d("warblegarble", "request failed");
                                     e.printStackTrace();
                                 }
-
-
                             }
                         });
 
                         t.start();
-
-
                         Log.d("supertest", "done");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
             }
         });
 
-
-        problemSet.setOnClickListener(new View.OnClickListener()
-
-            {
-                @Override
-                public void onClick (View view){
-
+        problemSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                assign_question = 1;
+                Toast.makeText(context.getApplicationContext(), "Problem Set " + assign +" has been uploaded",
+                        Toast.LENGTH_LONG).show();
+                assign++;
             }
-            });
-        }
+        });
+    }
 
-        private List<File> getListFiles (File parentDir){
-            ArrayList<File> inFiles = new ArrayList<File>();
-            File[] files = parentDir.listFiles();
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    inFiles.addAll(getListFiles(file));
-                } else {
-                    if (file.getName().endsWith(".csv")) {
-                        inFiles.add(file);
-                    }
+    private List<File> getListFiles(File parentDir) {
+        ArrayList<File> inFiles = new ArrayList<File>();
+        File[] files = parentDir.listFiles();
+        for (File file : files) {
+            if (file.isDirectory()) {
+                inFiles.addAll(getListFiles(file));
+            } else {
+                if (file.getName().endsWith(".csv")) {
+                    inFiles.add(file);
                 }
             }
-            return inFiles;
         }
+        return inFiles;
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == 100 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+        if (requestCode == 100 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
             canDo = true;
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -269,16 +262,12 @@ public class Editor extends AppCompatActivity {
         }
     }
 
-
     ProgressDialog progress;
-
-
 
     private String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
 
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
-
-
+    //---------------------------------------------
 }

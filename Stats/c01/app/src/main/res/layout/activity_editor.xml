@@ -59,7 +59,7 @@
             android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Generate Problem Set" />
+            android:text="Finalized Problem Set" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

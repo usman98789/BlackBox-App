@@ -30,18 +30,19 @@ android {
         exclude 'META-INF/LICENSE.txt'
     }
 
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 25
+    buildToolsVersion '26.0.2'
+
     defaultConfig {
         applicationId "com.c01"
-        minSdkVersion 26
-        targetSdkVersion 26
+        minSdkVersion 25
+        targetSdkVersion 25
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        jackOptions {
-            enabled true
-        }
+        android.compileOptions.sourceCompatibility 1.8
+        android.compileOptions.targetCompatibility 1.8
     }
     buildTypes {
         release {
@@ -60,16 +61,32 @@ android {
 
 }
 
-
-
-
 repositories {
     maven {
         url "http://dl.bintray.com/lukaville/maven"
     }
+
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'libs')
+        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
+        compile project(':mysql-connector-java-5.1.44-bin')
+        compile files('libs/javax.servlet-api-3.1.0.jar')
+        compile files('libs/jlatexmath-0.9.6.jar')
+        compile 'com.android.support:appcompat-v7:25.+'
+        compile 'com.android.support.constraint:constraint-layout:1.0.2'
+        compile 'com.android.support:design:25.+'
+        compile 'com.squareup.okhttp3:okhttp:3.9.0'
+        compile 'com.nbsp:library:1.8'
+        compile 'org.apache.ivy:ivy:2.3.0'
+        testCompile 'junit:junit:4.12'
+    }
+
+
+    repositories {
+        maven {
+            url "http://dl.bintray.com/lukaville/maven"
+        }
+    }
 }
-
-
-
-
-

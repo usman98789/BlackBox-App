@@ -38,7 +38,13 @@
             android:name=".Email"
             android:label="@string/title_activity_email"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Browsing"></activity>
+        <activity android:name=".Browsing" />
+
+        <activity android:name=".PostAnnouncement" />
+        <activity android:name=".ViewAnnouncements"></activity>
+
+        <activity android:name=".ViewNotes"></activity>
+
     </application>
 
 </manifest>
