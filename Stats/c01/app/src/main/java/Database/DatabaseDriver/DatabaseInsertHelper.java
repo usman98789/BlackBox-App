@@ -141,6 +141,12 @@ public class DatabaseInsertHelper extends HttpServlet {
         return success;
     }
 
+    public static void insertMark(int userId, float mark, Context context) {
+        DatabaseDriverA mydb = new DatabaseDriverA(context);
+
+        mydb.insertMark(userId, mark);
+        mydb.close();
+    }
     /**
      * insert a user and account relationship.
      *

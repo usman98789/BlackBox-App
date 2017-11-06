@@ -31,12 +31,13 @@
             android:label="@string/title_activity_email"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Browsing" />
-
         <activity android:name=".PostAnnouncement" />
-        <activity android:name=".ViewAnnouncements"></activity>
-
-        <activity android:name=".ViewNotes"></activity>
-
+        <activity android:name=".ViewAnnouncements" />
+        <activity android:name=".ViewNotes" />
+        <activity
+            android:name=".ViewMark"
+            android:label="@string/title_activity_view_mark"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

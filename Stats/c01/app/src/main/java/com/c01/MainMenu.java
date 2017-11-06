@@ -1,5 +1,6 @@
 package com.c01;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-
+import Database.DatabaseDriver.DatabaseInsertHelper;
+import Database.DatabaseDriver.DatabaseSelectHelper;
+import Exceptions.InvalidNameException;
+import user.Student;
 
 
 public class MainMenu extends AppCompatActivity {
@@ -23,9 +27,10 @@ public class MainMenu extends AppCompatActivity {
     Button viewNotes;
     Intent nextpage;
 
+    Context context = this.getApplicationContext();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
@@ -94,6 +99,8 @@ public class MainMenu extends AppCompatActivity {
 //        });
 //        dialog.show();
 //    }
+        Student bob = new Student(4, "Bob", 18, "perkosets", context);
+        DatabaseInsertHelper.insertMark(4,68.9f, context);
     }
 }
 

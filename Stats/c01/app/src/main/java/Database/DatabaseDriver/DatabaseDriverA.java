@@ -54,6 +54,8 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         + "(USERID INTEGER NOT NULL,"
         + "PASSWORD CHAR(64),"
         + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE MARKS "
+        + "(ID INTEGER PRIMARY KEY NOT NULL)");
   }
 
   @Override
@@ -139,7 +141,27 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.insert("USERPW", null, contentValues);
   }
 
+  protected void insertMark(int userId, float mark){
+    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put("USERID", userId);
+    contentValues.put("MARK", mark);
+    sqLiteDatabase.insert("MARKS", null, contentValues);
+  }
+
+
   //SELECT METHODS
+  protected float getMark(int userId) {
+    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+    Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM USERS WHERE USERID = ?",
+            new String[]{String.valueOf(userId)});
+    cursor.moveToFirst();
+    float value = cursor.getFloat(cursor.getColumnIndex("MARKS"));
+    cursor.close();
+    return value;
+
+  }
+
   protected Cursor getRoles() {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     return sqLiteDatabase.rawQuery("SELECT * FROM ROLES;", null);

@@ -1,5 +1,6 @@
 package Database.DatabaseDriver;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -220,6 +221,17 @@ public class DatabaseSelectHelper {
     return type1;
   }
 
+  public static float getMark(int userId, Context context) {
+    DatabaseDriverA mydb = new DatabaseDriverA(context);
+    float mark = -1;
+    try {
+      mark = mydb.getMark(userId);
+    } catch (IllegalAccessError e) {
+
+    }
+    mydb.close();
+    return mark;
+  }
   /**
    * Get the roleId of the user.
    *

@@ -49,11 +49,6 @@ public class InstructorMenu extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +134,9 @@ public class InstructorMenu extends AppCompatActivity
             if(canDo) {
                 new MaterialFilePicker().withActivity(InstructorMenu.this).withRequestCode(10).start();
             }
+        } else if (id == R.id.nav_ViewMark) {
+            Intent i = new Intent(InstructorMenu.this, ViewMark.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
