@@ -230,9 +230,9 @@ now that the database is added. e.g.
 
 Updated the sprint plan development cycle, product and sprint backlog with the 
 most recent update changes, and burndown charts (with planned curve). Discussed 
-about the current sprint plan as alot of changes need to be made with the remodelling
-of the application that needs to work with the remote database wihtout any major 
-obstacles prevent new feautures to be added to the project.
+about the current sprint plan as alot of changes need to be made with the remodeling
+of the application that needs to work with the remote database without any major 
+obstacles preventing/slowing down the progress of the project.
 
 Visit Google Docs to view these changes.
 
