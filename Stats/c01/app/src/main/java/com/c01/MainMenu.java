@@ -99,8 +99,6 @@ public class MainMenu extends AppCompatActivity {
 //        });
 //        dialog.show();
 //    }
-        Student bob = new Student(4, "Bob", 18, "perkosets", context);
-        DatabaseInsertHelper.insertMark(4,68.9f, context);
     }
 }
 

@@ -35,7 +35,7 @@ public class ViewMark extends AppCompatActivity {
         EnumMapRoles roleMap = new EnumMapRoles(context);
         ArrayList<String> displayer = new ArrayList<>();
         int ctr = 1;
-        String markHolder = "";
+        String markHolder = "N/A";
         String wholeHolder = "";
         boolean loop = true;
         try {
@@ -48,7 +48,7 @@ public class ViewMark extends AppCompatActivity {
                         markHolder = "N/A";
                     }
                     wholeHolder = user.getName() + ": " + markHolder;
-                    displayer.add(user.getName());
+                    displayer.add(wholeHolder);
                 }
                 ctr++;
             }

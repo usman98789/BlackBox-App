@@ -55,7 +55,9 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         + "PASSWORD CHAR(64),"
         + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
     sqLiteDatabase.execSQL("CREATE TABLE MARKS "
-        + "(ID INTEGER PRIMARY KEY NOT NULL)");
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
   }
 
   @Override
