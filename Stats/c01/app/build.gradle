@@ -18,6 +18,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/jlatexmath-0.9.6.jar')
     compile "commons-io:commons-io:+"
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
 }
 
 android {
@@ -64,29 +66,5 @@ android {
 repositories {
     maven {
         url "http://dl.bintray.com/lukaville/maven"
-    }
-
-    dependencies {
-        compile fileTree(include: ['*.jar'], dir: 'libs')
-        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-            exclude group: 'com.android.support', module: 'support-annotations'
-        })
-        compile project(':mysql-connector-java-5.1.44-bin')
-        compile files('libs/javax.servlet-api-3.1.0.jar')
-        compile files('libs/jlatexmath-0.9.6.jar')
-        compile 'com.android.support:appcompat-v7:25.+'
-        compile 'com.android.support.constraint:constraint-layout:1.0.2'
-        compile 'com.android.support:design:25.+'
-        compile 'com.squareup.okhttp3:okhttp:3.9.0'
-        compile 'com.nbsp:library:1.8'
-        compile 'org.apache.ivy:ivy:2.3.0'
-        testCompile 'junit:junit:4.12'
-    }
-
-
-    repositories {
-        maven {
-            url "http://dl.bintray.com/lukaville/maven"
-        }
     }
 }
