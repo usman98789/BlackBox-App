@@ -18,6 +18,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/jlatexmath-0.9.6.jar')
     compile "commons-io:commons-io:+"
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
 }
 
 android {
@@ -89,3 +91,5 @@ repositories {
         }
     }
 }
+1
+

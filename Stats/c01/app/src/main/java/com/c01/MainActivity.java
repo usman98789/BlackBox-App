@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 int id = DatabaseInsertHelper.insertNewUser("ProfA", 40, "123street", roleMap.get(Roles.PROF), "123", this.getApplicationContext());
                 int id3 = DatabaseInsertHelper.insertNewUser("StudentA", 19, "123street", roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
                 int id4 = DatabaseInsertHelper.insertNewUser("Molly Perkosets", 19, "123street", roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
+                int id5 = DatabaseInsertHelper.insertNewUser("420 Blaziken", 21, "losses", roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
                 DatabaseInsertHelper.insertMark(id3, 69.9, context);
                 DatabaseInsertHelper.insertMark(id4, 42.0, context);
                 Toast.makeText(getApplicationContext(), String.valueOf(id), Toast.LENGTH_LONG).show();
