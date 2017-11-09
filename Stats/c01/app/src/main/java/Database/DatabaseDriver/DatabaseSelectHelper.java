@@ -74,113 +74,6 @@ public class DatabaseSelectHelper {
   }
 
   /**
-   * Get a list of accountIds associated with the userID
-   *
-   * @param userId  the id of the user
-   * @param context is the context received from the activity
-   * @return list of accountIds associated with the userID
-   */
-  public static List<Integer> getAccountIds(int userId, Context context) {
-    List<Integer> accountList = new ArrayList<Integer>();
-    // Uses userId to get account id and adds account ids to account list if userId is greater than
-    // 0
-    if (userId > 0) {
-      // create a an instance of a database
-      DatabaseDriverA mydb = new DatabaseDriverA(context);
-      Cursor results;
-      results = mydb.getAccountIds(userId);
-      while (results.moveToNext()) {
-        // System.out.println(results.getInt("ID"));
-        accountList.add(results.getInt(results.getColumnIndex("ACCOUNTID")));
-      }
-      results.close();
-      mydb.close();
-    }
-    // Return list of accounts
-    return accountList;
-  }
-
-  /**
-   * . Get an Account object from the account Id
-   *
-   * @param accountId the id of the account
-   * @param context   is the context received from the activity
-   * @return an Account object created with the details of the account.
-   */
-
-  /**
-   * Gets the current balance in the account.
-   *
-   * @param accountId is the id of the account
-   * @param context   is the context received from the activity
-   * @return the current balance of the account in the database
-   */
-  public static BigDecimal getBalance(int accountId, Context context) {
-    // create a an instance of a database
-    DatabaseDriverA mydb = new DatabaseDriverA(context);
-    BigDecimal balance = null;
-    // try to get the balance of the account from the database, otherwise catch exception
-    balance = mydb.getBalance(accountId);
-    mydb.close();
-    return balance;
-  }
-
-  /**
-   * Get the current interest associated with the accountType.
-   *
-   * @param accountType the id of the accountType
-   * @param context     is the context received from the activity
-   * @return the current interest associated with the accountType.
-   */
-  public static BigDecimal getInterestRate(int accountType, Context context) {
-    // create a an instance of a database
-    DatabaseDriverA mydb = new DatabaseDriverA(context);
-    BigDecimal interestRate = null;
-    interestRate = mydb.getInterestRate(accountType);
-    mydb.close();
-    return interestRate;
-  }
-
-  /**
-   * Get a list of ids of account types.
-   *
-   * @param context is the context received from the activity
-   * @return a list of ids of account types.
-   */
-  public static List<Integer> getAccountTypesIds(Context context) {
-    // create a an instance of a database
-    DatabaseDriverA mydb = new DatabaseDriverA(context);
-    Cursor results = null;
-    List<Integer> ids = new ArrayList<>();
-    // try to get the result set of all account types
-    results = mydb.getAccountTypesId();
-    while (results.moveToNext()) {
-      // add each id from the result set to the list
-      ids.add(results.getInt(results.getColumnIndex("ID")));
-    }
-    results.close();
-    mydb.close();
-    return ids;
-  }
-
-  /**
-   * Get the name of the account type associated with the id
-   *
-   * @param accountTypeId the id of the account type
-   * @param context       is the context received from the activity
-   * @return the name of the account type associated with the id
-   */
-  public static String getAccountTypeName(int accountTypeId, Context context) {
-    // create a an instance of a database
-    DatabaseDriverA mydb = new DatabaseDriverA(context);
-    String name = null;
-    // try to get the name of the account type, otherwise catch an exception
-    name = mydb.getAccountTypeName(accountTypeId);
-    mydb.close();
-    return name;
-  }
-
-  /**
    * Get a list of roles.
    *
    * @param context is the context received from the activity
@@ -203,24 +96,6 @@ public class DatabaseSelectHelper {
     return ids;
   }
 
-  /**
-   * Get the account type Id associated with that account.
-   *
-   * @param accountId the id of the account.
-   * @param context   is the context received from the activity
-   * @return the account type Id associated with that account.
-   */
-  public static int getAccountType(int accountId, Context context) {
-    // create a an instance of a database
-    DatabaseDriverA mydb = new DatabaseDriverA(context);
-    int type1 = -1;
-    // try and get the type id of the account, otherwise catch an exception
-
-    type1 = mydb.getAccountType(accountId);
-    mydb.close();
-    return type1;
-  }
-
   public static double getMark(int userId, Context context) {
     DatabaseDriverA mydb = new DatabaseDriverA(context);
     double mark = -1;
@@ -232,6 +107,7 @@ public class DatabaseSelectHelper {
     mydb.close();
     return mark;
   }
+
   /**
    * Get the roleId of the user.
    *

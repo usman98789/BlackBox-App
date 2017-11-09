@@ -38,53 +38,6 @@ public class DatabaseInsertHelper extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Insert a new account into account table.
-     *
-     * @param name    the name of the account.
-     * @param balance the balance currently in account.
-     * @param typeId  the id of the type of the account.
-     * @param context is the context received from the activity
-     * @return accountId of inserted account, -1 otherwise
-     * @throws InvalidNameException if the name is null
-     */
-
-
-    /**
-     * insert an accountType into the accountType table.
-     *
-     * @param name         the name of the type of account.
-     * @param interestRate the interest rate for this type of account.
-     * @param context      is the context received from the activity
-     * @return true if successful, false otherwise.
-     * @throws InvalidNameException name is null
-     */
-    public static int insertAccountType(String name, BigDecimal interestRate, Context context)
-            throws InvalidNameException {
-        // create a an instance of a database
-        DatabaseDriverA mydb = new DatabaseDriverA(context);
-        // check if name is null
-        if (name.equals(null)) {
-            throw new InvalidNameException();
-        }
-        // check if interest rate is between 0 and 1
-        BigDecimal a = new BigDecimal("1.0");
-        BigDecimal b = new BigDecimal("0.0");
-        if (!((interestRate.compareTo(b) == 1) && (interestRate.compareTo(a) == -1))) {
-            return -1;
-        }
-        // insert the account type
-        int success = 0;
-        success = (int) mydb.insertAccountType(name, interestRate);
-        mydb.close();
-//    try {
-//      mydb.getWritableDatabase();
-//    } catch (Exception e) {
-//      e.printStackTrace();
-//    }
-        return success;
-    }
-
-    /**
      * inserts a new user into the users table
      *
      * @param name     the name of the user
@@ -146,29 +99,7 @@ public class DatabaseInsertHelper extends HttpServlet {
         mydb.insertMark(userId, mark);
         mydb.close();
     }
-    /**
-     * insert a user and account relationship.
-     *
-     * @param userId    the id of the user.
-     * @param accountId the id of the account.
-     * @param context   is the context received from the activity
-     * @return true if successful, false otherwise.
-     */
-    public static int insertUserAccount(int userId, int accountId, Context context) {
-        // Set boolean return value to 0
-        int retVal = 0;
-        // Adds user account with user account information into database if userid and account id
-        // are both greater than 0
-        if (userId > 0 && accountId > 0) {
-            // create a an instance of a database
-            DatabaseDriverA mydb = new DatabaseDriverA(context);
-            // Set return value to the id if user account is inserted into database
-            retVal = (int) mydb.insertUserAccount(userId, accountId);
-            mydb.close();
-        }
-        // Return boolean return value
-        return retVal;
-    }
+
 
     /**
      * Insert a new message into the database.

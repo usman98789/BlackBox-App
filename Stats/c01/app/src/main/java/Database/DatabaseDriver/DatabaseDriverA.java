@@ -26,16 +26,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.execSQL("CREATE TABLE ROLES "
         + "(ID INTEGER PRIMARY KEY NOT NULL,"
         + "NAME TEXT NOT NULL)");
-    sqLiteDatabase.execSQL("CREATE TABLE ACCOUNTTYPES "
-        + "(ID INTEGER PRIMARY KEY NOT NULL,"
-        + "NAME TEXT NOT NULL,"
-        + "INTERESTRATE TEXT)");
-    sqLiteDatabase.execSQL("CREATE TABLE ACCOUNTS "
-        + "(ID INTEGER PRIMARY KEY NOT NULL,"
-        + "NAME TEXT NOT NULL,"
-        + "BALANCE TEXT,"
-        + "TYPE INTEGER NOT NULL,"
-        + "FOREIGN KEY(TYPE) REFERENCES ACCOUNTTYPES(ID))");
     sqLiteDatabase.execSQL("CREATE TABLE USERS "
             + "(ID INTEGER PRIMARY KEY NOT NULL,"
             + "NAME TEXT NOT NULL,"
@@ -65,8 +55,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS USERPW");
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS USERACCOUNT");
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS USERS");
-    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS ACCOUNTS");
-    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS ACCOUNTTYPES");
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS ROLES");
 
     onCreate(sqLiteDatabase);
@@ -86,30 +74,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return id;
   }
 
-  protected long insertAccountType(String name, BigDecimal interestRate) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("NAME", name);
-    contentValues.put("INTERESTRATE", interestRate.toPlainString());
-    return sqLiteDatabase.insert("ACCOUNTTYPES", null, contentValues);
-  }
-
-  protected long insertAccount(String name, BigDecimal balance, int typeId) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("NAME", name);
-    contentValues.put("BALANCE", balance.toPlainString());
-    contentValues.put("TYPE", typeId);
-    return sqLiteDatabase.insert("ACCOUNTS", null, contentValues);
-  }
-
-  protected long insertUserAccount(int userId, int accountId) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("USERID", userId);
-    contentValues.put("ACCOUNTID", accountId);
-    return sqLiteDatabase.insert("USERACCOUNT", null, contentValues);
-  }
 
   protected long insertMessage(int userId, String message) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -209,63 +173,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return result;
   }
 
-  protected Cursor getAccountIds(int userId) {
-    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-    return sqLiteDatabase.rawQuery("SELECT ACCOUNTID FROM USERACCOUNT WHERE USERID = ?",
-        new String[]{String.valueOf(userId)});
-
-  }
-
-  protected Cursor getAccountDetails(int accountId) {
-    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-    return sqLiteDatabase.rawQuery("SELECT * FROM ACCOUNTS WHERE ID = ?",
-        new String[]{String.valueOf(accountId)});
-  }
-
-  protected BigDecimal getBalance(int accountId) {
-    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-    Cursor cursor = sqLiteDatabase.rawQuery("SELECT BALANCE FROM ACCOUNTS WHERE ID = ?",
-        new String[]{String.valueOf(accountId)});
-    cursor.moveToFirst();
-    BigDecimal result = new BigDecimal(cursor.getString(cursor.getColumnIndex("BALANCE")));
-    cursor.close();
-    return result;
-  }
-
-  protected int getAccountType(int accountId) {
-    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-    Cursor cursor = sqLiteDatabase.rawQuery("SELECT TYPE FROM ACCOUNTS WHERE ID = ?",
-        new String[]{String.valueOf(accountId)});
-    cursor.moveToFirst();
-    int result = cursor.getInt(cursor.getColumnIndex("TYPE"));
-    cursor.close();
-    return result;
-  }
-
-  protected String getAccountTypeName(int accountTypeId) {
-    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-    Cursor cursor = sqLiteDatabase.rawQuery("SELECT NAME FROM ACCOUNTTYPES WHERE ID = ?",
-        new String[]{String.valueOf(accountTypeId)});
-    cursor.moveToFirst();
-    String result = cursor.getString(cursor.getColumnIndex("NAME"));
-    cursor.close();
-    return result;
-  }
-
-  protected Cursor getAccountTypesId() {
-    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-    return sqLiteDatabase.rawQuery("SELECT ID FROM ACCOUNTTYPES", null);
-  }
-
-  protected BigDecimal getInterestRate(int accountType) {
-    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-    Cursor cursor = sqLiteDatabase.rawQuery("SELECT INTERESTRATE FROM ACCOUNTTYPES WHERE ID = ?",
-        new String[]{String.valueOf(accountType)});
-    cursor.moveToFirst();
-    BigDecimal result = new BigDecimal(cursor.getString(cursor.getColumnIndex("INTERESTRATE")));
-    cursor.close();
-    return result;
-  }
 
   protected Cursor getAllMessages(int userId) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
@@ -324,45 +231,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         > 0;
   }
 
-  protected boolean updateAccountName(String name, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("NAME", name);
-    return sqLiteDatabase.update("ACCOUNTS", contentValues, "ID = ?",
-        new String[]{String.valueOf(id)}) > 0;
-  }
-
-  protected boolean updateAccountBalance(BigDecimal balance, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("BALANCE", balance.toPlainString());
-    return sqLiteDatabase.update("ACCOUNTS", contentValues, "ID = ?",
-        new String[]{String.valueOf(id)}) > 0;
-  }
-
-  protected boolean updateAccountType(int typeId, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("TYPE", typeId);
-    return sqLiteDatabase.update("ACCOUNTS", contentValues, "ID = ?",
-        new String[]{String.valueOf(id)}) > 0;
-  }
-
-  protected boolean updateAccountTypeName(String name, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("NAME", name);
-    return sqLiteDatabase.update("ACCOUNTTYPES", contentValues, "ID = ?",
-        new String[]{String.valueOf(id)}) > 0;
-  }
-
-  protected boolean updateAccountTypeInterestRate(BigDecimal interestRate, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("INTERESTRATE", interestRate.toPlainString());
-    return sqLiteDatabase.update("ACCOUNTTYPES", contentValues, "ID = ?",
-        new String[]{String.valueOf(id)}) > 0;
-  }
 
   protected boolean updateUserPassword(String password, int id) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
