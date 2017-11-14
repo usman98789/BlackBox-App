@@ -104,7 +104,7 @@ public class Editor extends AppCompatActivity {
                 Toast.makeText(context.getApplicationContext(), "Problem_Set_" + assign + "_Q_" + assign_question + ".txt",
                         Toast.LENGTH_LONG).show();
                 try {
-                    name = "Problem_Set_" + assign + "_Q_" + assign_question;
+                    name = "Problem_Set_" + assign + "_Q_" + assign_question + ".txt";
                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt", Context.MODE_PRIVATE));
                     outputStreamWriter.write(text.getText().toString());
                     outputStreamWriter.close();
@@ -153,7 +153,7 @@ public class Editor extends AppCompatActivity {
                     Log.d("supertest", "running");
 //                    new MaterialFilePicker().withActivity(Editor.this).withRequestCode(10).start();
                     try {
-                        f = File.createTempFile(name, "");
+                        f = File.createTempFile(name, ".txt");
                         is = context.openFileInput(name);
                         FileUtils.copyInputStreamToFile(is, f);
 
@@ -166,10 +166,6 @@ public class Editor extends AppCompatActivity {
 //                            }
 //                        }
 
-                        progress = new ProgressDialog(Editor.this);
-                        progress.setTitle("Uploading");
-                        progress.setMessage("Please wait...");
-                        progress.show();
 
                         Thread t = new Thread(new Runnable() {
                             @Override
@@ -201,7 +197,6 @@ public class Editor extends AppCompatActivity {
                                         throw new IOException("Error : " + response);
                                     }
                                     Log.d("warblegarble", "request passed");
-                                    progress.dismiss();
                                 } catch (IOException e) {
                                     Log.d("warblegarble", "request failed");
                                     e.printStackTrace();
@@ -255,7 +250,6 @@ public class Editor extends AppCompatActivity {
         }
     }
 
-    ProgressDialog progress;
 
     private String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
