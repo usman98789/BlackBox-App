@@ -44,12 +44,6 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import maximsblog.blogspot.com.jlatexmath.*;
-
-import maximsblog.blogspot.com.jlatexmath.core.Insets;
-import maximsblog.blogspot.com.jlatexmath.core.TeXConstants;
-import maximsblog.blogspot.com.jlatexmath.core.TeXFormula;
-import maximsblog.blogspot.com.jlatexmath.core.TeXIcon;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -75,7 +69,6 @@ public class Editor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
         Context context = this.getApplicationContext();
-
 
 
         //generate = (Button) findViewById(R.id.generate_file_botton);
