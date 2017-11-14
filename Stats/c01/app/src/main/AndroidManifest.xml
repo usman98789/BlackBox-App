@@ -45,7 +45,8 @@
         <activity
             android:name=".ViewMark"
             android:label="@string/title_activity_view_mark"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ViewProblems"></activity>
     </application>
 
 </manifest>

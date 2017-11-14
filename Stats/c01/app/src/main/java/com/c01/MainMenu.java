@@ -77,6 +77,14 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        Button set = (Button) findViewById(R.id.ProblemSet);
+        set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainMenu.this, ViewProblems.class);
+                startActivity(i);
+            }
+        });
 
 
 

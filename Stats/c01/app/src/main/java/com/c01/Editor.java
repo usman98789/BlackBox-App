@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import maximsblog.blogspot.com.jlatexmath.*;
-import maximsblog.blogspot.com.jlatexmath.core.AjLatexMath;
+
 import maximsblog.blogspot.com.jlatexmath.core.Insets;
 import maximsblog.blogspot.com.jlatexmath.core.TeXConstants;
 import maximsblog.blogspot.com.jlatexmath.core.TeXFormula;
@@ -75,7 +75,7 @@ public class Editor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
         Context context = this.getApplicationContext();
-        AjLatexMath.init(context);
+
 
 
         //generate = (Button) findViewById(R.id.generate_file_botton);
