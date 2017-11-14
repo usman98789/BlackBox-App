@@ -68,37 +68,23 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        Button logout = (Button) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainMenu.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
-//    public void displayInformation(String info) {
-//        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-//        myAlert.setMessage(info);
-//        myAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                dialogInterface.dismiss();
-//            }
-//        });
-//        myAlert.show();
-//    }
 
-//    public void getCreds() {
-//        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-//        LinearLayout layout = new LinearLayout(this);
-//        layout.setOrientation(LinearLayout.VERTICAL);
-//
-//        final EditText nameBox = new EditText(this);
-//        nameBox.setHint("Enter name of student");
-//        layout.addView(nameBox);
-//        dialog.setView(layout);
-//
-//        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                name = nameBox.getText().toString();
-//            }
-//        });
-//        dialog.show();
-//    }
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 }
 
