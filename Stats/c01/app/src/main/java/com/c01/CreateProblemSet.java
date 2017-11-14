@@ -116,8 +116,9 @@ public class CreateProblemSet extends AppCompatActivity
 
             } else if (id == R.id.nav_share) {
 
-            } else if (id == R.id.nav_send) {
-
+            } else if (id == R.id.nav_logout) {
+                Intent i = new Intent(CreateProblemSet.this, MainActivity.class);
+                startActivity(i);
             } else if (id == R.id.nav_add_student) {
                 Intent i = new Intent(CreateProblemSet.this, addStudent.class);
                 startActivity(i);

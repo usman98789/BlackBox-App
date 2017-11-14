@@ -74,7 +74,7 @@ public class InstructorMenu extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
         }
     }
 
@@ -127,7 +127,9 @@ public class InstructorMenu extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_logout) {
+            Intent i = new Intent(InstructorMenu.this, MainActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_add_student) {
             Intent i = new Intent(InstructorMenu.this, addStudent.class);
@@ -225,5 +227,7 @@ public class InstructorMenu extends AppCompatActivity
 
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
+
+
 
 }
