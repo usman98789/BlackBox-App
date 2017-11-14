@@ -36,7 +36,7 @@ public class ViewAnnouncements extends AppCompatActivity {
         List<String> messages = new ArrayList<>();
         // get a list of all of this user's message ids
         List<Integer> messageIds = DatabaseSelectHelper.getAllMessageIds(id, context);
-        Toast.makeText(getApplicationContext(), String.valueOf(messageIds.size()), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), String.valueOf(messageIds.size()), Toast.LENGTH_LONG).show();
         messages.add("  ");
         for (Integer iD : messageIds) {
             messages.add(DatabaseSelectHelper.getSpecificMessage(iD, context));

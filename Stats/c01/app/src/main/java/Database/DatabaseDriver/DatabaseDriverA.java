@@ -47,6 +47,12 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
             + "(USERID INTEGER NOT NULL,"
             + "MARKS REAL NOT NULL,"
             + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE USERMESSAGES "
+            + "(ID INTEGER PRIMARY KEY NOT NULL,"
+            + "USERID INTEGER NOT NULL,"
+            + "MESSAGE CHAR(512) NOT NULL,"
+            + "VIEWED CHAR(1) NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
   }
 
   @Override

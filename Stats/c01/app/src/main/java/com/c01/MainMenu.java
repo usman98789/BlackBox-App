@@ -27,7 +27,7 @@ public class MainMenu extends AppCompatActivity {
     Button viewNotes;
     Intent nextpage;
 
-    Context context = this.getApplicationContext();
+    //Context context = this.getApplicationContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
