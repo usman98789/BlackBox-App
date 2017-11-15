@@ -81,7 +81,7 @@ public class MainMenu extends AppCompatActivity {
         set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainMenu.this, ViewProblems.class);
+                Intent i = new Intent(MainMenu.this, WhichProblemSet.class);
                 startActivity(i);
             }
         });
