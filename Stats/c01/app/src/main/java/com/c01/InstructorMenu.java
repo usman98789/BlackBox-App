@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,6 +25,9 @@ import android.webkit.MimeTypeMap;
 
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.ivy.util.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -143,7 +147,10 @@ public class InstructorMenu extends AppCompatActivity
                 }
             }
             if(canDo) {
-                new MaterialFilePicker().withActivity(InstructorMenu.this).withRequestCode(10).start();
+//                new MaterialFilePicker().withActivity(InstructorMenu.this).withRequestCode(10).start();
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                startActivityForResult(intent, 10);
             }
         } else if (id == R.id.nav_ViewMark) {
             Intent i = new Intent(InstructorMenu.this, ViewMark.class);
@@ -166,24 +173,23 @@ public class InstructorMenu extends AppCompatActivity
         }
     }
 
-    ProgressDialog progress;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         if(requestCode == 10 && resultCode == RESULT_OK) {
-            progress = new ProgressDialog(InstructorMenu.this);
-            progress.setTitle("Uploading");
-            progress.setMessage("Please wait...");
-            progress.show();
 
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    File f = new File(data.getStringExtra((FilePickerActivity.RESULT_FILE_PATH)));
+                    File f = new File(data.getData().getPath());
                     String content_type = getMimeType(f.getPath());
                     Log.d("warblegarble", f.getPath());
+                    Log.d("warblegarble", data.getData().getPath());
 
                     OkHttpClient client = new OkHttpClient();
+                    if (content_type == null) {
+                        Log.d("supertest", "null");
+                    }
                     RequestBody file_body = RequestBody.create(MediaType.parse(content_type), f);
                     String file_path = f.getAbsolutePath();
 
@@ -207,7 +213,6 @@ public class InstructorMenu extends AppCompatActivity
                             throw new IOException("Error : " +response);
                         }
                         Log.d("warblegarble", "request passed");
-                        progress.dismiss();
                     } catch (IOException e) {
                         Log.d("warblegarble", "request failed");
                         e.printStackTrace();
