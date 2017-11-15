@@ -2,6 +2,7 @@ package com.c01;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -182,7 +183,10 @@ public class InstructorMenu extends AppCompatActivity
                 @Override
                 public void run() {
                     File f = new File(data.getData().getPath());
-                    String content_type = getMimeType(f.getPath());
+                    ContentResolver cr = getContentResolver();
+                    MimeTypeMap mime = MimeTypeMap.getSingleton();
+                    Uri uri = data.getData();
+                    String content_type = mime.getExtensionFromMimeType(cr.getType(uri));
                     Log.d("warblegarble", f.getPath());
                     Log.d("warblegarble", data.getData().getPath());
 
