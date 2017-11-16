@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 etUserPass.setError("Invalid Student password");
             }
+        } else {
+            etUserName.setError("This UserId has not been registered");
         }
         return false;
     }
