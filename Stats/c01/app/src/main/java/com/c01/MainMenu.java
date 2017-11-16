@@ -20,14 +20,11 @@ public class MainMenu extends AppCompatActivity {
     String address;
     int age;
     String password;
-    Button messageStudent;
 
     String id;
 
     Button viewNotes;
     Intent nextpage;
-
-    //Context context = this.getApplicationContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -38,15 +35,7 @@ public class MainMenu extends AppCompatActivity {
 
         viewNotes = (Button) findViewById(R.id.viewNotesButton);
 
-        messageStudent = (Button) findViewById(R.id.messageStudentButton);
 
-        messageStudent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainMenu.this, addStudent.class);
-                startActivity(i);
-            }
-        });
 
 
         Button inbox = (Button) findViewById(R.id.email);
