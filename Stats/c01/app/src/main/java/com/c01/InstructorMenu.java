@@ -41,6 +41,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
 
@@ -198,10 +199,14 @@ public class InstructorMenu extends AppCompatActivity
                         path = FilenameUtils.getName(uri.toString());
                     }
 
-                    Log.d("warblegarble", path);
+                    Log.d("warblegarble", data.getData().getPath());
                     File f = new File(path);
 
-                    String content_type = getMimeType(f.getPath());
+
+                    String temp = path.substring(path.lastIndexOf("."));
+                    Log.d("supertest", temp);
+                    String content_type = getMimeType("temp" + temp);
+                    Log.d("supertest", content_type);
 //                    Log.d("warblegarble", f.getPath());
 //                    Log.d("warblegarble", data.getData().getPath());
 
