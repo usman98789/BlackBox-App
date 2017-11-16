@@ -35,11 +35,6 @@
             android:title="Add Assignments" />
 
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Import Gallery Pictures" />
-
-        <item
             android:id="@+id/nav_view_lecture_slides"
             android:icon="@drawable/ic_pdf"
             android:title="View Posted Lecture" />
@@ -62,10 +57,6 @@
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_menu_send"
