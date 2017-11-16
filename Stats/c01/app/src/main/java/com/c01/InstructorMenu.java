@@ -3,11 +3,14 @@ package com.c01;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,7 +34,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.ivy.util.FileUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -182,11 +188,27 @@ public class InstructorMenu extends AppCompatActivity
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    File f = new File(data.getData().getPath());
-                    ContentResolver cr = getContentResolver();
-                    MimeTypeMap mime = MimeTypeMap.getSingleton();
-                    Uri uri = data.getData();
-                    String content_type = mime.getExtensionFromMimeType(cr.getType(uri));
+                    String[] projection = {MediaStore.MediaColumns.DISPLAY_NAME};
+                    ContentResolver cr = getApplicationContext().getContentResolver();
+                    Cursor metaCursor = cr.query(data.getData(), projection, null, null, null);
+                    String path = "";
+                    if (metaCursor != null) {
+                        Log.d("warblegarble", "in try");
+                        try {
+                            if (metaCursor.moveToFirst()) {
+                                path = metaCursor.getString(0);
+                                Log.d("warblegarble", path);
+                            }
+                        } finally {
+                            metaCursor.close();
+                        }
+                    }
+
+
+                    Log.d("warblegarble", path);
+                    File f = new File("/storage/emulated/0/Download/" + path);
+
+                    String content_type = getMimeType(f.getPath());
                     Log.d("warblegarble", f.getPath());
                     Log.d("warblegarble", data.getData().getPath());
 
@@ -235,6 +257,32 @@ public class InstructorMenu extends AppCompatActivity
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
 
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+    }
+
+    public static String getRealFilePath(final Context context, final Uri uri ) {
+        if ( null == uri ) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if ( scheme == null )
+            data = uri.getPath();
+        else if ( ContentResolver.SCHEME_FILE.equals( scheme ) ) {
+            data = uri.getPath();
+        } else if
+                ( ContentResolver.SCHEME_CONTENT.equals( scheme ) ) {
+
+            Cursor cursor = context.getContentResolver().query( uri, new String[] { MediaStore.Images.ImageColumns.DATA }, null, null, null );
+            if ( null != cursor ) {
+                if ( cursor.moveToFirst() ) {
+
+                    int index = cursor.getColumnIndex( MediaStore.Images.ImageColumns.DATA );
+                    if ( index > -1 ) {
+                        data = cursor.getString( index );
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
     }
 
 
