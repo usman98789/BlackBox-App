@@ -13,6 +13,11 @@
         <item name="colorControlNormal">@color/light</item>
         <item name="colorSwitchThumbNormal">@color/light</item>
         <item name="editTextColor">@color/light</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+    </style>
+
+    <style name="Navigationview">
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

@@ -3,58 +3,60 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_add_assignments"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Add Assignments" />
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_announcement"
+            android:title="Post Announcements" />
+
+        <item
+            android:id="@+id/nav_add_student"
+            android:icon="@drawable/ic_add_people"
+            android:title="Add Student" />
 
         <item
             android:id="@+id/nav_add_lecture"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_powerpoint_box"
             android:title="Add Lecture" />
 
         <item
             android:id="@+id/nav_add_lecture_notes"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Add Lecture" />
+            android:icon="@drawable/ic_file_gray_116dp"
+            android:title="Add Lecture Notes" />
+
+        <item
+            android:id="@+id/nav_add_notes"
+            android:icon="@drawable/ic_add_notes2"
+            android:title="Add Notes" />
+
+        <item
+            android:id="@+id/nav_add_assignments"
+            android:icon="@drawable/ic_add_assignments"
+            android:title="Add Assignments" />
 
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Import Gallery Pictures" />
 
         <item
             android:id="@+id/nav_view_lecture_slides"
-            android:icon="@drawable/ic_menu_lecture"
-            android:title="Lecture" />
+            android:icon="@drawable/ic_pdf"
+            android:title="View Posted Lecture" />
 
         <item
             android:id="@+id/nav_view_lecture_notes"
-            android:icon="@drawable/ic_menu_lecture"
-            android:title="Lecture" />
-
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Announce" />
-
-        <item
-            android:id="@+id/nav_add_student"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Add Student" />
-
-        <item
-            android:id="@+id/nav_add_notes"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Add Notes" />
+            android:icon="@drawable/ic_pdf"
+            android:title="View Posted Lecture Notes" />
 
         <item
             android:id="@+id/nav_edit_grades"
             android:icon="@drawable/ic_menu_manage"
             android:title="Edit Grades" />
+
         <item
             android:id="@+id/nav_ViewMark"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_view_grades"
             android:title="View Marks" />
     </group>
 

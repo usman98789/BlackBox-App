@@ -10,11 +10,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.ivy.util.url.ApacheURLLister;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ViewProblems extends AppCompatActivity {
     ListAdapter myAdapter;
@@ -22,11 +25,15 @@ public class ViewProblems extends AppCompatActivity {
     List serverDir;
     ListView fileList;
     DownloadManager downloadManager;
+    String num;
+    List newList = new ArrayList();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_problems);
-
+        num = getIntent().getStringExtra("num");
+        Toast.makeText(getApplicationContext(), "Problem Set: " + num, Toast.LENGTH_LONG).show();
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -41,6 +48,21 @@ public class ViewProblems extends AppCompatActivity {
                         String temp = serverDir.get(i).toString();
                         temp = temp.replace("https://megumin.ga/stats/assignments/", "");
                         serverDir.set(i, temp);
+
+                    }
+
+                    Random randomGenerator = new Random();
+                    int index = 0;
+                    String temp;
+                    String temp2;
+                    while (newList.size() <= 5){
+                        index = randomGenerator.nextInt(serverDir.size());
+                        temp = serverDir.get(index).toString();
+
+                        temp2 = temp.substring(12, 13);
+                        if (( temp2.equals(num)) && !(newList.contains(temp))) {
+                            newList.add(temp);
+                        }
                     }
 
                 } catch (Exception e) {
@@ -49,12 +71,14 @@ public class ViewProblems extends AppCompatActivity {
             }
         });
 
+
+
         t.start();
         while(t.isAlive()){}
 
         if (!t.isAlive()) {
 
-            myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, serverDir);
+            myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, newList);
             fileList = (ListView) findViewById(R.id.fileListView);
             fileList.setAdapter(myAdapter);
 
