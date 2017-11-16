@@ -16,7 +16,7 @@
         android:layout_marginTop="93dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="Enter Announcement..."
+        android:hint="Enter Announcement..."
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
