@@ -194,18 +194,27 @@ public class InstructorMenu extends AppCompatActivity
                     String path = "";
 
                     Uri uri = data.getData();
-                    path = getPath(context, uri);
-                    if (path == null) {
-                        path = FilenameUtils.getName(uri.toString());
-                    }
+                    Log.d("supertest", data.getData().toString());
+                    Log.d("supertest", data.getData().getPath());
+                    path = data.getData().getPath().toString();
+                    int index = path.lastIndexOf(".");
 
-                    Log.d("warblegarble", data.getData().getPath());
+
+                    if (index != -1) {
+                        Log.d("supertest", "in loop");
+                        path = path.substring(path.lastIndexOf(":") + 1);
+                    } else {
+                        path = getPath(context, uri);
+                        if (path == null) {
+                            path = FilenameUtils.getName(uri.toString());
+                        }
+                        Log.d("warblegarble", data.getData().getPath());
+                    }
+                    String temp = path.substring(path.lastIndexOf("."));
+                    String content_type = getMimeType("temp" + temp);
                     File f = new File(path);
 
 
-                    String temp = path.substring(path.lastIndexOf("."));
-                    Log.d("supertest", temp);
-                    String content_type = getMimeType("temp" + temp);
                     Log.d("supertest", content_type);
 //                    Log.d("warblegarble", f.getPath());
 //                    Log.d("warblegarble", data.getData().getPath());
