@@ -69,7 +69,7 @@ public class InstructorMenu extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Feature in development..", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -136,13 +136,9 @@ public class InstructorMenu extends AppCompatActivity
         } else if (id == R.id.nav_add_assignments) {
             Intent i = new Intent(InstructorMenu.this, CreateProblemSet.class);
             startActivity(i);
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_manage) {
+        }  else if (id == R.id.nav_manage) {
             Intent i = new Intent(InstructorMenu.this, PostAnnouncement.class);
             startActivity(i);
-        } else if (id == R.id.nav_share) {
-
         } else if (id == R.id.nav_logout) {
             Intent i = new Intent(InstructorMenu.this, MainActivity.class);
             startActivity(i);

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Statistics (STAB22/52)</string>
+    <string name="app_name">Statify</string>
     <string name="title_activity_instructor_menu">Instructor Menu</string>
     <string name="title_activity_create_problem_set">Problem Set</string>
     <string name="title_activity_editor">Editor</string>
