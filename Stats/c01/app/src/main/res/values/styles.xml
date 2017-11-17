@@ -10,7 +10,7 @@
         <item name="colorButtonNormal">@color/white</item>
         <item name="colorControlActivated">@color/light</item>
         <item name="colorControlHighlight">@color/light</item>
-        <item name="colorControlNormal">@color/light</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="colorSwitchThumbNormal">@color/light</item>
         <item name="editTextColor">@color/light</item>
         <item name="android:navigationBarColor">@color/transparent</item>

@@ -1,36 +1,26 @@
 package com.c01;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import org.apache.ivy.util.url.ApacheURLLister;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,21 +28,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.net.URL;
-import java.util.List;
-import org.apache.ivy.util.url.ApacheURLLister;
-
-public class CreateProblemSet extends AppCompatActivity {
+public class StudentFileInbox extends AppCompatActivity {
 
     private static ListAdapter myAdapter;
-    private static List serverDir;
+    private static List<String> serverDir;
     private static ListView fileList;
     private static File files;
     private static File[] localDir;
-    private static ApacheURLLister lister;
     private static Context context;
 
     public void showAlert() {
@@ -70,16 +56,10 @@ public class CreateProblemSet extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_problem_set);
+        setContentView(R.layout.activity_student_file_inbox);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = getApplicationContext();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        Drawable myFabSrc = getResources().getDrawable(android.R.drawable.ic_input_add);
-        Drawable willBeWhite = myFabSrc.getConstantState().newDrawable();
-        willBeWhite.mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
-        fab.setImageDrawable(willBeWhite);
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -87,16 +67,13 @@ public class CreateProblemSet extends AppCompatActivity {
 
 
                 try {
-                    URL url = new URL("https://shev:Biscut123@megumin.ga/stats/assignments");
-                    lister = new ApacheURLLister();
-                    serverDir = lister.listFiles(url);
+                    String dir = "/sdcard/Android/data/com.c01/files/Download";
+                    files = new File(dir);
+                    localDir = files.listFiles();
+                    serverDir = new ArrayList<String>();
 
-                    for (int i = 0; i < serverDir.size(); i++) {
-                        String temp = serverDir.get(i).toString();
-                        temp = temp.replace("https://megumin.ga/stats/assignments/", "");
-                        System.out.println(temp);
-                        serverDir.set(i, temp);
-
+                    for (File file : localDir){
+                        serverDir.add(file.getName());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -153,28 +130,29 @@ public class CreateProblemSet extends AppCompatActivity {
                         Log.e("login activity", "Can not read file: " + e.toString());
                     }
 
-                    Intent i = new Intent(CreateProblemSet.this, EditFileContent.class);
-                    i.putExtra("assign", assign);
-                    i.putExtra("assign_question", assign_question);
+                    Intent i = new Intent(StudentFileInbox.this, FileView.class);
                     i.putExtra("text", text);
                     startActivity(i);
                 }
             });
         }
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Staring Up LaTeX file", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Getting More Problem Sets", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent i = new Intent(CreateProblemSet.this, Editor.class);
+                Intent i = new Intent(StudentFileInbox.this, WhichProblemSet.class);
                 startActivity(i);
             }
         });
     }
+
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(CreateProblemSet.this, InstructorMenu.class);
+        Intent i = new Intent(StudentFileInbox.this, MainMenu.class);
         startActivity(i);
     }
+
 }
