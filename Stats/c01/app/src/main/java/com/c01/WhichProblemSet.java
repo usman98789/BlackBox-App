@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 public class WhichProblemSet extends AppCompatActivity {
 
-    Context context;
-    String num;
+    private static Context context;
+    private static String num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,5 +49,10 @@ public class WhichProblemSet extends AppCompatActivity {
             return true;
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(WhichProblemSet.this, StudentFileInbox.class);
+        startActivity(i);
     }
 }
