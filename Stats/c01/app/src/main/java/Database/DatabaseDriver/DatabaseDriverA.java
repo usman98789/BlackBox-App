@@ -53,6 +53,23 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
             + "MESSAGE CHAR(512) NOT NULL,"
             + "VIEWED CHAR(1) NOT NULL,"
             + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE A1MARK"
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS REAL NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE A2MARK"
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS REAL NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE A3MARK"
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS REAL NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE A4MARK"
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS REAL NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+
   }
 
   @Override
@@ -120,6 +137,21 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.insert("MARK", null, contentValues);
   }
 
+  protected void insertAssignmentMark(int userId, double mark, int aNum){
+    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put("USERID", userId);
+    contentValues.put("MARKS", mark);
+    if (aNum == 1){
+      sqLiteDatabase.insert("A1MARK", null, contentValues);
+    } else if (aNum == 2){
+      sqLiteDatabase.insert("A2MARK", null, contentValues);
+    } else if (aNum == 3){
+      sqLiteDatabase.insert("A3MARK", null, contentValues);
+    } else if (aNum == 4){
+      sqLiteDatabase.insert("A4MARK", null, contentValues);
+    }
+  }
 
   //SELECT METHODS
   protected double getMark(int userId) {
@@ -129,6 +161,42 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     cursor.moveToFirst();
     double value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
     cursor.close();
+    return value;
+  }
+
+  protected double getAssignmentMark(int userId, int aNum) {
+    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+    double value = -1;
+
+    if (aNum == 1){
+      Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM A1MARK WHERE USERID = ?",
+              new String[]{String.valueOf(userId)});
+      cursor.moveToFirst();
+      value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
+      cursor.close();
+
+    } else if (aNum == 2){
+      Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM A2MARK WHERE USERID = ?",
+              new String[]{String.valueOf(userId)});
+      cursor.moveToFirst();
+      value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
+      cursor.close();
+
+    } else if (aNum == 3){
+      Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM A3MARK WHERE USERID = ?",
+              new String[]{String.valueOf(userId)});
+      cursor.moveToFirst();
+      value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
+      cursor.close();
+
+    } else if (aNum == 4){
+      Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM A4MARK WHERE USERID = ?",
+              new String[]{String.valueOf(userId)});
+      cursor.moveToFirst();
+      value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
+      cursor.close();
+    }
+
     return value;
   }
 

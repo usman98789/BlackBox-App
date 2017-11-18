@@ -47,7 +47,12 @@
             android:label="@string/title_activity_view_mark"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ViewProblems" />
-        <activity android:name=".WhichProblemSet"></activity>
+        <activity android:name=".WhichProblemSet" />
+        <activity
+            android:name=".EditGrades"
+            android:label="@string/title_activity_edit_grades"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ProblemSetList"></activity>
     </application>
 
 </manifest>

@@ -108,6 +108,18 @@ public class DatabaseSelectHelper {
     return mark;
   }
 
+  public static double getAssignmentMark (int userId, int aNum, Context context) {
+    DatabaseDriverA mydb = new DatabaseDriverA(context);
+    double mark = -1;
+    try {
+      mark = mydb.getAssignmentMark(userId, aNum);
+    } catch (IllegalAccessError e) {
+
+    }
+    mydb.close();
+    return mark;
+  }
+
   /**
    * Get the roleId of the user.
    *
