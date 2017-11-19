@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 
 import Database.DatabaseDriver.DatabaseDriverA;
+import Database.DatabaseDriver.DatabaseInsertHelper;
 import Database.DatabaseDriver.DatabaseSelectHelper;
 import generics.EnumMapRoles;
 import generics.Roles;
@@ -50,8 +51,6 @@ public class TestDatabaseA {
         assertEquals("gagan", user.getName());
         assertEquals(19, user.getAge());
         assertEquals("123street", user.getAddress());
-        int roleId = roleMap.get(Roles.STUDENT);
-        assertEquals(roleId, user.getRoleId());
     }
 
     @Test
@@ -71,4 +70,14 @@ public class TestDatabaseA {
         assertEquals("ROLE1", role);
     }
 
+    @Test
+    public void testgetAssignmentMark() throws Exception {
+        EnumMapRoles roleMap = new EnumMapRoles(context);
+        int id = 0;
+        id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+        DatabaseInsertHelper.insertAssignmentMark(id, 59.4, 1, context);
+        assertEquals(59.4, DatabaseSelectHelper.getAssignmentMark(id, 1, context), 0);
+    }
+
+    
 }
