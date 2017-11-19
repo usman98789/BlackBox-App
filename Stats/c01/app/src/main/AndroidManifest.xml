@@ -44,6 +44,7 @@
         <activity android:name=".ViewNotes" />
         <activity android:name=".EditGrades" />
         <activity android:name=".ProblemSetList" />
+        <activity android:name=".DialogMarks" />
         <activity
             android:name=".ViewMark"
             android:label="@string/title_activity_view_mark"
