@@ -8,6 +8,7 @@ import java.util.List;
 import user.*;
 import android.content.Context;
 import android.database.Cursor;
+import android.widget.Toast;
 
 public class DatabaseSelectHelper {
 
@@ -113,8 +114,7 @@ public class DatabaseSelectHelper {
     double mark = -1;
     try {
       mark = mydb.getAssignmentMark(userId, aNum);
-    } catch (IllegalAccessError e) {
-
+    } catch (Exception e) {
     }
     mydb.close();
     return mark;

@@ -161,10 +161,7 @@ public class InstructorMenu extends AppCompatActivity
                 intent.setType("*/*");
                 startActivityForResult(intent, 10);
             }
-        } else if (id == R.id.nav_ViewMark) {
-            Intent i = new Intent(InstructorMenu.this, ViewMark.class);
-            startActivity(i);
-        } else if (id == R.id.nav_edit_grades) {
+        }  else if (id == R.id.nav_edit_grades) {
             Intent i = new Intent(InstructorMenu.this, EditGrades.class);
             startActivity(i);
         }

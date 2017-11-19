@@ -49,10 +49,6 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="Edit Grades" />
 
-        <item
-            android:id="@+id/nav_ViewMark"
-            android:icon="@drawable/ic_view_grades"
-            android:title="View Marks" />
     </group>
 
     <item android:title="Communicate">

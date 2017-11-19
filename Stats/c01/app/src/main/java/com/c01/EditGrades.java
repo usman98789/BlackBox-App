@@ -60,7 +60,7 @@ public class EditGrades extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(view.getContext(),ProblemSetList.class);
-                String data = (String)parent.getItemAtPosition(position);
+                String data = (String) parent.getItemAtPosition(position);
                 i.putExtra("name", data);
                 startActivity(i);
             }
@@ -68,4 +68,9 @@ public class EditGrades extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), InstructorMenu.class);
+        startActivity(intent);
+    }
 }

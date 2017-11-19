@@ -1,11 +1,15 @@
 package com.c01;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,7 +31,7 @@ public class ProblemSetList extends AppCompatActivity {
 
     public void displayMarks(Context context){
         String userName;
-        userName = getIntent().getExtras().getString("name");
+        userName = getIntent().getStringExtra("name");
 
         EnumMapRoles roleMap = new EnumMapRoles(context);
         ArrayList<String> displayer = new ArrayList<>();
@@ -54,11 +58,20 @@ public class ProblemSetList extends AppCompatActivity {
                 ctr++;
             }
         } catch (Exception e) {
-
         }
 
         ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, displayer);
         ListView view = (ListView) findViewById(R.id.ProblemSetList);
         view.setAdapter(adapter);
+        view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent intent = new Intent(view.getContext(), DialogMarks.class);
+                intent.putExtra("aNum", position + 1);
+                intent.putExtra("name", userName);
+                startActivity(intent);
+            }
+        });
+
     }
 }

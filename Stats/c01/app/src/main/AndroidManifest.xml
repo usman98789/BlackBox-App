@@ -52,7 +52,12 @@
             android:name=".EditGrades"
             android:label="@string/title_activity_edit_grades"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProblemSetList"></activity>
+        <activity android:name=".ProblemSetList" />
+        <activity
+            android:name=".DialogMarks">
+            android:label="DialogMarks"
+            android:theme="@style/Theme.AppCompat.DialogAlert"
+        </activity>
     </application>
 
 </manifest>
