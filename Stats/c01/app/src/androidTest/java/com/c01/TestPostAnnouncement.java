@@ -98,7 +98,7 @@ public class TestPostAnnouncement {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("Announcement 1"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("Announcement1"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.post), withText("Post"),
