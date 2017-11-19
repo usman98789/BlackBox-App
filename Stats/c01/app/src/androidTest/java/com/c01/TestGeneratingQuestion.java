@@ -71,6 +71,15 @@ public class TestGeneratingQuestion {
         appCompatEditText.perform(replaceText("When \\\\(a \\\\ne 0\\\\), there are two solutions to \\\\(ax^2 + bx + c = 0\\\\)\n" +
                 "        and they are $$x = {-b \\\\pm \\\\sqrt{b^2-4ac} \\\\over 2a}.$$"), closeSoftKeyboard());
 
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.math_view),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        0),
+                                0),
+                        isDisplayed()));
+
         try {
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
@@ -91,6 +100,15 @@ public class TestGeneratingQuestion {
                                 1),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("aslkjasdjklasdkjlds"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.math_view),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        0),
+                                0),
+                        isDisplayed()));
 
         try {
             TimeUnit.SECONDS.sleep(3);
