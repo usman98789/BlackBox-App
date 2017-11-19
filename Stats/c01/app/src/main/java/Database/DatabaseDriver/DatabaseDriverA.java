@@ -67,21 +67,21 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
   }
 
   //INSERTS
-  protected long insertRole(String role) {
+  public long insertRole(String role) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("NAME", role);
     return sqLiteDatabase.insert("ROLES", null, contentValues);
   }
 
-  protected long insertNewUser(String name, int age, String address, int roleId, String password) {
+  public long insertNewUser(String name, int age, String address, int roleId, String password) {
     long id = insertUser(name, age, address, roleId);
     insertPassword(password, (int) id);
     return id;
   }
 
 
-  protected long insertMessage(int userId, String message) {
+  public long insertMessage(int userId, String message) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("USERID", userId);
@@ -112,7 +112,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.insert("USERPW", null, contentValues);
   }
 
-  protected void insertMark(int userId, double mark){
+  public void insertMark(int userId, double mark){
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("USERID", userId);
