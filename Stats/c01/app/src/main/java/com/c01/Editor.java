@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -63,12 +64,14 @@ public class Editor extends AppCompatActivity {
     private static String name;
     private static File f;
     private static InputStream is;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
-        Context context = this.getApplicationContext();
+        context = this.getApplicationContext();
+        initAssignment();
 
         mathView = (MathView) findViewById(R.id.math_view);
         text = (TextView) findViewById(R.id.input_view);
@@ -206,6 +209,14 @@ public class Editor extends AppCompatActivity {
                 Toast.makeText(context.getApplicationContext(), "Problem Set " + assign +" has been finalized.",
                         Toast.LENGTH_LONG).show();
                 assign++;
+                try {
+                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("markQuestionSet.txt", Context.MODE_PRIVATE));
+                    outputStreamWriter.write(assign + "");
+                    outputStreamWriter.close();
+
+                } catch (IOException e) {
+                    Log.e("Exception", "File write failed: " + e.toString());
+                }
             }
         });
     }
@@ -236,11 +247,53 @@ public class Editor extends AppCompatActivity {
         }
     }
 
-
     private String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
 
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+    }
+
+    private void initAssignment() {
+        try {
+            InputStream inputStream = context.openFileInput("markQuestionSet.txt");
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+                String built = stringBuilder.toString();
+                assign = Integer.parseInt(built);
+
+                System.out.println("1. Creating Problem Set : " + assign);
+
+                Toast.makeText(context.getApplicationContext(), "nN Problem Set : " + assign,
+                        Toast.LENGTH_LONG).show();
+
+                inputStream.close();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("Editor activity", "File not found: " + e.toString());
+            try {
+                name = "markQuestionSet.txt";
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("markQuestionSet.txt", Context.MODE_PRIVATE));
+                outputStreamWriter.write(assign + "");
+
+                System.out.println("2. Creating Problem Set : " + assign);
+
+                Toast.makeText(context.getApplicationContext(), "Creating Problem Set : " + assign,
+                        Toast.LENGTH_LONG).show();
+
+                outputStreamWriter.close();
+            } catch (IOException ex) {
+                Log.e("Exception", "File write failed: " + ex.toString());
+            }
+        } catch (IOException e) {
+            Log.e("Editor activity", "Can not read file: " + e.toString());
+        }
     }
 
     @Override
