@@ -14,6 +14,9 @@ go to: L02_06/Backlogs/Sprint_Backlog.pdf
 To find mentioned Google Docs from text below,
 go to: https://docs.google.com/document/d/1Vw7xkpTeNbBVYAAwfDZXO0HxPGIfN_DJiqYeaho3VwU/edit
 
+To find mentioned code review list on Google Docs,
+go to: https://docs.google.com/document/d/119Kgpi1Pxy6jWE3ufkcwIFE7s-dwtpLlbXnjnk-H1zo/edit
+
 <--------------------------------(Meetings)------------------------------>
 
 Meeting 1 (September 22, 2017):
@@ -239,3 +242,37 @@ Visit Google Docs to view these changes.
  Duration (Hour:Minute:Second) := 1:20:49
 
 |---------------------------------(end #8)---------------------------------------|
+
+Meeting 9 (November 16, 2017):
+
+Discussed about the code review strategies that will be using to cover the correct
+standardized coding implementations. Planned out full a list of code review topics 
+that will be used during the code review session meeting that will be held later in 
+the week of November 12.
+
+Visit Google Docs to view this mentioned list.
+
+ Duration (Hour:Minute:Second) := 0:30:55
+
+|---------------------------------(end #9)---------------------------------------|
+
+Meeting 10 (November 18, 2017):
+
+Disscused about automation testing to proper test the U.I implementation of the 
+application and the correct coresponding features that the U.I linked with. The 
+automation testing that will be used in this application is "Espresso" to fully 
+automate the test cases to check the implementation for any crashes.
+		-> Espresso is used to test the created activities on the android application
+
+Discussed about different methods to test the database as many user-story features 
+depend on the database. The testing implementation that will be used to test the 
+database is a junit white box testing.
+
+Discussed about the created test cases and test files that were created during 
+the sprint week. Checked what additional test case was missing and needs to be added 
+or needs to be changed as it didn't fully test the implementation of the features and 
+database.
+
+ Duration (Hour:Minute:Second) := 3:46:04
+
+|---------------------------------(end #10)---------------------------------------|
