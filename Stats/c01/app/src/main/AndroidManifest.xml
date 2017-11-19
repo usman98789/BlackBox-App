@@ -42,6 +42,8 @@
         <activity android:name=".PostAnnouncement" />
         <activity android:name=".ViewAnnouncements" />
         <activity android:name=".ViewNotes" />
+        <activity android:name=".EditGrades" />
+        <activity android:name=".ProblemSetList" />
         <activity
             android:name=".ViewMark"
             android:label="@string/title_activity_view_mark"
