@@ -260,7 +260,7 @@ public class InstructorMenu extends AppCompatActivity
     }
 
 
-    private String getMimeType(String path) {
+    public String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
 
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
