@@ -228,6 +228,27 @@ public class ServerDownAndUpTest {
         device.click(500, 500);
         device.click(500, 600);
 
+        ViewInteraction appCompatImageButton3 = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        childAtPosition(
+                                allOf(withId(R.id.toolbar),
+                                        childAtPosition(
+                                                withClassName(is("android.support.design.widget.AppBarLayout")),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton3.perform(click());
+
+        ViewInteraction navigationMenuItemView3 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(R.id.design_navigation_view),
+                                childAtPosition(
+                                        withId(R.id.nav_view),
+                                        0)),
+                        10),
+                        isDisplayed()));
+        navigationMenuItemView3.perform(click());
+
 
     }
 
