@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 etUserPass.setError("Invalid Student password");
             }
+        } else {
+            etUserName.setError("This UserId has not been registered");
         }
         return false;
     }
@@ -187,5 +189,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
 }
 

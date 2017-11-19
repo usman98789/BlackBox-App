@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.c01.MainActivity"
-    android:background="@color/white">
+    tools:context="com.c01.MainActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -67,9 +66,9 @@
         </LinearLayout>
     </LinearLayout>
 
-    <EditText
+    <TextView
         android:id="@+id/welcomeText"
-        android:layout_width="322dp"
+        android:layout_width="fill_parent"
         android:layout_height="39dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -81,6 +80,21 @@
         android:textStyle="italic"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:paddingTop="45dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimary"/>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView"

@@ -49,6 +49,7 @@
         <activity android:name=".ViewProblems" />
         <activity android:name=".WhichProblemSet" />
         <activity
+
             android:name=".EditGrades"
             android:label="@string/title_activity_edit_grades"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -58,6 +59,18 @@
             android:label="DialogMarks"
             android:theme="@style/Theme.AppCompat.DialogAlert"
         </activity>
+            android:name=".StudentFileInbox"
+            android:label="@string/title_activity_student_file_inbox"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditFileContent"
+            android:label="@string/title_activity_edit_file_content"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FileView"
+            android:label="@string/title_activity_file_edit"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

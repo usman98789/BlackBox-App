@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Statify</string>
+    <string name="main_page_header"><u><b><i>Welcome To Blackbox</i></b></u></string>
     <string name="title_activity_instructor_menu">Instructor Menu</string>
     <string name="title_activity_create_problem_set">Problem Set</string>
     <string name="title_activity_editor">Editor</string>
@@ -108,5 +109,11 @@
     <string name="title_activity_example_fragment">ExampleFragment</string>
     <string name="title_activity_view_announcements">ViewAnnouncements</string>
     <string name="title_activity_view_mark">ViewMark</string>
+
     <string name="title_activity_edit_grades">EditGrades</string>
+
+    <string name="title_activity_student_file_inbox">Problem Set With Notes Inbox</string>
+    <string name="title_activity_edit_file_content">File Editor</string>
+    <string name="title_activity_file_edit">View Problem</string>
+>>>>>>> master
 </resources>

@@ -2,7 +2,9 @@ package com.c01;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,18 +22,22 @@ import java.util.List;
 import java.util.Random;
 
 public class ViewProblems extends AppCompatActivity {
-    ListAdapter myAdapter;
-    ApacheURLLister lister;
-    List serverDir;
-    ListView fileList;
-    DownloadManager downloadManager;
-    String num;
-    List newList = new ArrayList();
+
+    private static ListAdapter myAdapter;
+    private static ApacheURLLister lister;
+    private static List serverDir;
+    private static ListView fileList;
+    private static DownloadManager downloadManager;
+    private static String num;
+    private static List newList = new ArrayList();
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_problems);
+        context = getApplicationContext();
+
         num = getIntent().getStringExtra("num");
         Toast.makeText(getApplicationContext(), "Problem Set: " + num, Toast.LENGTH_LONG).show();
         Thread t = new Thread(new Runnable() {
@@ -71,8 +77,6 @@ public class ViewProblems extends AppCompatActivity {
             }
         });
 
-
-
         t.start();
         while(t.isAlive()){}
 
@@ -89,9 +93,15 @@ public class ViewProblems extends AppCompatActivity {
                     Uri uri = Uri.parse("https://shev:Biscut123@megumin.ga/stats/assignments/" + fileList.getItemAtPosition(position).toString());
                     DownloadManager.Request request = new DownloadManager.Request(uri);
                     request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    request.setDestinationInExternalFilesDir(context.getApplicationContext(), Environment.DIRECTORY_DOWNLOADS,fileList.getItemAtPosition(position).toString());
                     Long reference = downloadManager.enqueue(request);
                 }
             });
         }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(ViewProblems.this, WhichProblemSet.class);
+        startActivity(i);
     }
 }
