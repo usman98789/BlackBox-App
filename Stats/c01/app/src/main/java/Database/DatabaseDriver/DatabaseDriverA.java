@@ -33,12 +33,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
             + "ADDRESS CHAR(100),"
             + "ROLEID INTEGER,"
             + "FOREIGN KEY(ROLEID) REFERENCES ROLE(ID))");
-    sqLiteDatabase.execSQL("CREATE TABLE USERACCOUNT "
-        + "(USERID INTEGER NOT NULL,"
-        + "ACCOUNTID INTEGER NOT NULL,"
-        + "FOREIGN KEY(USERID) REFERENCES USER(ID),"
-        + "FOREIGN KEY(ACCOUNTID) REFERENCES ACOUNT(ID),"
-        + "PRIMARY KEY(USERID, ACCOUNTID))");
     sqLiteDatabase.execSQL("CREATE TABLE USERPW "
         + "(USERID INTEGER NOT NULL,"
         + "PASSWORD CHAR(64),"
@@ -76,9 +70,13 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
   public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS USERMESSAGES");
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS USERPW");
-    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS USERACCOUNT");
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS USERS");
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS ROLES");
+    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS MARK");
+    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS A1MARK");
+    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS A2MARK");
+    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS A3MARK");
+    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS A4MARK");
 
     onCreate(sqLiteDatabase);
   }
