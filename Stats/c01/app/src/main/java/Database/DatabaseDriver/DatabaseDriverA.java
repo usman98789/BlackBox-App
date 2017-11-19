@@ -53,6 +53,23 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
             + "MESSAGE CHAR(512) NOT NULL,"
             + "VIEWED CHAR(1) NOT NULL,"
             + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE A1MARK"
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS REAL NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE A2MARK"
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS REAL NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE A3MARK"
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS REAL NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE A4MARK"
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS REAL NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+
   }
 
   @Override
@@ -90,7 +107,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return sqLiteDatabase.insert("USERMESSAGES", null, contentValues);
   }
 
-  private long insertUser(String name, int age, String address, int roleId) {
+  public long insertUser(String name, int age, String address, int roleId) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("NAME", name);
@@ -101,7 +118,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return sqLiteDatabase.insert("USERS", null, contentValues);
   }
 
-  private void insertPassword(String password, int userId) {
+  public void insertPassword(String password, int userId) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
 
@@ -120,9 +137,24 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.insert("MARK", null, contentValues);
   }
 
+  public void insertAssignmentMark(int userId, double mark, int aNum){
+    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put("USERID", userId);
+    contentValues.put("MARKS", mark);
+    if (aNum == 1){
+      sqLiteDatabase.insert("A1MARK", null, contentValues);
+    } else if (aNum == 2){
+      sqLiteDatabase.insert("A2MARK", null, contentValues);
+    } else if (aNum == 3){
+      sqLiteDatabase.insert("A3MARK", null, contentValues);
+    } else if (aNum == 4){
+      sqLiteDatabase.insert("A4MARK", null, contentValues);
+    }
+  }
 
   //SELECT METHODS
-  protected double getMark(int userId) {
+  public double getMark(int userId) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM MARK WHERE USERID = ?",
             new String[]{String.valueOf(userId)});
@@ -132,12 +164,48 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return value;
   }
 
-  protected Cursor getRoles() {
+  public double getAssignmentMark(int userId, int aNum) {
+    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+    double value = -1;
+
+    if (aNum == 1){
+      Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM A1MARK WHERE USERID = ?",
+              new String[]{String.valueOf(userId)});
+      cursor.moveToFirst();
+      value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
+      cursor.close();
+
+    } else if (aNum == 2){
+      Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM A2MARK WHERE USERID = ?",
+              new String[]{String.valueOf(userId)});
+      cursor.moveToFirst();
+      value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
+      cursor.close();
+
+    } else if (aNum == 3){
+      Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM A3MARK WHERE USERID = ?",
+              new String[]{String.valueOf(userId)});
+      cursor.moveToFirst();
+      value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
+      cursor.close();
+
+    } else if (aNum == 4){
+      Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM A4MARK WHERE USERID = ?",
+              new String[]{String.valueOf(userId)});
+      cursor.moveToFirst();
+      value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
+      cursor.close();
+    }
+
+    return value;
+  }
+
+  public Cursor getRoles() {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     return sqLiteDatabase.rawQuery("SELECT * FROM ROLES;", null);
   }
 
-  protected String getRole(int id) {
+  public String getRole(int id) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     Cursor cursor = sqLiteDatabase.rawQuery("SELECT NAME FROM ROLES WHERE ID = ?",
         new String[]{String.valueOf(id)});
@@ -148,7 +216,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
 
   }
 
-  protected int getUserRole(int userId) {
+  public int getUserRole(int userId) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     Cursor cursor = sqLiteDatabase.rawQuery("SELECT ROLEID FROM USERS WHERE ID = ?",
         new String[]{String.valueOf(userId)});
@@ -158,18 +226,18 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return result;
   }
 
-  protected Cursor getUsersDetails() {
+  public Cursor getUsersDetails() {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     return sqLiteDatabase.rawQuery("SELECT * FROM USERS", null);
   }
 
-  protected Cursor getUserDetails(int userId) {
+  public Cursor getUserDetails(int userId) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     return sqLiteDatabase.rawQuery("SELECT * FROM USERS WHERE ID = ?",
         new String[]{String.valueOf(userId)});
   }
 
-  protected String getPassword(int userId) {
+  public String getPassword(int userId) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     Cursor cursor = sqLiteDatabase.rawQuery("SELECT PASSWORD FROM USERPW WHERE USERID = ?",
         new String[]{String.valueOf(userId)});
@@ -180,13 +248,13 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
   }
 
 
-  protected Cursor getAllMessages(int userId) {
+  public Cursor getAllMessages(int userId) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     return sqLiteDatabase.rawQuery("SELECT * FROM USERMESSAGES WHERE USERID = ?",
         new String[]{String.valueOf(userId)});
   }
 
-  protected String getSpecificMessage(int messageId) {
+  public String getSpecificMessage(int messageId) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
     Cursor cursor = sqLiteDatabase.rawQuery("SELECT MESSAGE FROM USERMESSAGES WHERE ID = ?",
         new String[]{String.valueOf(messageId)});
@@ -197,7 +265,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
   }
 
   //UPDATE Methods
-  protected boolean updateRoleName(String name, int id) {
+  public boolean updateRoleName(String name, int id) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("NAME", name);
@@ -205,7 +273,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         > 0;
   }
 
-  protected boolean updateUserName(String name, int id) {
+  public boolean updateUserName(String name, int id) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("NAME", name);
@@ -213,7 +281,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         > 0;
   }
 
-  protected boolean updateUserAge(int age, int id) {
+  public boolean updateUserAge(int age, int id) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("AGE", age);
@@ -221,7 +289,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         > 0;
   }
 
-  protected boolean updateUserRole(int roleId, int id) {
+  public boolean updateUserRole(int roleId, int id) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("ROLEID", roleId);
@@ -229,7 +297,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         > 0;
   }
 
-  protected boolean updateUserAddress(String address, int id) {
+  public boolean updateUserAddress(String address, int id) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("ADDRESS", address);
@@ -238,7 +306,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
   }
 
 
-  protected boolean updateUserPassword(String password, int id) {
+  public boolean updateUserPassword(String password, int id) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("PASSWORD", password);
@@ -246,7 +314,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
         new String[]{String.valueOf(id)}) > 0;
   }
 
-  protected boolean updateUserMessageState(int id) {
+  public boolean updateUserMessageState(int id) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("VIEWED", 1);

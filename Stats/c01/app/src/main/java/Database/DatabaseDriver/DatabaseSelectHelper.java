@@ -8,6 +8,7 @@ import java.util.List;
 import user.*;
 import android.content.Context;
 import android.database.Cursor;
+import android.widget.Toast;
 
 public class DatabaseSelectHelper {
 
@@ -103,6 +104,17 @@ public class DatabaseSelectHelper {
       mark = mydb.getMark(userId);
     } catch (IllegalAccessError e) {
 
+    }
+    mydb.close();
+    return mark;
+  }
+
+  public static double getAssignmentMark (int userId, int aNum, Context context) {
+    DatabaseDriverA mydb = new DatabaseDriverA(context);
+    double mark = -1;
+    try {
+      mark = mydb.getAssignmentMark(userId, aNum);
+    } catch (Exception e) {
     }
     mydb.close();
     return mark;

@@ -100,6 +100,11 @@ public class DatabaseInsertHelper extends HttpServlet {
         mydb.close();
     }
 
+    public static void insertAssignmentMark (int userId, double mark, int aNum, Context context) {
+        DatabaseDriverA mydb = new DatabaseDriverA(context);
+        mydb.insertAssignmentMark(userId, mark, aNum);
+        mydb.close();
+    }
 
     /**
      * Insert a new message into the database.

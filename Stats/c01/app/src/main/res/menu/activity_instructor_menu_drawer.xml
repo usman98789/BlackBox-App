@@ -50,13 +50,10 @@
             android:title="Edit Grades" />
 
         <item
-            android:id="@+id/nav_ViewMark"
-            android:icon="@drawable/ic_view_grades"
-            android:title="View Marks" />
-        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_menu_send"
             android:title="Logout" />
+
     </group>
 
 
