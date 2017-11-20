@@ -148,6 +148,8 @@ public class InstructorMenu extends AppCompatActivity
             Intent i = new Intent(InstructorMenu.this, addStudent.class);
             startActivity(i);
         } else if (id == R.id.nav_add_notes) {
+
+            //Check the phone to see if it has permission to access files
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
@@ -155,6 +157,7 @@ public class InstructorMenu extends AppCompatActivity
                     canDo = true;
                 }
             }
+            //if permission is granted open file explorer to choose file to upload
             if(canDo) {
 //                new MaterialFilePicker().withActivity(InstructorMenu.this).withRequestCode(10).start();
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -193,32 +196,27 @@ public class InstructorMenu extends AppCompatActivity
                 public void run() {
                     String path = "";
 
+                    //get the extension of the file to upload so we can generate it's mime type
+                    //and get it's url to create a file object
                     Uri uri = data.getData();
-                    Log.d("supertest", data.getData().toString());
-                    Log.d("supertest", data.getData().getPath());
                     path = data.getData().getPath().toString();
                     int index = path.lastIndexOf(".");
 
 
                     if (index != -1) {
-                        Log.d("supertest", "in loop");
                         path = path.substring(path.lastIndexOf(":") + 1);
                     } else {
                         path = getPath(context, uri);
                         if (path == null) {
                             path = FilenameUtils.getName(uri.toString());
                         }
-                        Log.d("warblegarble", data.getData().getPath());
                     }
                     String temp = path.substring(path.lastIndexOf("."));
                     String content_type = getMimeType("temp" + temp);
                     File f = new File(path);
 
 
-                    Log.d("supertest", content_type);
-//                    Log.d("warblegarble", f.getPath());
-//                    Log.d("warblegarble", data.getData().getPath());
-
+                    //start building an http post request to send the file to the server
                     OkHttpClient client = new OkHttpClient();
                     if (content_type == null) {
                         Log.d("supertest", "null");
@@ -232,12 +230,12 @@ public class InstructorMenu extends AppCompatActivity
                             .addFormDataPart("uploaded_file", file_path.substring(file_path.lastIndexOf("/") + 1), file_body)
                             .build();
 
-                    Log.d("warblegarble", "woah");
                     Request request = new Request.Builder()
                             .url("https://shev:Biscut123@megumin.ga/stats/save_file.php")
                             .post(request_body)
                             .build();
 
+                    //send the file to the server
                     try {
                         Log.d("warblegarble", "running request");
                         Response response = client.newCall(request).execute();
@@ -260,7 +258,7 @@ public class InstructorMenu extends AppCompatActivity
     }
 
 
-    private String getMimeType(String path) {
+    public String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
 
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);

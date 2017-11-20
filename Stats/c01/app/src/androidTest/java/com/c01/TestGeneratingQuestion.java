@@ -1,10 +1,11 @@
 package com.c01;
 
-
+import android.content.Context;
+import android.support.design.widget.NavigationView;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -16,123 +17,132 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.concurrent.TimeUnit;
+
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.anything;
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
 
-@LargeTest
+/**
+ * Instrumentation test, which will execute on an Android device.
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
 @RunWith(AndroidJUnit4.class)
-public class TestPostAnnouncement {
+public class TestGeneratingQuestion {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<Editor> mActivityTestRule = new ActivityTestRule<>(Editor.class);
 
     @Test
-    public void testPostAnnouncement() {
+    public void useAppContext() throws Exception {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        assertEquals("com.c01", appContext.getPackageName());
+    }
+
+    @Test
+    public void testLatexInput() {
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.loginInput),
+                allOf(withId(R.id.input_view),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.support.constraint.ConstraintLayout")),
                                         0),
-                                0),
+                                1),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("1"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("When \\\\(a \\\\ne 0\\\\), there are two solutions to \\\\(ax^2 + bx + c = 0\\\\)\n" +
+                "        and they are $$x = {-b \\\\pm \\\\sqrt{b^2-4ac} \\\\over 2a}.$$"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.passwordInput),
+                allOf(withId(R.id.math_view),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        0),
+                                0),
+                        isDisplayed()));
+
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @Test
+    public void testLatexInputWithRandomText() {
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.input_view),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.support.constraint.ConstraintLayout")),
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("123"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("aslkjasdjklasdkjlds"), closeSoftKeyboard());
 
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.loginButton), withText("Login"),
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.math_view),
                         childAtPosition(
                                 childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        2),
-                                0),
-                        isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("android.support.design.widget.AppBarLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
-
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.design_navigation_view),
-                                childAtPosition(
-                                        withId(R.id.nav_view),
-                                        0)),
-                        1),
-                        isDisplayed()));
-        navigationMenuItemView.perform(click());
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.announceText),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("Announcement1"), closeSoftKeyboard());
 
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.post), withText("Post"),
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void testLatexWithInputFormula() {
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.input_view),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatButton2.perform(click());
+        appCompatEditText.perform(replaceText("$$V - E + F = 2$$"), closeSoftKeyboard());
 
-        pressBack();
-
-        ViewInteraction appCompatImageButton2 = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("android.support.design.widget.AppBarLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton2.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withText("Instructor"),
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.math_view),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.navigation_header_container),
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
                                         0),
-                                1),
+                                0),
                         isDisplayed()));
-        textView.check(matches(withText("Instructor")));
-
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static Matcher<View> childAtPosition(

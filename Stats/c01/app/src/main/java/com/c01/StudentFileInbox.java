@@ -94,44 +94,52 @@ public class StudentFileInbox extends AppCompatActivity {
             fileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    int assign;
-                    int assign_question;
-
                     String fileName = fileList.getItemAtPosition(position).toString();
-                    String delim = "[_.]";
-                    String[] tokens = fileName.split(delim);
-                    String text = "";
-                    assign = Integer.parseInt(tokens[2]);
-                    assign_question = Integer.parseInt(tokens[4]);
+                    String delimNotReadable = "[.]";
+                    String[] tokenNotReadable = fileName.split(delimNotReadable);
 
-                    System.out.println("Problem Set -> " + assign + " Question Number -> " + assign_question);
+                    if (tokenNotReadable[tokenNotReadable.length - 1].compareTo("txt") == 0) {
+                        int assign;
+                        int assign_question;
 
-                    try {
-                        InputStream inputStream = context.openFileInput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt");
-                        if (inputStream != null) {
-                            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                            String receiveString = "";
-                            StringBuilder stringBuilder = new StringBuilder();
+                        String delim = "[_.]";
+                        String[] tokens = fileName.split(delim);
+                        String text = "";
+                        assign = Integer.parseInt(tokens[2]);
+                        assign_question = Integer.parseInt(tokens[4]);
 
-                            while ((receiveString = bufferedReader.readLine()) != null) {
-                                stringBuilder.append(receiveString);
+                        System.out.println("Problem Set -> " + assign + " Question Number -> " + assign_question);
+
+                        try {
+                            InputStream inputStream = context.openFileInput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt");
+                            if (inputStream != null) {
+                                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                                String receiveString = "";
+                                StringBuilder stringBuilder = new StringBuilder();
+
+                                while ((receiveString = bufferedReader.readLine()) != null) {
+                                    stringBuilder.append(receiveString);
+                                }
+
+                                text = stringBuilder.toString();
+                                inputStream.close();
+                                Toast.makeText(context.getApplicationContext(), stringBuilder.toString(),
+                                        Toast.LENGTH_LONG).show();
                             }
-
-                            text = stringBuilder.toString();
-                            inputStream.close();
-                            Toast.makeText(context.getApplicationContext(), stringBuilder.toString(),
-                                    Toast.LENGTH_LONG).show();
+                        } catch (FileNotFoundException e) {
+                            Log.e("login activity", "File not found: " + e.toString());
+                        } catch (IOException e) {
+                            Log.e("login activity", "Can not read file: " + e.toString());
                         }
-                    } catch (FileNotFoundException e) {
-                        Log.e("login activity", "File not found: " + e.toString());
-                    } catch (IOException e) {
-                        Log.e("login activity", "Can not read file: " + e.toString());
-                    }
 
-                    Intent i = new Intent(StudentFileInbox.this, FileView.class);
-                    i.putExtra("text", text);
-                    startActivity(i);
+                        Intent i = new Intent(StudentFileInbox.this, FileView.class);
+                        i.putExtra("text", text);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(context.getApplicationContext(), "File cannot be read",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }
