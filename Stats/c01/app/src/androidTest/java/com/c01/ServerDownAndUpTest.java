@@ -171,62 +171,62 @@ public class ServerDownAndUpTest {
                         isDisplayed()));
         appCompatButton4.perform(click());
 
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("android.support.design.widget.AppBarLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
-
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.design_navigation_view),
-                                childAtPosition(
-                                        withId(R.id.nav_view),
-                                        0)),
-                        5),
-                        isDisplayed()));
-        navigationMenuItemView.perform(click());
-
-        allowPermissionsIfNeeded("READ");
-
-        if (!hasPerm){
-
-            ViewInteraction appCompatImageButton2 = onView(
-                    allOf(withContentDescription("Open navigation drawer"),
-                            childAtPosition(
-                                    allOf(withId(R.id.toolbar),
-                                            childAtPosition(
-                                                    withClassName(is("android.support.design.widget.AppBarLayout")),
-                                                    0)),
-                                    1),
-                            isDisplayed()));
-            appCompatImageButton2.perform(click());
-
-            ViewInteraction navigationMenuItemView2 = onView(
-                    allOf(childAtPosition(
-                            allOf(withId(R.id.design_navigation_view),
-                                    childAtPosition(
-                                            withId(R.id.nav_view),
-                                            0)),
-                            5),
-                            isDisplayed()));
-            navigationMenuItemView2.perform(click());
-        }
+//        ViewInteraction appCompatImageButton = onView(
+//                allOf(withContentDescription("Open navigation drawer"),
+//                        childAtPosition(
+//                                allOf(withId(R.id.toolbar),
+//                                        childAtPosition(
+//                                                withClassName(is("android.support.design.widget.AppBarLayout")),
+//                                                0)),
+//                                1),
+//                        isDisplayed()));
+//        appCompatImageButton.perform(click());
+//
+//        ViewInteraction navigationMenuItemView = onView(
+//                allOf(childAtPosition(
+//                        allOf(withId(R.id.design_navigation_view),
+//                                childAtPosition(
+//                                        withId(R.id.nav_view),
+//                                        0)),
+//                        5),
+//                        isDisplayed()));
+//        navigationMenuItemView.perform(click());
+//
+//        allowPermissionsIfNeeded("READ");
+//
+//        if (!hasPerm){
+//
+//            ViewInteraction appCompatImageButton2 = onView(
+//                    allOf(withContentDescription("Open navigation drawer"),
+//                            childAtPosition(
+//                                    allOf(withId(R.id.toolbar),
+//                                            childAtPosition(
+//                                                    withClassName(is("android.support.design.widget.AppBarLayout")),
+//                                                    0)),
+//                                    1),
+//                            isDisplayed()));
+//            appCompatImageButton2.perform(click());
+//
+//            ViewInteraction navigationMenuItemView2 = onView(
+//                    allOf(childAtPosition(
+//                            allOf(withId(R.id.design_navigation_view),
+//                                    childAtPosition(
+//                                            withId(R.id.nav_view),
+//                                            0)),
+//                            5),
+//                            isDisplayed()));
+//            navigationMenuItemView2.perform(click());
+//        }
 
         //The automated testing won't let us click a objects that aren't part of the app
         //this part of the test opens files explorer so we need to approximate where to click
-        UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-        device.click(500, 300);
-        device.click(500, 200);
-        device.click(500, 100);
-        device.click(500, 400);
-        device.click(500, 500);
-        device.click(500, 600);
+//        UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+//        device.click(500, 300);
+//        device.click(500, 200);
+//        device.click(500, 100);
+//        device.click(500, 400);
+//        device.click(500, 500);
+//        device.click(500, 600);
 
         ViewInteraction appCompatImageButton3 = onView(
                 allOf(withContentDescription("Open navigation drawer"),

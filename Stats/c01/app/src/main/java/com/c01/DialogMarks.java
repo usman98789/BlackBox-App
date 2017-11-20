@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 import Database.DatabaseDriver.DatabaseInsertHelper;
 import Database.DatabaseDriver.DatabaseSelectHelper;
+import Exceptions.InvalidAssignmentException;
+import Exceptions.InvalidIdException;
+import Exceptions.InvalidMarkException;
 import generics.EnumMapRoles;
 import generics.Roles;
 import user.User;
@@ -55,7 +58,15 @@ public class DialogMarks extends AppCompatActivity {
                                     onBackPressed();
                                 } else {
                                     Double mark = Double.parseDouble(Mark);
-                                    DatabaseInsertHelper.insertAssignmentMark(user.getId(), mark, aNum, getApplicationContext());
+                                    try {
+                                        DatabaseInsertHelper.insertAssignmentMark(user.getId(), mark, aNum, getApplicationContext());
+                                    } catch (InvalidMarkException e) {
+                                        e.printStackTrace();
+                                    } catch (InvalidIdException e) {
+                                        e.printStackTrace();
+                                    } catch (InvalidAssignmentException e) {
+                                        e.printStackTrace();
+                                    }
                                     Toast.makeText(getApplicationContext(), "Mark set", Toast.LENGTH_LONG).show();
                                     onBackPressed();
                                 }
