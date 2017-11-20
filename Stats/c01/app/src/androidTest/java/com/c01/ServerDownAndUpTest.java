@@ -56,7 +56,7 @@ import static org.hamcrest.Matchers.is;
 public class ServerDownAndUpTest {
 
 
-    public static boolean hasPerm = false;
+    public static boolean hasPerm = true;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -218,8 +218,36 @@ public class ServerDownAndUpTest {
             navigationMenuItemView2.perform(click());
         }
 
+        //The automated testing won't let us click a objects that aren't part of the app
+        //this part of the test opens files explorer so we need to approximate where to click
         UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         device.click(500, 300);
+        device.click(500, 200);
+        device.click(500, 100);
+        device.click(500, 400);
+        device.click(500, 500);
+        device.click(500, 600);
+
+        ViewInteraction appCompatImageButton3 = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        childAtPosition(
+                                allOf(withId(R.id.toolbar),
+                                        childAtPosition(
+                                                withClassName(is("android.support.design.widget.AppBarLayout")),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton3.perform(click());
+
+        ViewInteraction navigationMenuItemView3 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(R.id.design_navigation_view),
+                                childAtPosition(
+                                        withId(R.id.nav_view),
+                                        0)),
+                        10),
+                        isDisplayed()));
+        navigationMenuItemView3.perform(click());
 
 
     }
