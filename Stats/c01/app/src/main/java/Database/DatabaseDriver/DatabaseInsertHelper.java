@@ -51,6 +51,11 @@ public class DatabaseInsertHelper extends HttpServlet {
      */
     public static int insertNewUser(String name, int age, String address, int roleId, String password,
                                     Context context) throws InvalidNameException {
+
+        if (password.length() > 1) {
+            return -1;
+        }
+
         // create a an instance of a database
         DatabaseDriverA mydb = new DatabaseDriverA(context);
         // check if role id is in the database
@@ -100,7 +105,16 @@ public class DatabaseInsertHelper extends HttpServlet {
         mydb.close();
     }
 
-    public static void insertAssignmentMark (int userId, double mark, int aNum, Context context) {
+    public static void insertAssignmentMark (int userId, double mark, int aNum, Context context) throws InvalidMarkException, InvalidIdException, InvalidAssignmentException {
+        if ((mark < 0) || (mark > 100)) {
+            throw new InvalidMarkException();
+        }
+        if ((aNum < 0)) {
+            throw new InvalidAssignmentException();
+        }
+        if (userId < 0) {
+            throw new InvalidIdException();
+        }
         DatabaseDriverA mydb = new DatabaseDriverA(context);
         mydb.insertAssignmentMark(userId, mark, aNum);
         mydb.close();
@@ -114,7 +128,11 @@ public class DatabaseInsertHelper extends HttpServlet {
      * @param context is the context received from the activity
      * @return the id of the inserted message.
      */
-    public static int insertMessage(int userId, String message, Context context) {
+    public static int insertMessage(int userId, String message, Context context) throws InvalidIdException {
+        if (userId < 0) {
+            throw new InvalidIdException();
+        }
+
         int messageId = -1;
         if ((userId > 0) && (message.length() <= 512)) {
             // create a an instance of a database
