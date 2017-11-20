@@ -75,6 +75,17 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        Button myGrades = (Button) findViewById(R.id.CheckGradesButton);
+        myGrades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainMenu.this, StudentGrades.class);
+                int userId = Integer.parseInt(id);
+                i.putExtra("userId", userId);
+                startActivity(i);
+            }
+        });
+
 
 
     }

@@ -115,5 +115,6 @@
     <string name="title_activity_student_file_inbox">Problem Set With Notes Inbox</string>
     <string name="title_activity_edit_file_content">File Editor</string>
     <string name="title_activity_file_edit">View Problem</string>
->>>>>>> master
+    <string name="title_activity_student_grades">StudentGrades</string>
+    >>>>>>> master
 </resources>
