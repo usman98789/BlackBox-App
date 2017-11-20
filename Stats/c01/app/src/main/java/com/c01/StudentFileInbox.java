@@ -65,7 +65,6 @@ public class StudentFileInbox extends AppCompatActivity {
             @Override
             public void run() {
 
-
                 try {
                     String dir = "/sdcard/Android/data/com.c01/files/Download";
                     files = new File(dir);

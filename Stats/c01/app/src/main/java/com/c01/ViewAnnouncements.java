@@ -53,7 +53,6 @@ public class ViewAnnouncements extends AppCompatActivity {
         Exit.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-
                 Intent i = new Intent(ViewAnnouncements.this, MainMenu.class);
                 i.putExtra("id", String.valueOf(id));
                 startActivity(i);
