@@ -52,7 +52,7 @@ public class DatabaseInsertHelper extends HttpServlet {
     public static int insertNewUser(String name, int age, String address, int roleId, String password,
                                     Context context) throws InvalidNameException {
 
-        if (password.length() > 1) {
+        if (password.length() < 1) {
             return -1;
         }
 
