@@ -215,6 +215,7 @@ public class InstructorMenu extends AppCompatActivity
                     String content_type = getMimeType("temp" + temp);
                     File f = new File(path);
 
+                    Log.d("supertest", path);
 
                     //start building an http post request to send the file to the server
                     OkHttpClient client = new OkHttpClient();

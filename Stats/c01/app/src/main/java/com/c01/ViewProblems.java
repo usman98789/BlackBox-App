@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -31,10 +32,12 @@ public class ViewProblems extends AppCompatActivity {
     private static String num;
     private static List newList = new ArrayList();
     private static Context context;
+    private static Button attempt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Intent nextpage = new Intent(ViewProblems.this, AnswerProblems.class);;
         setContentView(R.layout.activity_view_problems);
         context = getApplicationContext();
 
@@ -98,6 +101,15 @@ public class ViewProblems extends AppCompatActivity {
                 }
             });
         }
+
+        attempt = (Button) findViewById(R.id.answerButton);
+        attempt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(nextpage);
+            }
+        });
+
     }
     @Override
     public void onBackPressed() {
