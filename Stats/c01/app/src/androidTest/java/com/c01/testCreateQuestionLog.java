@@ -1,7 +1,6 @@
 package com.c01;
 
 import android.content.Context;
-import android.support.design.widget.NavigationView;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
@@ -23,21 +22,15 @@ import java.util.concurrent.TimeUnit;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
-import static android.support.test.espresso.action.ViewActions.swipeUp;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
-import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -147,7 +140,7 @@ public class testCreateQuestionLog {
         }
 
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.generate_question), withText("Generate Question"),
+                allOf(withId(R.id.generate_problem), withText("Generate Question"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.support.constraint.ConstraintLayout")),

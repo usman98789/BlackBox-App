@@ -50,17 +50,18 @@
         android:paddingTop="450dp" >
 
         <Button
-            android:id="@+id/generate_question"
-            android:backgroundTint="@color/white"
+            android:id="@+id/generate_problem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Generate Question" />
+            android:backgroundTint="@color/white"
+            android:text="Next" />
+
         <Button
             android:id="@+id/generate_problem_set"
-            android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Finalized Problem Set" />
+            android:backgroundTint="@color/white"
+            android:text="Finalize Problem Set" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
