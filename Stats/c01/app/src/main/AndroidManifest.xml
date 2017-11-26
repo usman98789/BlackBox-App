@@ -66,6 +66,10 @@
         <activity
             android:name=".StudentGrades"
             android:label="@string/title_activity_student_grades"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".addProfessor"
+            android:label="@string/title_activity_add_professor"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
