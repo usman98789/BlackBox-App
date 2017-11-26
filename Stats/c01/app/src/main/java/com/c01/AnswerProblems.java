@@ -19,10 +19,6 @@ import FileOperations.TextFileReader;
 public class AnswerProblems extends AppCompatActivity {
 
     private static EditText questionText;
-    private static RadioButton choiceOne;
-    private static RadioButton choiceTwo;
-    private static RadioButton choiceThree;
-    private static RadioButton choiceFour;
     private static Button next;
     private static RadioGroup choices;
     private static int counter, feedbackCounter;

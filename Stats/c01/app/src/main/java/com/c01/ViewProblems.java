@@ -33,13 +33,14 @@ public class ViewProblems extends AppCompatActivity {
     private static List newList = new ArrayList();
     private static Context context;
     private static Button attempt;
+    private static Intent nextpage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Intent nextpage = new Intent(ViewProblems.this, AnswerProblems.class);;
         setContentView(R.layout.activity_view_problems);
         context = getApplicationContext();
+        attempt = (Button) findViewById(R.id.answerButton);
 
         num = getIntent().getStringExtra("num");
         Toast.makeText(getApplicationContext(), "Problem Set: " + num, Toast.LENGTH_LONG).show();
@@ -102,10 +103,11 @@ public class ViewProblems extends AppCompatActivity {
             });
         }
 
-        attempt = (Button) findViewById(R.id.answerButton);
+
         attempt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                nextpage = new Intent(ViewProblems.this, AnswerProblems.class);
                 startActivity(nextpage);
             }
         });
