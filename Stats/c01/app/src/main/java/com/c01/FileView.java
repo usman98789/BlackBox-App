@@ -40,11 +40,12 @@ public class FileView extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Editted Finalized Edit", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Email Contact", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         Intent i = new Intent(FileView.this, StudentFileInbox.class);

@@ -128,6 +128,8 @@ public class InstructorMenu extends AppCompatActivity
         } else if (id == R.id.nav_add_lecture_notes) {
             Intent i = new Intent(InstructorMenu.this, Browsing.class);
             startActivity(i);
+        } else if (id == R.id.nav_add_prof) {
+
         } else if (id == R.id.nav_view_lecture_slides) {
             Intent i = new Intent(InstructorMenu.this, Browsing.class);
             startActivity(i);
@@ -148,7 +150,6 @@ public class InstructorMenu extends AppCompatActivity
             Intent i = new Intent(InstructorMenu.this, addStudent.class);
             startActivity(i);
         } else if (id == R.id.nav_add_notes) {
-
             //Check the phone to see if it has permission to access files
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

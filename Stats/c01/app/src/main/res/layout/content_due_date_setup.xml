@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.c01.DueDateSetup"
+    tools:showIn="@layout/activity_due_date_setup">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="262dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="435dp"
+            android:layout_marginEnd="61dp"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="20dp"
+            android:text="Due Date Setup"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="294dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="65dp"
+            android:lineSpacingExtra="10sp"
+            android:text="Enter when the Problem Set will be released"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="294dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="60dp"
+            android:lineSpacingExtra="10sp"
+            android:text="Enter when the Problem Set will be Due"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.73"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="294dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="60dp"
+            android:lineSpacingExtra="0sp"
+            android:text="Enter when the semester will end"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+    </android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/picDate"
+            android:layout_width="144dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="155dp"
+            android:layout_marginLeft="100dp"
+            android:onClick="datePickerReleaseDate"
+            android:text="Start Date" />
+
+        <Button
+                android:id="@+id/picDate2"
+                android:layout_width="144dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="260dp"
+                android:layout_marginLeft="100dp"
+                android:onClick="datePickerDueDate"
+                android:text="Due Date" />
+
+        <Button
+            android:id="@+id/picDate3"
+            android:layout_width="144dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="360dp"
+            android:layout_marginLeft="100dp"
+            android:onClick="datePickerEndOfSemester"
+            android:text="End of Course Date" />
+        </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
