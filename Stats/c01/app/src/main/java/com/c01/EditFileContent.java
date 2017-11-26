@@ -52,6 +52,7 @@ public class EditFileContent extends AppCompatActivity {
     private static File f;
     private static String path = "/data/data/com.c01/files/";
     private static String oldProblemSetPath = "";
+    private static String oldFileName = "";
     private static Intent i;
 
     @Override
@@ -73,6 +74,7 @@ public class EditFileContent extends AppCompatActivity {
         System.out.println("Problem set -> " + assign + " Question Number -> " + assign_question);
         String text = i.getStringExtra("text");
         oldProblemSetPath = i.getStringExtra("oldFile");
+        oldFileName = i.getStringExtra("fileName");
 
 
         editText.setText(text);
@@ -105,11 +107,11 @@ public class EditFileContent extends AppCompatActivity {
 
                 Toast.makeText(context.getApplicationContext(), "Editing problem",
                         Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), "Problem_Set_" + assign + "_Q_" + assign_question + ".txt",
+                Toast.makeText(context.getApplicationContext(), oldFileName,
                         Toast.LENGTH_LONG).show();
                 try {
-                    name = "Problem_Set_" + assign + "_Q_" + assign_question + ".txt";
-                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt", Context.MODE_PRIVATE));
+                    name = oldFileName;
+                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(oldFileName, Context.MODE_PRIVATE));
                     outputStreamWriter.write(content.getText().toString());
                     outputStreamWriter.close();
 
@@ -119,7 +121,7 @@ public class EditFileContent extends AppCompatActivity {
 
                 String ret = "";
                 try {
-                    InputStream inputStream = context.openFileInput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt");
+                    InputStream inputStream = context.openFileInput(oldFileName);
                     is = inputStream;
                     if (inputStream != null) {
                         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

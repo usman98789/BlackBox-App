@@ -142,7 +142,7 @@ public class CreateProblemSet extends AppCompatActivity {
                         downloadFile(position);
                         waitForFileDownload(fileName);
                     }
-                    readFile();
+                    readFile(fileName);
                     editFile (fileName);
                 }
             });
@@ -165,10 +165,9 @@ public class CreateProblemSet extends AppCompatActivity {
         return file.exists();
     }
 
-    private void readFile () {
+    private void readFile (String fileName) {
         try {
-            File fileQuestion = new File("/sdcard/Android/data/com.c01/files/Download/"
-                    + "Problem_Set_" + assign + "_Q_" + assign_question + ".txt");
+            File fileQuestion = new File("/sdcard/Android/data/com.c01/files/Download/" + fileName);
             if (fileQuestion != null) {
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(fileQuestion));
                 String receiveString = "";
@@ -192,6 +191,7 @@ public class CreateProblemSet extends AppCompatActivity {
         i.putExtra("assign", assign);
         i.putExtra("assign_question", assign_question);
         i.putExtra("text", text);
+        i.putExtra("fileName", fileName);
         String dir = "/sdcard/Android/data/com.c01/files/Download/" + fileName;
         i.putExtra("oldFile", dir);
         startActivity(i);
