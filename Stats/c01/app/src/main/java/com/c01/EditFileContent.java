@@ -39,6 +39,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+  The activity for editting file contect.
+*/
 public class EditFileContent extends AppCompatActivity {
 
     private static TextView content;
@@ -53,6 +56,11 @@ public class EditFileContent extends AppCompatActivity {
     private static String path;
     private static Intent i;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
