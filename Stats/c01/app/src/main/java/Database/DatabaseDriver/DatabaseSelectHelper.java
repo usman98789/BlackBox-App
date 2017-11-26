@@ -1,14 +1,11 @@
 package Database.DatabaseDriver;
 
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import user.*;
 import android.content.Context;
 import android.database.Cursor;
-import android.widget.Toast;
 
 public class DatabaseSelectHelper {
 
@@ -61,12 +58,10 @@ public class DatabaseSelectHelper {
       // check which user it is and create the users
       if (role.equals("PROF")) {
         user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
-            results.getInt(results.getColumnIndex("AGE")),
-            results.getString(results.getColumnIndex("ADDRESS")), context);
+            results.getInt(results.getColumnIndex("AGE")), context);
       }  else if (role.equals("STUDENT")) {
         user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
-            results.getInt(results.getColumnIndex("AGE")),
-            results.getString(results.getColumnIndex("ADDRESS")), context);
+            results.getInt(results.getColumnIndex("AGE")), context);
       }
     }
     results.close();
@@ -89,24 +84,11 @@ public class DatabaseSelectHelper {
     results = mydb.getRoles();
     while (results.moveToNext()) {
       // add each id into the list of id's
-      // System.out.println(results.getInt("ID"));
       ids.add(results.getInt(results.getColumnIndex("ID")));
     }
     results.close();
     mydb.close();
     return ids;
-  }
-
-  public static double getMark(int userId, Context context) {
-    DatabaseDriverA mydb = new DatabaseDriverA(context);
-    double mark = -1;
-    try {
-      mark = mydb.getMark(userId);
-    } catch (Exception e) {
-
-    }
-    mydb.close();
-    return mark;
   }
 
   public static double getFeedBackMark(int userId, Context context) {
@@ -120,7 +102,7 @@ public class DatabaseSelectHelper {
     mydb.close();
     return mark;
   }
-
+  
   public static double getAssignmentMark (int userId, int aNum, Context context) {
     DatabaseDriverA mydb = new DatabaseDriverA(context);
     double mark = -1;
@@ -187,26 +169,6 @@ public class DatabaseSelectHelper {
     result.close();
     mydb.close();
     return messageList;
-  }
-
-  /**
-   * Get all message statuses.
-   *
-   * @param userId  the user whose message statuses are being retrieved.
-   * @param context is the context received from the activity
-   * @return a list of message statuses.
-   */
-  public static List<Integer> getAllMessageStatuses(int userId, Context context) {
-    // create a an instance of a database
-    DatabaseDriverA mydb = new DatabaseDriverA(context);
-    List<Integer> messageStatusList = new ArrayList<>();
-    Cursor result = mydb.getAllMessages(userId);
-    while (result.moveToNext()) {
-      messageStatusList.add(result.getInt(result.getColumnIndex("VIEWED")));
-    }
-    result.close();
-    mydb.close();
-    return messageStatusList;
   }
 
   /**

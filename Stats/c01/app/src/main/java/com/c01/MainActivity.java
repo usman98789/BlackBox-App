@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
                 DatabaseInsertHelper.insertRole("PROF", this.getApplicationContext());
                 DatabaseInsertHelper.insertRole("STUDENT", this.getApplicationContext());
                 EnumMapRoles roleMap = new EnumMapRoles(this.getApplicationContext());
-                int id = DatabaseInsertHelper.insertNewUser("ProfA", 40, "123street", roleMap.get(Roles.PROF), "123", this.getApplicationContext());
-                int id4 = DatabaseInsertHelper.insertNewUser("Student1", 19, "123street", roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
-                int id5 = DatabaseInsertHelper.insertNewUser("Student2", 21, "losses", roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
+                int id = DatabaseInsertHelper.insertNewUser("ProfA", 40, roleMap.get(Roles.PROF), "123", this.getApplicationContext());
+                int id4 = DatabaseInsertHelper.insertNewUser("Student1", 19, roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
+                int id5 = DatabaseInsertHelper.insertNewUser("Student2", 21, roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
                 Toast.makeText(getApplicationContext(), "New", Toast.LENGTH_LONG).show();
             } catch (InvalidNameException e) {
                 Toast.makeText(getApplicationContext(), String.valueOf(e), Toast.LENGTH_LONG).show();

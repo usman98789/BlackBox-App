@@ -137,7 +137,8 @@ public class AnswerProblems extends AppCompatActivity {
                                 ((RadioButton) choices.getChildAt(i)).setText(temp[i]);
                             }
 
-                                questionText.setText(contents[0]);
+                            //questionText.setText(contents[0]);
+                            mathView.setText(contents[0].toString());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
