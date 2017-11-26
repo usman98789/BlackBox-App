@@ -70,14 +70,7 @@ public class StudentFileInbox extends AppCompatActivity {
             public void run() {
 
                 try {
-                    String dir = "/sdcard/Android/data/com.c01/files/Download";
-                    files = new File(dir);
-                    localDir = files.listFiles();
-                    serverDir = new ArrayList<String>();
-
-                    for (File file : localDir){
-                        serverDir.add(file.getName());
-                    }
+                    getFiles();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

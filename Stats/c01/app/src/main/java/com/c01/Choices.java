@@ -173,6 +173,7 @@ public class Choices extends AppCompatActivity {
                         }
                     }
                 }
+                serializeProblemSet(context);
             }
         });
 
@@ -318,6 +319,15 @@ public class Choices extends AppCompatActivity {
         Toast.makeText(context.getApplicationContext(), string, Toast.LENGTH_LONG).show();
     }
 
+    private void serializeProblemSet(Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(serializeQuestionSet, Context.MODE_PRIVATE));
+            outputStreamWriter.write(assign + "_" + assign_question);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
 
     @Override
     public void onBackPressed() {
