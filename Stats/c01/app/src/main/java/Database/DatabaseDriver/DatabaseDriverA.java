@@ -5,13 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import Database.DatabaseDriver.PasswordHelpers;
-
-import java.math.BigDecimal;
-
-/**
- * Created by Joe on 2017-07-17.
- */
 
 public class DatabaseDriverA extends SQLiteOpenHelper {
   private static final int DATABASE_VERSION = 1;
@@ -30,7 +23,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
             + "(ID INTEGER PRIMARY KEY NOT NULL,"
             + "NAME TEXT NOT NULL,"
             + "AGE INTEGER NOT NULL,"
-            + "ADDRESS CHAR(100),"
             + "ROLEID INTEGER,"
             + "FOREIGN KEY(ROLEID) REFERENCES ROLE(ID))");
     sqLiteDatabase.execSQL("CREATE TABLE USERPW "
@@ -89,8 +81,8 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return sqLiteDatabase.insert("ROLES", null, contentValues);
   }
 
-  public long insertNewUser(String name, int age, String address, int roleId, String password) {
-    long id = insertUser(name, age, address, roleId);
+  public long insertNewUser(String name, int age, int roleId, String password) {
+    long id = insertUser(name, age, roleId);
     insertPassword(password, (int) id);
     return id;
   }
@@ -105,12 +97,11 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return sqLiteDatabase.insert("USERMESSAGES", null, contentValues);
   }
 
-  public long insertUser(String name, int age, String address, int roleId) {
+  public long insertUser(String name, int age, int roleId) {
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
     contentValues.put("NAME", name);
     contentValues.put("AGE", age);
-    contentValues.put("ADDRESS", address);
     contentValues.put("ROLEID", roleId);
 
     return sqLiteDatabase.insert("USERS", null, contentValues);
@@ -125,14 +116,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     contentValues.put("USERID", userId);
     contentValues.put("PASSWORD", password);
     sqLiteDatabase.insert("USERPW", null, contentValues);
-  }
-
-  public void insertMark(int userId, double mark){
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("USERID", userId);
-    contentValues.put("MARKS", mark);
-    sqLiteDatabase.insert("MARK", null, contentValues);
   }
 
   public void insertAssignmentMark(int userId, double mark, int aNum){
@@ -152,15 +135,6 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
   }
 
   //SELECT METHODS
-  public double getMark(int userId) {
-    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-    Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM MARK WHERE USERID = ?",
-            new String[]{String.valueOf(userId)});
-    cursor.moveToFirst();
-    double value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
-    cursor.close();
-    return value;
-  }
 
   public double getAssignmentMark(int userId, int aNum) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();
@@ -262,61 +236,4 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return result;
   }
 
-  //UPDATE Methods
-  public boolean updateRoleName(String name, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("NAME", name);
-    return sqLiteDatabase.update("ROLES", contentValues, "ID = ?", new String[]{String.valueOf(id)})
-        > 0;
-  }
-
-  public boolean updateUserName(String name, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("NAME", name);
-    return sqLiteDatabase.update("USERS", contentValues, "ID = ?", new String[]{String.valueOf(id)})
-        > 0;
-  }
-
-  public boolean updateUserAge(int age, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("AGE", age);
-    return sqLiteDatabase.update("USERS", contentValues, "ID = ?", new String[]{String.valueOf(id)})
-        > 0;
-  }
-
-  public boolean updateUserRole(int roleId, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("ROLEID", roleId);
-    return sqLiteDatabase.update("USERS", contentValues, "ID = ?", new String[]{String.valueOf(id)})
-        > 0;
-  }
-
-  public boolean updateUserAddress(String address, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("ADDRESS", address);
-    return sqLiteDatabase.update("USERS", contentValues, "ID = ?", new String[]{String.valueOf(id)})
-        > 0;
-  }
-
-
-  public boolean updateUserPassword(String password, int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("PASSWORD", password);
-    return sqLiteDatabase.update("USERPW", contentValues, "USERID = ?",
-        new String[]{String.valueOf(id)}) > 0;
-  }
-
-  public boolean updateUserMessageState(int id) {
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put("VIEWED", 1);
-    return sqLiteDatabase.update("USERMESSAGES", contentValues, "ID = ?",
-        new String[]{String.valueOf(id)}) > 0;
-  }
 }

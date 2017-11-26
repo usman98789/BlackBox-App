@@ -21,7 +21,6 @@ public class addProfessor extends AppCompatActivity {
     Context context;
     String name;
     int age;
-    String add;
     String pass;
 
     @Override
@@ -47,14 +46,11 @@ public class addProfessor extends AppCompatActivity {
         boolean useridAuthen = true;
         boolean passwordAuthen = true;
         boolean ageAuthen = true;
-        boolean addressAuthen = true;
 
         EditText etUserName = (EditText) findViewById(R.id.name2);
         name = etUserName.getText().toString();
         EditText etAge = (EditText) findViewById(R.id.age);
         age = Integer.valueOf(etAge.getText().toString());
-        EditText etAddress = (EditText) findViewById(R.id.address2);
-        add = etAddress.getText().toString();
         EditText etPassword = (EditText) findViewById(R.id.password2);
         pass = etPassword.getText().toString();
 
@@ -66,16 +62,12 @@ public class addProfessor extends AppCompatActivity {
             etAge.setError("No age");
             ageAuthen = false;
         }
-        if (TextUtils.isEmpty(add)) {
-            etAddress.setError("No Address");
-            addressAuthen = false;
-        }
         if (TextUtils.isEmpty(pass)) {
             etPassword.setError("No password");
             passwordAuthen = false;
         }
         boolean passed = false;
-        if (useridAuthen && passwordAuthen && ageAuthen && addressAuthen) {
+        if (useridAuthen && passwordAuthen && ageAuthen) {
             passed = insertUser(context);
         }
         return (passed);
@@ -87,7 +79,7 @@ public class addProfessor extends AppCompatActivity {
         EnumMapRoles roleMap = new EnumMapRoles(context);
         // Insert info into database
         try {
-            success = DatabaseInsertHelper.insertNewUser(name, age, add, roleMap.get(Roles.PROF), pass, context);
+            success = DatabaseInsertHelper.insertNewUser(name, age, roleMap.get(Roles.PROF), pass, context);
         } catch (InvalidNameException e) {
             e.printStackTrace();
         }
