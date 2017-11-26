@@ -37,7 +37,7 @@ public class Browsing extends AppCompatActivity {
 
    /**
    * Starts the activity.
-   * @param Bundle savedInstanceState
+   * @param savedInstanceState The data it most recently supplied on
    * @return No return value
    */
     @Override
@@ -48,7 +48,7 @@ public class Browsing extends AppCompatActivity {
 
     /**
     * Reads files.
-    * @param View view
+    * @param view The content to display
     * @return No return value
     */
     public void readFile(View view) {
@@ -61,9 +61,9 @@ public class Browsing extends AppCompatActivity {
 
    /**
    * Gets back the result.
-   * @param int requestCode
-   * @param int resultCode
-   * @param Intent resultData
+   * @param requestCode The request code allowing to identify who this result came from
+   * @param resultCode The result code returned by child activity
+   * @param resultData The Intent returning result data to caller
    * @return No return value
    */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -81,20 +81,15 @@ public class Browsing extends AppCompatActivity {
 
             if (requestCode == READ_REQ) {
                 readTextFile(uri);
-            } /*else if (requestCode == EDIT_REQ) {
-                editDocument(uri);
-            } else if (requestCode == WRITE_REQ) {
-                editDocument(uri);
-            } else if (requestCode == DELETE_REQ) {
-                deleteFile(uri);
-            } */
+            }
+          
         }
     }
 
     /**
     * Reads text files.
-    * @param Uri uri
-    * @exception e
+    * @param uri uri of content
+    * @exception e any exception
     * @return No return value
     */
     private void readTextFile(Uri uri) {
@@ -118,8 +113,8 @@ public class Browsing extends AppCompatActivity {
 
     /**
     * Deletes files.
-    * @param Uri uri
-    * @exception e
+    * @param uri The Uri of the content
+    * @exception e Any exception
     * @return No return value
     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
