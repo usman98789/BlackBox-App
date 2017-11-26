@@ -18,7 +18,11 @@ import android.widget.Toast;
 import org.apache.ivy.util.url.ApacheURLLister;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -27,17 +31,22 @@ public class ViewProblems extends AppCompatActivity {
     private static ListAdapter myAdapter;
     private static ApacheURLLister lister;
     private static List serverDir;
+    private static List serverDirFiltered = new ArrayList();
     private static ListView fileList;
     private static DownloadManager downloadManager;
     private static String num;
     private static List newList = new ArrayList();
     private static Context context;
+
     private static Button attempt;
+
+    private static final String isQuestionFile = "Q";
+    private static final String isNoteFile = "N";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Intent nextpage = new Intent(ViewProblems.this, AnswerProblems.class);;
+        final Intent nextpage = new Intent(ViewProblems.this, AnswerProblems.class);
         setContentView(R.layout.activity_view_problems);
         context = getApplicationContext();
 
@@ -46,8 +55,6 @@ public class ViewProblems extends AppCompatActivity {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-
-
                 try {
                     URL url = new URL("https://shev:Biscut123@megumin.ga/stats/assignments");
                     lister = new ApacheURLLister();
@@ -56,15 +63,19 @@ public class ViewProblems extends AppCompatActivity {
                     for (int i = 0; i < serverDir.size(); i++) {
                         String temp = serverDir.get(i).toString();
                         temp = temp.replace("https://megumin.ga/stats/assignments/", "");
-                        serverDir.set(i, temp);
 
+                        serverDir.set(i, temp);
+                        if (canBeDisplayed(temp)) {
+                            serverDirFiltered.add(serverDir.get(i));
+                        }
+                        System.out.println(temp);
                     }
 
                     Random randomGenerator = new Random();
                     int index = 0;
                     String temp;
                     String temp2;
-                    while (newList.size() <= 5){
+                    while (newList.size() <= 1){
                         index = randomGenerator.nextInt(serverDir.size());
                         temp = serverDir.get(index).toString();
 
@@ -73,7 +84,6 @@ public class ViewProblems extends AppCompatActivity {
                             newList.add(temp);
                         }
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -85,7 +95,7 @@ public class ViewProblems extends AppCompatActivity {
 
         if (!t.isAlive()) {
 
-            myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, newList);
+            myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, serverDirFiltered);
             fileList = (ListView) findViewById(R.id.fileListView);
             fileList.setAdapter(myAdapter);
 
@@ -96,7 +106,8 @@ public class ViewProblems extends AppCompatActivity {
                     Uri uri = Uri.parse("https://shev:Biscut123@megumin.ga/stats/assignments/" + fileList.getItemAtPosition(position).toString());
                     DownloadManager.Request request = new DownloadManager.Request(uri);
                     request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                    request.setDestinationInExternalFilesDir(context.getApplicationContext(), Environment.DIRECTORY_DOWNLOADS,fileList.getItemAtPosition(position).toString());
+                    request.setDestinationInExternalFilesDir(context.getApplicationContext(), Environment.DIRECTORY_DOWNLOADS, fileList.getItemAtPosition(position).toString());
+                    System.out.println(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString());
                     Long reference = downloadManager.enqueue(request);
                 }
             });
@@ -109,8 +120,67 @@ public class ViewProblems extends AppCompatActivity {
                 startActivity(nextpage);
             }
         });
-
     }
+
+    private boolean canBeDisplayed(String fileTile) {
+        String releaseMonth;
+        int releaseDay;
+        int releaseYear;
+
+        String dueMonth;
+        int dueDay;
+        int dueYear;
+
+        Calendar calendar = Calendar.getInstance();
+        //calendar.set(2017, 0, 1); // used to quickly manually test
+        Date current = calendar.getTime();
+
+        Date releaseFile = null;
+        Date dueFile = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("MMMM/dd/yyyy");
+
+        String delim = "[_.]";
+        String[] tokens = fileTile.split(delim);
+
+        releaseMonth = tokens[5];
+        releaseDay = Integer.parseInt(tokens[6]);
+        releaseYear = Integer.parseInt(tokens[7]);
+
+        String releaseDateSet = releaseMonth + "/" + releaseDay + "/" + releaseYear;
+        try {
+            releaseFile = formatter.parse(releaseDateSet);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        dueMonth = tokens[8];
+        dueDay = Integer.parseInt(tokens[9]);
+        dueYear = Integer.parseInt(tokens[10]);
+
+        String dueDateSet = dueMonth + "/" + dueDay + "/" + dueYear;
+        try {
+            dueFile = formatter.parse(dueDateSet);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+System.out.println(current);
+        System.out.println(releaseFile);
+        System.out.println(dueFile);
+        System.out.println(current.after(releaseFile));
+        System.out.println(current.before(dueFile));
+        return current.after(releaseFile) && current.before(dueFile);
+    }
+
+    private boolean verifyFile(String fileName) {
+        String delim = "[_.]";
+        String[] tokens = fileName.split(delim);
+        if (((tokens[3].compareTo(isQuestionFile) == 0) && (tokens.length == 14))
+                || (tokens[3].compareTo(isNoteFile) == 0)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void onBackPressed() {
         Intent i = new Intent(ViewProblems.this, WhichProblemSet.class);

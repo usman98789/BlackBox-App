@@ -42,11 +42,20 @@ public class Choices extends AppCompatActivity {
     private static Button question;
     private static int assign = 1;
     private static int assign_question = 1;
-    private static Boolean canDo = false;
+
     private static String name;
+    private static String releaseDate = "";
+    private static String dueDate = "";
+    private static String endSemesterDate = "";
+    private static final String serializeQuestionSet = "serial.txt";
+
+    private static Boolean canDo = false;
     private static File f;
     private static InputStream is;
+
     private static String text;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +63,23 @@ public class Choices extends AppCompatActivity {
         setContentView(R.layout.activity_choices);
         Context context = this.getApplicationContext();
         text = getIntent().getStringExtra("question");
-        assign = Integer.valueOf(getIntent().getStringExtra("assign"));
-        assign_question = Integer.valueOf(getIntent().getStringExtra("assign_question"));
 
         question = (Button) findViewById(R.id.generate_problem);
         String path = "/data/data/com.c01/files/";
 
+        releaseDate = getIntent().getStringExtra("releaseDate");
+        System.out.println("No longer a date " + releaseDate);
+        releaseDate = releaseDate.replaceAll("[ ]", "_");
+        releaseDate = releaseDate.replaceAll("[,]", "");
+
+        dueDate = getIntent().getStringExtra("dueDate");
+        dueDate = dueDate.replaceAll("[ ]", "_");
+        dueDate = dueDate.replaceAll("[,]", "");
+//Prove the claim :$$V-E+F=2$$
+        endSemesterDate = getIntent().getStringExtra("endSemesterDate");
+        endSemesterDate = endSemesterDate.replaceAll("[ ]", "_");
+        endSemesterDate = endSemesterDate.replaceAll("[,]", "");
+        initSerializeProblemSet(context);
 
         question.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,46 +110,9 @@ public class Choices extends AppCompatActivity {
                     text += "_";
                     text += feedback;
 
-
-                    Toast.makeText(context.getApplicationContext(), "Creating problem",
-                            Toast.LENGTH_LONG).show();
-                    Toast.makeText(context.getApplicationContext(), "Problem_Set_" + assign + "_Q_" + assign_question + ".txt",
-                            Toast.LENGTH_LONG).show();
-                    try {
-                        name = "Problem_Set_" + assign + "_Q_" + assign_question + ".txt";
-                        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt", Context.MODE_PRIVATE));
-                        outputStreamWriter.write(text);
-                        outputStreamWriter.close();
-
-                    } catch (IOException e) {
-                        Log.e("Exception", "File write failed: " + e.toString());
-                    }
-
-                    String ret = "";
-                    try {
-                        InputStream inputStream = context.openFileInput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt");
-                        is = inputStream;
-                        if (inputStream != null) {
-                            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                            String receiveString = "";
-                            StringBuilder stringBuilder = new StringBuilder();
-
-                            while ((receiveString = bufferedReader.readLine()) != null) {
-                                stringBuilder.append(receiveString);
-                            }
-
-                            inputStream.close();
-                            ret = stringBuilder.toString();
-                            Toast.makeText(context.getApplicationContext(), ret,
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    } catch (FileNotFoundException e) {
-                        Log.e("login activity", "File not found: " + e.toString());
-                    } catch (IOException e) {
-                        Log.e("login activity", "Can not read file: " + e.toString());
-                    }
-
+                    printEditorBanner(context);
+                    writeQuestionToFile(context);
+                    readQuestionFile(context);
                     assign_question++;
 
                     //Uploading txt to server
@@ -196,21 +179,6 @@ public class Choices extends AppCompatActivity {
 
     }
 
-    private List<File> getListFiles(File parentDir) {
-        ArrayList<File> inFiles = new ArrayList<File>();
-        File[] files = parentDir.listFiles();
-        for (File file : files) {
-            if (file.isDirectory()) {
-                inFiles.addAll(getListFiles(file));
-            } else {
-                if (file.getName().endsWith(".csv")) {
-                    inFiles.add(file);
-                }
-            }
-        }
-        return inFiles;
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 100 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -274,9 +242,86 @@ public class Choices extends AppCompatActivity {
         return (passed);
     }
 
+
+    private void readQuestionFile(Context context) {
+        try {
+            InputStream inputStream = context.openFileInput("Problem_Set_" + assign + "_Q_"
+                    + assign_question + "_" + releaseDate + "_" + dueDate + "_" + endSemesterDate + ".txt");
+            is = inputStream;
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveText = "";
+                StringBuilder fileText = new StringBuilder();
+                while ((receiveText = bufferedReader.readLine()) != null) {
+                    fileText.append(receiveText);
+                }
+                inputStream.close();
+                printToast(context, fileText.toString());
+            }
+            File fileSet = new File ("Problem_Set_" + assign + "_Q_" + assign_question + "_" + releaseDate + "_" + dueDate + "_" + endSemesterDate + ".txt");
+            fileSet.delete();
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+    }
+
+    private void writeQuestionToFile(Context context) {
+        try {
+            name = "Problem_Set_" + assign + "_Q_" + assign_question + "_" + releaseDate + "_" + dueDate + "_" + endSemesterDate + ".txt";
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("Problem_Set_" + assign + "_Q_"
+                    + assign_question + "_" + releaseDate + "_" + dueDate + "_" + endSemesterDate + ".txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(text);
+            outputStreamWriter.close();
+
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    private void initSerializeProblemSet(Context context) {
+        try {
+            InputStream inputStream = context.openFileInput(serializeQuestionSet);
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveText = "";
+                StringBuilder fileText = new StringBuilder();
+                while ((receiveText = bufferedReader.readLine()) != null) {
+                    fileText.append(receiveText);
+                }
+                inputStream.close();
+
+                String delim = "[_.]";
+                String content = fileText.toString();
+                String[] tokens = content.split(delim);
+                assign = Integer.parseInt(tokens[0]);
+                assign_question = Integer.parseInt(tokens[1]);
+
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+    }
+
+    private void printEditorBanner(Context context) {
+        Toast.makeText(context.getApplicationContext(), "Creating problem", Toast.LENGTH_LONG).show();
+        Toast.makeText(context.getApplicationContext(), "Problem_Set_" + assign + "_Q_"
+                + assign_question + "_" + releaseDate + "_" + dueDate + "_" + endSemesterDate + ".txt", Toast.LENGTH_LONG).show();
+    }
+
+    private void printToast(Context context, String string) {
+        Toast.makeText(context.getApplicationContext(), string, Toast.LENGTH_LONG).show();
+    }
+
+
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(Choices.this, CountQuestions.class);
+        Intent i = new Intent(Choices.this, Editor.class);
         i.putExtra("assign", String.valueOf(assign));
         i.putExtra("assign_question", String.valueOf(assign_question));
         startActivity(i);

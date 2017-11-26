@@ -15,6 +15,11 @@
             android:title="Add Student" />
 
         <item
+            android:id="@+id/nav_add_prof"
+            android:icon="@drawable/ic_prof"
+            android:title="Add Prof" />
+
+        <item
             android:id="@+id/nav_add_lecture"
             android:icon="@drawable/ic_powerpoint_box"
             android:title="Add Lecture" />

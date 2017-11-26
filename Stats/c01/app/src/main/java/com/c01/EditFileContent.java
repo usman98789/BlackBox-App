@@ -50,7 +50,8 @@ public class EditFileContent extends AppCompatActivity {
     private static InputStream is;
     private static Boolean canDo = false;
     private static File f;
-    private static String path;
+    private static String path = "/data/data/com.c01/files/";
+    private static String oldProblemSetPath = "";
     private static Intent i;
 
     @Override
@@ -71,6 +72,8 @@ public class EditFileContent extends AppCompatActivity {
         assign_question = i.getIntExtra("assign_question", 0);
         System.out.println("Problem set -> " + assign + " Question Number -> " + assign_question);
         String text = i.getStringExtra("text");
+        oldProblemSetPath = i.getStringExtra("oldFile");
+
 
         editText.setText(text);
         mathView.setText(content.getText().toString());
@@ -138,7 +141,7 @@ public class EditFileContent extends AppCompatActivity {
                 } catch (IOException e) {
                     Log.e("login activity", "Can not read file: " + e.toString());
                 }
-
+                deleteFile();
                 assign_question++;
 
                 //Uploading txt to server
@@ -216,12 +219,17 @@ public class EditFileContent extends AppCompatActivity {
 
     private String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
-
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+    }
+
+    private void deleteFile() {
+        File oldProblemSet = new File (oldProblemSetPath);
+        oldProblemSet.delete();
     }
 
     @Override
     public void onBackPressed() {
+        deleteFile();
         Intent i = new Intent(EditFileContent.this, CreateProblemSet.class);
         startActivity(i);
     }

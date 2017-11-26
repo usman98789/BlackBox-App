@@ -67,6 +67,10 @@
             android:name=".StudentGrades"
             android:label="@string/title_activity_student_grades"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DueDateSetup"
+            android:label="@string/title_activity_due_date_setup"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".AnswerProblems" />
         <activity android:name=".Choices" />
         <activity android:name=".CountQuestions" />
