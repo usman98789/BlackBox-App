@@ -18,6 +18,8 @@ public class AssignmentChoice extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent nextpage = new Intent(AssignmentChoice.this, AnswerProblems.class);
+                int id = getIntent().getIntExtra("userId", 0);
+                nextpage.putExtra("userId", id);
                 startActivity(nextpage);
             }
         });

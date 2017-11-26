@@ -102,7 +102,19 @@ public class DatabaseSelectHelper {
     double mark = -1;
     try {
       mark = mydb.getMark(userId);
-    } catch (IllegalAccessError e) {
+    } catch (Exception e) {
+
+    }
+    mydb.close();
+    return mark;
+  }
+
+  public static double getFeedBackMark(int userId, Context context) {
+    DatabaseDriverA mydb = new DatabaseDriverA(context);
+    double mark = -1;
+    try {
+      mark = mydb.getFeedBackMark(userId);
+    } catch (Exception e) {
 
     }
     mydb.close();

@@ -89,6 +89,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainMenu.this, AssignmentChoice.class);
+                i.putExtra("userId", id);
                 startActivity(i);
             }
         });

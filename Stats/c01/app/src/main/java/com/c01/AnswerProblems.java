@@ -113,9 +113,10 @@ public class AnswerProblems extends AppCompatActivity {
                         }
                         counter = 0;
                         feedbackCounter = 0;
-
+                        int id = getIntent().getIntExtra("userId", 0);
                         Intent i = new Intent(AnswerProblems.this, Results.class);
                         i.putExtra("feedback", feedbackArr);
+                        i.putExtra("userId", id);
                         startActivity(i);
                     } else {
                         if (answer.equals(correctAnswer)) {
@@ -136,7 +137,7 @@ public class AnswerProblems extends AppCompatActivity {
                                 ((RadioButton) choices.getChildAt(i)).setText(temp[i]);
                             }
 
-                            questionText.setText(contents[0]);
+                                questionText.setText(contents[0]);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -157,7 +158,9 @@ public class AnswerProblems extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+
                         Intent mainMenuIntent = new Intent(AnswerProblems.this, MainMenu.class);
+
                         startActivity(mainMenuIntent);
                     }
                 });
