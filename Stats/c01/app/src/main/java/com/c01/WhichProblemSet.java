@@ -26,7 +26,7 @@ public class WhichProblemSet extends AppCompatActivity {
 
             public void onClick(View view) {
                 if (check(context)) {
-                    Intent i = new Intent(WhichProblemSet.this, ViewProblems.class);
+                    Intent i = new Intent(WhichProblemSet.this, AnswerProblems.class);
                     i.putExtra("num", num);
                     startActivity(i);
                 }
