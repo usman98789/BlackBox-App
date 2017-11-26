@@ -168,6 +168,9 @@ public class InstructorMenu extends AppCompatActivity
         }  else if (id == R.id.nav_edit_grades) {
             Intent i = new Intent(InstructorMenu.this, EditGrades.class);
             startActivity(i);
+        } else if (id == R.id.nav_add_Professor){
+            Intent i = new Intent(InstructorMenu.this, addProfessor.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

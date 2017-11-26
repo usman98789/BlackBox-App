@@ -10,6 +10,10 @@
             android:title="Post Announcements" />
 
         <item
+            android:id="@+id/nav_add_Professor"
+            android:icon="@drawable/ic_add_people"
+            android:title="Add Professors" />
+        <item
             android:id="@+id/nav_add_student"
             android:icon="@drawable/ic_add_people"
             android:title="Add Student" />
