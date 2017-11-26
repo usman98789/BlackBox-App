@@ -38,9 +38,6 @@ public class ViewProblems extends AppCompatActivity {
     private static List newList = new ArrayList();
     private static Context context;
 
-    private static Button attempt;
-    private static Intent nextpage;
-
     private static final String isQuestionFile = "Q";
     private static final String isNoteFile = "N";
 
@@ -49,7 +46,6 @@ public class ViewProblems extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_problems);
         context = getApplicationContext();
-        attempt = (Button) findViewById(R.id.answerButton);
 
         num = getIntent().getStringExtra("num");
         Toast.makeText(getApplicationContext(), "Problem Set: " + num, Toast.LENGTH_LONG).show();
@@ -114,14 +110,6 @@ public class ViewProblems extends AppCompatActivity {
             });
         }
 
-
-        attempt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextpage = new Intent(ViewProblems.this, AnswerProblems.class);
-                startActivity(nextpage);
-            }
-        });
     }
 
     private boolean canBeDisplayed(String fileTile) {

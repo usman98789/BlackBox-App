@@ -17,13 +17,11 @@ import user.Student;
 
 public class MainMenu extends AppCompatActivity {
     String name;
-    String address;
-    int age;
-    String password;
 
     String id;
 
     Button viewNotes;
+
     Intent nextpage;
 
     @Override
@@ -82,6 +80,15 @@ public class MainMenu extends AppCompatActivity {
                 Intent i = new Intent(MainMenu.this, StudentGrades.class);
                 int userId = Integer.parseInt(id);
                 i.putExtra("userId", userId);
+                startActivity(i);
+            }
+        });
+
+        Button assignment = (Button) findViewById(R.id.addAssignmentButton);
+        assignment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainMenu.this, AssignmentChoice.class);
                 startActivity(i);
             }
         });

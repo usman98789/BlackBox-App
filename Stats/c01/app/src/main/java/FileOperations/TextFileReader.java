@@ -12,10 +12,14 @@ public class TextFileReader {
     public String[] readFile(String fileName) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         try {
+            String fullLine = "";
             String[] fileContents = new String[6];
             String line = br.readLine();
-            line = line.replace("_", ",");
-            fileContents = line.split(",");
+            fullLine += line;
+            while ((line = br.readLine()) != null) {
+                fullLine += line;
+            }
+            fileContents = fullLine.split("_");
             return fileContents;
         } finally {
             br.close();

@@ -68,18 +68,17 @@
             android:label="@string/title_activity_student_grades"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-
             android:name=".DueDateSetup"
             android:label="@string/title_activity_due_date_setup" />
         <activity
             android:name=".addProfessor"
             android:label="@string/title_activity_add_professor"
-
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AnswerProblems" />
         <activity android:name=".Choices" />
         <activity android:name=".CountQuestions" />
-        <activity android:name=".Results"></activity>
+        <activity android:name=".Results" />
+        <activity android:name=".AssignmentChoice"></activity>
     </application>
 
 </manifest>

@@ -32,16 +32,20 @@ public class Results extends AppCompatActivity {
         thirdQuestion = (TextView) findViewById(R.id.third);
         fourthQuestion = (TextView) findViewById(R.id.fourth);
         fifthQuestion = (TextView) findViewById(R.id.fifth);
+        TextView[] questions = {firstQuestion, secondQuestion, thirdQuestion, fourthQuestion, fifthQuestion};
         back = (Button) findViewById(R.id.backToMain);
 
         Intent intent = getIntent();
         feedback = intent.getStringArrayExtra("feedback");
 
-        firstQuestion.setText(feedback[0]);
-        secondQuestion.setText(feedback[1]);
-        thirdQuestion.setText(feedback[2]);
-        fourthQuestion.setText(feedback[3]);
-        fifthQuestion.setText(feedback[4]);
+
+        for (int i = 0; i < 5; i++) {
+            if (i < feedback.length) {
+                questions[i].setText(feedback[i]);
+            } else {
+                questions[i].setText("");
+            }
+        }
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

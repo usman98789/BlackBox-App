@@ -128,8 +128,6 @@ public class InstructorMenu extends AppCompatActivity
         } else if (id == R.id.nav_add_lecture_notes) {
             Intent i = new Intent(InstructorMenu.this, Browsing.class);
             startActivity(i);
-        } else if (id == R.id.nav_add_prof) {
-
         } else if (id == R.id.nav_view_lecture_slides) {
             Intent i = new Intent(InstructorMenu.this, Browsing.class);
             startActivity(i);

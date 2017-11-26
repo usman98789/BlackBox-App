@@ -28,17 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
 
 
-    public void showAlert() {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("ID or password was incorrect")
-                .setPositiveButton("Close", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-        myAlert.show();
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
