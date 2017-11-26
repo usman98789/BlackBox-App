@@ -28,6 +28,9 @@ import android.widget.Toast;
 
 import com.nishant.math.MathView;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 
 public class Editor extends AppCompatActivity {
 
@@ -35,23 +38,34 @@ public class Editor extends AppCompatActivity {
     private static Button next;
     private static TextView text;
     private static Button problemSet;
+
+    private static String releaseDate = "";
+    private static String dueDate = "";
+    private static String endSemesterDate = "";
     private static int assign = 1;
     private static int assign_question = 1;
+
+    private static final String serializeQuestionSet = "serial.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
         Context context = this.getApplicationContext();
-        assign = Integer.valueOf(getIntent().getStringExtra("assign"));
-        assign_question = Integer.valueOf(getIntent().getStringExtra("assign_question"));
 
         mathView = (MathView) findViewById(R.id.math_view);
         text = (TextView) findViewById(R.id.input_view);
         mathView.setText("");
         next = (Button) findViewById(R.id.generate_problem);
         problemSet = (Button) findViewById(R.id.generate_problem_set);
-        String path = "/data/data/com.c01/files/";
+
+        releaseDate = getIntent().getStringExtra("releaseDate");
+        dueDate = getIntent().getStringExtra("dueDate");
+        endSemesterDate = getIntent().getStringExtra("endSemesterDate");
+
+        System.out.println("101010101010101010101 " + releaseDate);
+        System.out.println("101010101010101010101 " + dueDate);
+        System.out.println("101010101010101010101 " + endSemesterDate);
 
         text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,8 +94,9 @@ public class Editor extends AppCompatActivity {
                 } else {
                     Intent i = new Intent(Editor.this, Choices.class);
                     i.putExtra("question", Text);
-                    i.putExtra("assign", String.valueOf(assign));
-                    i.putExtra("assign_question", String.valueOf(assign_question));
+                    i.putExtra("releaseDate", releaseDate);
+                    i.putExtra("dueDate", dueDate);
+                    i.putExtra("endSemesterDate", endSemesterDate);
                     startActivity(i);
                 }
             }
@@ -90,17 +105,29 @@ public class Editor extends AppCompatActivity {
         problemSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                assign_question = 1;
                 Toast.makeText(context.getApplicationContext(), "Problem Set " + assign +" has been finalized.",
                         Toast.LENGTH_LONG).show();
+                assign++;
+                serializeProblemSet(context);
             }
         });
 
     }
 
+    private void serializeProblemSet(Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(serializeQuestionSet, Context.MODE_PRIVATE));
+            outputStreamWriter.write(assign + "_" + assign_question);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(Editor.this, CountQuestions.class);
+        Intent i = new Intent(Editor.this, CreateProblemSet.class);
         startActivity(i);
     }
 }

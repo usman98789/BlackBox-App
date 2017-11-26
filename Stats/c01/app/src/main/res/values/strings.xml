@@ -116,5 +116,9 @@
     <string name="title_activity_edit_file_content">File Editor</string>
     <string name="title_activity_file_edit">View Problem</string>
     <string name="title_activity_student_grades">StudentGrades</string>
-    >>>>>>> master
+
+    <string name="title_activity_due_date_setup">Problem Set Setup</string>
+
+    <string name="title_activity_add_professor">addProfessor</string>
+
 </resources>
