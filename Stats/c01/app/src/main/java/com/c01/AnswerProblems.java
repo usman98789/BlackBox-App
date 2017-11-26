@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.nishant.math.MathView;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -32,15 +34,19 @@ public class AnswerProblems extends AppCompatActivity {
     private static String[] feedbackArr = new String[5];
     private static String[] tempFilesPath = new String[5];
 
+    private static MathView mathView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer_problems);
         Intent intent = getIntent();
 
-        questionText = (EditText) findViewById(R.id.questionText);
+        //questionText = (EditText) findViewById(R.id.questionText);
         choices = (RadioGroup) findViewById(R.id.choices);
         next = (Button) findViewById(R.id.nextButton);
+        mathView = (MathView) findViewById(R.id.math_view_assignment);
+
         String path = "/sdcard/Android/data/com.c01/files/Download/";
         File f = new File(path);
         File file[] = f.listFiles();
@@ -83,7 +89,8 @@ public class AnswerProblems extends AppCompatActivity {
                     ((RadioButton) choices.getChildAt(i)).setText(temp[i]);
                 }
 
-                questionText.setText(contents[0]);
+                //questionText.setText(contents[0]);
+                mathView.setText(contents[0].toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -53,17 +53,12 @@
 
         </RadioGroup>
 
-        <EditText
-            android:id="@+id/questionText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Question goes here"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <com.nishant.math.MathView
+            android:id="@+id/math_view_assignment"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.nishant.math.MathView>
 
         <Button
             android:id="@+id/nextButton"
