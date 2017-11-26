@@ -76,7 +76,7 @@ public class CreateProblemSet extends AppCompatActivity {
 
     /**
     * Starts the activity.
-    * @param savedInstanceState the data it most recently supplied on
+    * @param savedInstanceState The data it most recently supplied on
     * @return No return value
     */
     @Override
@@ -98,7 +98,7 @@ public class CreateProblemSet extends AppCompatActivity {
             
             /**
             * Lists files' name properly.
-            * @exception e
+            * @exception e Any exception
             * @return No return value
             */
             public void run() {
@@ -135,10 +135,11 @@ public class CreateProblemSet extends AppCompatActivity {
                 
                 /**
                 * Responds when an item in AdapterView has been clicked.
-                * @param parent the AdapterView where the click happened
-                * @param view the view whin the AdapterView that was clicked
-                * @param position the position of the view in the adapter
-                * @param id the row id of the item that was clicked
+                * @param parent The AdapterView where the click happened
+                * @param view The view whin the AdapterView that was clicked
+                * @param position The position of the view in the adapter
+                * @param id The row id of the item that was clicked
+                * @exception FileNotFoundException, IOException
                 * @return No return value
                 */
                 @Override
@@ -191,7 +192,7 @@ public class CreateProblemSet extends AppCompatActivity {
             
             /**
             * Responds when a click happened.
-            * @param View view
+            * @param view The content to display
             * @return No return value
             */
             @Override
