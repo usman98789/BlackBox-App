@@ -84,7 +84,6 @@ public class EditFileContent extends AppCompatActivity {
         oldProblemSetPath = i.getStringExtra("oldFile");
         oldFileName = i.getStringExtra("fileName");
 
-
         editText.setText(text);
         mathView.setText(content.getText().toString());
 
@@ -205,12 +204,22 @@ public class EditFileContent extends AppCompatActivity {
         }
     }
 
+    /**
+    * Prints banner.
+    * @param view The content to be displayed
+    * @return No return value
+    */
     private void printBanner(View view) {
         Snackbar.make(view, "Editted Finalized Edit", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         Toast.makeText(context.getApplicationContext(), "Editing problem", Toast.LENGTH_LONG).show();
         Toast.makeText(context.getApplicationContext(), oldFileName, Toast.LENGTH_LONG).show();
     }
 
+    /**
+    * Writes to file.
+    * @exception e IOException
+    * @return No return value
+    */
     private void writeToFile() {
         try {
             name = oldFileName;
@@ -223,6 +232,11 @@ public class EditFileContent extends AppCompatActivity {
         }
     }
 
+    /**
+    * Reads file.
+    * @exception e FileNotFoundException, IOException
+    * @return No return value
+    */
     private void readFile() {
         try {
             InputStream inputStream = context.openFileInput(oldFileName);
@@ -259,6 +273,10 @@ public class EditFileContent extends AppCompatActivity {
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 
+    /**
+    * Deletes file.
+    * @return No return value
+    */
     private void deleteFile() {
         File oldProblemSet = new File (oldProblemSetPath);
         oldProblemSet.delete();
