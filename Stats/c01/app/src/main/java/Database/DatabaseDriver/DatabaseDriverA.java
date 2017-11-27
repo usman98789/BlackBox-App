@@ -260,4 +260,13 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     return result;
   }
 
+  // Update method
+  public boolean updateAssignmentMark(int id, double mark, int aNum){
+    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put("USERID", id);
+    contentValues.put("MARKS", mark);
+    return sqLiteDatabase.update("A" + aNum + "MARK", contentValues, "USERID = ?",
+            new String[]{String.valueOf(id)}) > 0;
+  }
 }

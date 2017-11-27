@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Database.DatabaseDriver.DatabaseInsertHelper;
+import Database.DatabaseDriver.DatabaseSelectHelper;
+import Database.DatabaseDriver.DatabaseUpdateHelper;
 import Exceptions.InvalidAssignmentException;
 import Exceptions.InvalidIdException;
 import Exceptions.InvalidMarkException;
@@ -65,7 +67,11 @@ public class Results extends AppCompatActivity {
         mark = (Fracmark/total) * 100;
         int id = getIntent().getIntExtra("userId", 0);
         try {
-            DatabaseInsertHelper.insertAssignmentMark(id, mark, 1, getApplicationContext());
+            if (DatabaseSelectHelper.getAssignmentMark(id, aNum, getApplicationContext()) == -1){
+                DatabaseInsertHelper.insertAssignmentMark(id, mark, aNum, getApplicationContext());
+            } else {
+                DatabaseUpdateHelper.updateAssignmentMark(id, mark, aNum, getApplicationContext());
+            }
             Toast.makeText(getApplicationContext(), String.valueOf(mark), Toast.LENGTH_LONG).show();
         } catch (InvalidMarkException e) {
             Toast.makeText(getApplicationContext(), "Student added1", Toast.LENGTH_LONG).show();
@@ -78,10 +84,10 @@ public class Results extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Results.this, StudentMenu.class);
-                int id2 = getIntent().getIntExtra("userId", 0);
-                i.putExtra("userId",String.valueOf(id2));
-                startActivity(i);
+                Intent newi = new Intent(Results.this, StudentMenu.class);
+                newi.putExtra("id",String.valueOf(id));
+                System.out.println("INSIDE RESULTS ID IS " + id);
+                startActivity(newi);
             }
         });
     }
