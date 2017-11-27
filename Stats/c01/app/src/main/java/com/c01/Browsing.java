@@ -19,6 +19,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+  The Browsing activity.
+*/
 public class Browsing extends AppCompatActivity {
 
     private static final int READ_REQ = 24;
@@ -32,12 +35,22 @@ public class Browsing extends AppCompatActivity {
     ViewGroup cont;
     ListView contactLst;
 
+   /**
+   * Starts the activity.
+   * @param Bundle savedInstanceState
+   * @return No return value
+   */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browsing);
     }
 
+    /**
+    * Reads files.
+    * @param View view
+    * @return No return value
+    */
     public void readFile(View view) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -46,6 +59,13 @@ public class Browsing extends AppCompatActivity {
         startActivityForResult(intent, READ_REQ);
     }
 
+   /**
+   * Gets back the result.
+   * @param int requestCode
+   * @param int resultCode
+   * @param Intent resultData
+   * @return No return value
+   */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onActivityResult(int requestCode, int resultCode,
@@ -71,6 +91,12 @@ public class Browsing extends AppCompatActivity {
         }
     }
 
+    /**
+    * Reads text files.
+    * @param Uri uri
+    * @exception e
+    * @return No return value
+    */
     private void readTextFile(Uri uri) {
         InputStream inputStream = null;
         try {
@@ -90,6 +116,12 @@ public class Browsing extends AppCompatActivity {
         }
     }
 
+    /**
+    * Deletes files.
+    * @param Uri uri
+    * @exception e
+    * @return No return value
+    */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void deleteFile(Uri uri) {
         Cursor cursor = this.getContentResolver()
