@@ -20,6 +20,9 @@ import generics.EnumMapRoles;
 import generics.Roles;
 import user.User;
 
+/**
+* The activity for student grades.
+*/
 public class StudentGrades extends AppCompatActivity {
 
     /**
