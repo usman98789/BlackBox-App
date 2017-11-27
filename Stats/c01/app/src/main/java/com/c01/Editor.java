@@ -118,6 +118,11 @@ public class Editor extends AppCompatActivity {
 
     }
 
+    /**
+    * Serializes problem set.
+    * @exception e IOException
+    * @return No return value
+    */
     private void serializeProblemSet(Context context) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(serializeQuestionSet, Context.MODE_PRIVATE));
