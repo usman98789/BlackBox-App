@@ -37,6 +37,12 @@ public class AnswerProblems extends AppCompatActivity {
     private static int num;
     private static MathView mathView;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @exception e IOException
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +105,13 @@ public class AnswerProblems extends AppCompatActivity {
             }
 
             next.setOnClickListener(new View.OnClickListener() {
+                
+                /**
+                * Responds when a click happened.
+                * @param v The content to display
+                * @exception e IOException
+                * @return No return value
+                */
                 @Override
                 public void onClick(View v) {
                     int radioID = choices.getCheckedRadioButtonId();
@@ -150,12 +163,13 @@ public class AnswerProblems extends AppCompatActivity {
                 }
             });
         }
-//        String[] tempFilesPath = {path + "testQuestion.txt", path + "testQuestion2.txt", path + "testQuestion3.txt", path + "testQuestion4.txt", path + "testQuestion5.txt"};
-
-
 
     }
 
+    /**
+    * Shows an alert when no saved files in download folder.
+    * @return No return value
+    */
     public void showAlert() {
         final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
         myAlert.setMessage("You don't have any problem sets saved in your downloads folder.")
@@ -170,6 +184,11 @@ public class AnswerProblems extends AppCompatActivity {
         myAlert.show();
     }
 
+    /**
+    * Shuffles an array.
+    * @param array Integer array
+    * @return No return value
+    */
     private static void shuffleArray(int[] array)
     {
         int index;
@@ -186,6 +205,11 @@ public class AnswerProblems extends AppCompatActivity {
         }
     }
 
+    /**
+    * Filters a list.
+    * @param files File of files
+    * @return File Filtered files
+    */
     public File[] filterList(File[] files) {
         List<File> templist = Arrays.asList(files);
         List<File> newList = new ArrayList<File>();
@@ -209,12 +233,15 @@ public class AnswerProblems extends AppCompatActivity {
         return filtered;
     }
 
+    /**
+    * Sets information.
+    * @param infoArr Array of string information
+    * @return String[] Array of string information, shuffled
+    */
     public String[] setInformation(String[] infoArr) {
         String[] temp = {infoArr[1], infoArr[2], infoArr[3]};
         Collections.shuffle(Arrays.asList(temp));
         return temp;
     }
-
-
 
 }
