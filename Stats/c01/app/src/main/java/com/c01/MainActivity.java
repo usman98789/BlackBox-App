@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import Database.DatabaseDriver.DatabaseSelectHelper;
 import android.widget.Toast;
 import Database.DatabaseDriver.DatabaseInsertHelper;
@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     String strUsernum;
     String strPass;
     Context context;
-
+    String studentName;
+    String profName;
 
 
 
@@ -62,10 +63,12 @@ public class MainActivity extends AppCompatActivity {
                     User user = DatabaseSelectHelper.getUserDetails(id, context);
                     if (user.getRoleId() == roleMap.get(Roles.PROF)) {
                         nextpage = new Intent(MainActivity.this, InstructorMenu.class);
+                        nextpage.putExtra("name", profName);
                         startActivity(nextpage);
                     } else if (user.getRoleId() == roleMap.get(Roles.STUDENT)) {
-                        nextpage = new Intent(MainActivity.this, MainMenu.class);
+                        nextpage = new Intent(MainActivity.this, StudentMenu.class);
                         nextpage.putExtra("id", etUserName.getText().toString());
+                        nextpage.putExtra("name", studentName);
                         startActivity(nextpage);
                     }
                 }
@@ -111,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             // Authenticate inputed password
             Prof prof = (Prof) DatabaseSelectHelper.getUserDetails
                     (id, context);
+            profName = prof.getName();
             boolean passed = prof.authenticate(pass, context);
             if (passed) {
                 // Allow Prof
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             // Authenticate inputed password
             Student student = (Student) DatabaseSelectHelper.getUserDetails
                     (id, context);
+            studentName = student.getName();
             boolean passed = student.authenticate(pass, context);
             if (passed) {
                 // Allow student

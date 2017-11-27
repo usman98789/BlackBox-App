@@ -1,12 +1,9 @@
 package com.c01;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -20,16 +17,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.apache.ivy.util.url.ApacheURLLister;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -184,7 +176,7 @@ public class StudentFileInbox extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(StudentFileInbox.this, MainMenu.class);
+        Intent i = new Intent(StudentFileInbox.this, StudentMenu.class);
         startActivity(i);
     }
 

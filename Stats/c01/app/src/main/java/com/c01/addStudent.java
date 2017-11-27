@@ -34,7 +34,7 @@ public class addStudent extends AppCompatActivity {
 
             public void onClick(View view) {
                 if (useridauthen1(context)) {
-                    Intent i = new Intent(addStudent.this, MainMenu.class);
+                    Intent i = new Intent(addStudent.this, StudentMenu.class);
                     Toast.makeText(getApplicationContext(), "Student added", Toast.LENGTH_LONG).show();
                     startActivity(i);
                 }

@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class Results extends AppCompatActivity {
 
     private static EditText title;
@@ -50,7 +48,7 @@ public class Results extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Results.this, MainMenu.class);
+                Intent i = new Intent(Results.this, StudentMenu.class);
                 startActivity(i);
             }
         });

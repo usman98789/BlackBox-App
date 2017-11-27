@@ -1,22 +1,15 @@
 package com.c01;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-
-import Database.DatabaseDriver.DatabaseInsertHelper;
-import Database.DatabaseDriver.DatabaseSelectHelper;
-import Exceptions.InvalidNameException;
-import user.Student;
+import android.widget.TextView;
 
 
-public class MainMenu extends AppCompatActivity {
-    String name;
+public class StudentMenu extends AppCompatActivity {
+
 
     String id;
 
@@ -27,8 +20,10 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
-
+        setContentView(R.layout.activity_student_menu);
+        TextView text = (TextView) findViewById(R.id.studentTitle);
+        final String name = getIntent().getStringExtra("name");
+        text.setText("Welcome " + name);
         id = getIntent().getStringExtra("id");
 
         viewNotes = (Button) findViewById(R.id.viewNotesButton);
@@ -40,7 +35,7 @@ public class MainMenu extends AppCompatActivity {
         inbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainMenu.this, ViewAnnouncements.class);
+                Intent i = new Intent(StudentMenu.this, ViewAnnouncements.class);
                 i.putExtra("id", id);
                 startActivity(i);
             }
@@ -49,7 +44,7 @@ public class MainMenu extends AppCompatActivity {
         viewNotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextpage = new Intent(MainMenu.this, ViewNotes.class);
+                nextpage = new Intent(StudentMenu.this, ViewNotes.class);
                 startActivity(nextpage);
 
             }
@@ -59,7 +54,7 @@ public class MainMenu extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainMenu.this, MainActivity.class);
+                Intent i = new Intent(StudentMenu.this, MainActivity.class);
                 startActivity(i);
             }
         });
@@ -68,7 +63,7 @@ public class MainMenu extends AppCompatActivity {
         set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainMenu.this, StudentFileInbox.class);
+                Intent i = new Intent(StudentMenu.this, StudentFileInbox.class);
                 startActivity(i);
             }
         });
@@ -77,7 +72,7 @@ public class MainMenu extends AppCompatActivity {
         myGrades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainMenu.this, StudentGrades.class);
+                Intent i = new Intent(StudentMenu.this, StudentGrades.class);
                 int userId = Integer.parseInt(id);
                 i.putExtra("userId", userId);
                 startActivity(i);
@@ -88,7 +83,7 @@ public class MainMenu extends AppCompatActivity {
         assignment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainMenu.this, AssignmentChoice.class);
+                Intent i = new Intent(StudentMenu.this, AssignmentChoice.class);
                 startActivity(i);
             }
         });

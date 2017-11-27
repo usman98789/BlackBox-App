@@ -2,7 +2,6 @@ package com.c01;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -158,7 +157,7 @@ public class AnswerProblems extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        Intent mainMenuIntent = new Intent(AnswerProblems.this, MainMenu.class);
+                        Intent mainMenuIntent = new Intent(AnswerProblems.this, StudentMenu.class);
                         startActivity(mainMenuIntent);
                     }
                 });
