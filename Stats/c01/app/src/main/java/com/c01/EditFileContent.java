@@ -86,9 +86,9 @@ public class EditFileContent extends AppCompatActivity {
         content.addTextChangedListener(new TextWatcher() {
 
             /**
-              Notifies when text has been changed within s.
-              @param s An editable
-              @return No return value
+            * Notifies when text has been changed within s.
+            * @param s An editable
+            * @return No return value
             */
             @Override
             public void afterTextChanged(Editable s) {
