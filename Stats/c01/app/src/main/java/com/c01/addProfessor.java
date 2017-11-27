@@ -56,7 +56,7 @@ public class addProfessor extends AppCompatActivity {
     }
 
     /**
-    * Check if userID is authorized.
+    * Creates a new professor.
     * @param context The context
     * @return boolean True if succeeded
     */
