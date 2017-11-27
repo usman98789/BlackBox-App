@@ -52,13 +52,19 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
-
+/**
+* The activity for instructor menu.
+*/
 public class InstructorMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Boolean canDo = false;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +74,12 @@ public class InstructorMenu extends AppCompatActivity
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+        
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Feature in development..", Snackbar.LENGTH_LONG)
@@ -85,6 +97,10 @@ public class InstructorMenu extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -95,6 +111,11 @@ public class InstructorMenu extends AppCompatActivity
         }
     }
 
+    /**
+    * Initialize the contents of the Activity's standard options menu.
+    * @param menu The options menu in which items are placed.
+    * @return boolean True for the menu to be displayed
+    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -102,6 +123,11 @@ public class InstructorMenu extends AppCompatActivity
         return true;
     }
 
+    /**
+    * Called when an item in options menu is selected.
+    * @param item The menu item being selected.
+    * @return boolean True to consume it here, or false to allow normal menu processing to proceed
+    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -117,6 +143,11 @@ public class InstructorMenu extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+    * Called when an item in the navigation menu is selected.
+    * @param item The selected item.
+    * @return boolean True to display the item as the selected item
+    */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -149,7 +180,7 @@ public class InstructorMenu extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.nav_add_notes) {
 
-            //Check the phone to see if it has permission to access files
+            // Check the phone to see if it has permission to access files
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
@@ -157,9 +188,9 @@ public class InstructorMenu extends AppCompatActivity
                     canDo = true;
                 }
             }
-            //if permission is granted open file explorer to choose file to upload
+            
+            // If permission is granted open file explorer to choose file to upload
             if(canDo) {
-//                new MaterialFilePicker().withActivity(InstructorMenu.this).withRequestCode(10).start();
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("*/*");
                 startActivityForResult(intent, 10);
@@ -177,6 +208,13 @@ public class InstructorMenu extends AppCompatActivity
         return true;
     }
 
+    /**
+    * Callback for the result from requesting permissions.
+    * @param requestCode The request code passed in
+    * @param permissions The requested permissions
+    * @param grantResults The corresponding permissions
+    * @return No return value
+    */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == 100 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -188,7 +226,13 @@ public class InstructorMenu extends AppCompatActivity
         }
     }
 
-
+    /**
+    * Gets back the result.
+    * @param requestCode The request code allowing to identify who this result came from
+    * @param resultCode The result code returned by child activity
+    * @param resultData The Intent returning result data to caller
+    * @return No return value
+    */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         if(requestCode == 10 && resultCode == RESULT_OK) {
@@ -199,8 +243,8 @@ public class InstructorMenu extends AppCompatActivity
                 public void run() {
                     String path = "";
 
-                    //get the extension of the file to upload so we can generate it's mime type
-                    //and get it's url to create a file object
+                    // get the extension of the file to upload so we can generate it's mime type
+                    // and get it's url to create a file object
                     Uri uri = data.getData();
                     path = data.getData().getPath().toString();
                     int index = path.lastIndexOf(".");
@@ -219,7 +263,7 @@ public class InstructorMenu extends AppCompatActivity
                     File f = new File(path);
 
 
-                    //start building an http post request to send the file to the server
+                    // Start building an http post request to send the file to the server
                     OkHttpClient client = new OkHttpClient();
                     if (content_type == null) {
                         Log.d("supertest", "null");
@@ -238,7 +282,7 @@ public class InstructorMenu extends AppCompatActivity
                             .post(request_body)
                             .build();
 
-                    //send the file to the server
+                    // Send the file to the server
                     try {
                         Log.d("warblegarble", "running request");
                         Response response = client.newCall(request).execute();
@@ -260,13 +304,23 @@ public class InstructorMenu extends AppCompatActivity
         }
     }
 
-
+    /**
+    * Return one of the possible clip MIME types.
+    * @param path The path
+    * @return String One of the possible clip MIME types
+    */
     public String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
 
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 
+    /**
+    * Gets the path.
+    * @param context The context
+    * @param uri The uri
+    * @return String The path
+    */
     public static String getPath(Context context, Uri uri) {
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
@@ -322,6 +376,13 @@ public class InstructorMenu extends AppCompatActivity
         return null;
     }
 
+    /**
+    * Gets the data column.
+    * @param context The context
+    * @param uri The uri
+    * @param selection Things being selected
+    * @return String The index
+    */
     public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
         Cursor cursor = null;
         final String column = "_data";
@@ -339,6 +400,11 @@ public class InstructorMenu extends AppCompatActivity
         return null;
     }
 
+    /**
+    * Check if it is external storage document.
+    * @param uri The uri
+    * @return boolean True if it is external storage document, or false otherwise
+    */
     public static boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
@@ -366,7 +432,5 @@ public class InstructorMenu extends AppCompatActivity
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
-
-
 
 }
