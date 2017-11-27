@@ -12,8 +12,8 @@ import android.widget.Toast;
 public class CountQuestions extends AppCompatActivity {
     Context context;
     String name;
-    int problem_set_number = 0;
-    int question_number = 0;
+    private static int problem_set_number = 0;
+    private static int question_number = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class CountQuestions extends AppCompatActivity {
                 EditText etNumber2 = (EditText) findViewById(R.id.editText2);
                 question_number = Integer.valueOf(etNumber2.getText().toString());
                 if ((problem_set_number != 0) && (question_number != 0)) {
-                    Intent i = new Intent(CountQuestions.this, Editor.class);
+                    Intent i = new Intent(CountQuestions.this, DueDateSetup.class);
                     i.putExtra("assign", String.valueOf(problem_set_number));
                     i.putExtra("assign_question", String.valueOf(question_number));
                     startActivity(i);

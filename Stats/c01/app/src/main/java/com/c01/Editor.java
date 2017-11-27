@@ -49,10 +49,8 @@ public class Editor extends AppCompatActivity {
         releaseDate = getIntent().getStringExtra("releaseDate");
         dueDate = getIntent().getStringExtra("dueDate");
         endSemesterDate = getIntent().getStringExtra("endSemesterDate");
-
-        System.out.println("101010101010101010101 " + releaseDate);
-        System.out.println("101010101010101010101 " + dueDate);
-        System.out.println("101010101010101010101 " + endSemesterDate);
+        assign = Integer.valueOf(getIntent().getStringExtra("assign"));
+        assign_question = Integer.valueOf(getIntent().getStringExtra("assign_question"));
 
         text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -84,6 +82,8 @@ public class Editor extends AppCompatActivity {
                     i.putExtra("releaseDate", releaseDate);
                     i.putExtra("dueDate", dueDate);
                     i.putExtra("endSemesterDate", endSemesterDate);
+                    i.putExtra("assign", String.valueOf(assign));
+                    i.putExtra("assign_question", String.valueOf(assign_question));
                     startActivity(i);
                 }
             }

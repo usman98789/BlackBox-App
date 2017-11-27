@@ -153,7 +153,7 @@ public class CreateProblemSet extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Staring Up LaTeX file", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent i = new Intent(CreateProblemSet.this, DueDateSetup.class);
+                Intent i = new Intent(CreateProblemSet.this, CountQuestions.class);
                 startActivity(i);
             }
         });

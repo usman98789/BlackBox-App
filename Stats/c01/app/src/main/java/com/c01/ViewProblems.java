@@ -72,9 +72,10 @@ public class ViewProblems extends AppCompatActivity {
                     int index = 0;
                     String temp;
                     String temp2;
+                    System.out.println(serverDirFiltered.size());
                     while (newList.size() <= 1){
-                        index = randomGenerator.nextInt(serverDir.size());
-                        temp = serverDir.get(index).toString();
+                        index = randomGenerator.nextInt(serverDirFiltered.size());
+                        temp = serverDirFiltered.get(index).toString();
 
                         temp2 = temp.substring(12, 13);
                         if (( temp2.equals(num)) && !(newList.contains(temp))) {
@@ -92,7 +93,7 @@ public class ViewProblems extends AppCompatActivity {
 
         if (!t.isAlive()) {
 
-            myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, serverDirFiltered);
+            myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, newList);
             fileList = (ListView) findViewById(R.id.fileListView);
             fileList.setAdapter(myAdapter);
 
@@ -106,6 +107,7 @@ public class ViewProblems extends AppCompatActivity {
                     request.setDestinationInExternalFilesDir(context.getApplicationContext(), Environment.DIRECTORY_DOWNLOADS, fileList.getItemAtPosition(position).toString());
                     System.out.println(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString());
                     Long reference = downloadManager.enqueue(request);
+                    serverDirFiltered.clear();
                 }
             });
         }

@@ -55,9 +55,9 @@ public class InstructorMenu extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView text = (TextView) findViewById(R.id.profText);
-        String name = getIntent().getStringExtra("name");
-        text.setText("Welcome " + name);
+//        TextView text = (TextView) findViewById(R.id.profText);
+//        String name = getIntent().getStringExtra("name");
+//        text.setText("Welcome " + name);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

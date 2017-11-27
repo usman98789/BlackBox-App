@@ -23,9 +23,9 @@ public class StudentMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_menu);
-        TextView text = (TextView) findViewById(R.id.studentTitle);
-        final String name = getIntent().getStringExtra("name");
-        text.setText("Welcome " + name);
+//        TextView text = (TextView) findViewById(R.id.studentTitle);
+//        final String name = getIntent().getStringExtra("name");
+//        text.setText("Welcome " + name);
         id = getIntent().getStringExtra("id");
 
         viewNotes = (Button) findViewById(R.id.viewNotesButton);

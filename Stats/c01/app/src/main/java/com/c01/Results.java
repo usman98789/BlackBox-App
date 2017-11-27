@@ -7,7 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import Database.DatabaseDriver.DatabaseInsertHelper;
+import Exceptions.InvalidAssignmentException;
+import Exceptions.InvalidIdException;
+import Exceptions.InvalidMarkException;
 
 public class Results extends AppCompatActivity {
 
@@ -37,7 +42,6 @@ public class Results extends AppCompatActivity {
 
         Intent intent = getIntent();
         feedback = intent.getStringArrayExtra("feedback");
-
         int Fracmark = 0;
         double mark = 0.0;
 
@@ -51,22 +55,31 @@ public class Results extends AppCompatActivity {
 
         Fracmark = 0;
         for (int i = 0; i < 5; i++){
-            if (feedback[i].contains("correct")){
-                Fracmark += 1;
+            if (feedback[i].contains("incorrect")){
                 total += 1;
-            } else if (feedback[i].contains("incorrect")){
+            } else if (feedback[i].contains("correct")){
+                Fracmark += 1;
                 total += 1;
             }
         }
-
         mark = Fracmark/total * 100;
         int id = getIntent().getIntExtra("userId", 0);
-        DatabaseInsertHelper.insertFeedBackMark(id, mark, getApplicationContext());
+        try {
+            DatabaseInsertHelper.insertAssignmentMark(id, mark, 1, getApplicationContext());
+            Toast.makeText(getApplicationContext(), String.valueOf(mark), Toast.LENGTH_LONG).show();
+        } catch (InvalidMarkException e) {
+            Toast.makeText(getApplicationContext(), "Student added1", Toast.LENGTH_LONG).show();
+        } catch (InvalidIdException e) {
+            Toast.makeText(getApplicationContext(), "Student added2", Toast.LENGTH_LONG).show();
+        } catch (InvalidAssignmentException e) {
+            Toast.makeText(getApplicationContext(), "Student added3", Toast.LENGTH_LONG).show();
+        }
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Results.this, StudentMenu.class);
+                i.putExtra("userId",id);
                 startActivity(i);
             }
         });

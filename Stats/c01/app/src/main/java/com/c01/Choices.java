@@ -79,7 +79,8 @@ public class Choices extends AppCompatActivity {
         endSemesterDate = getIntent().getStringExtra("endSemesterDate");
         endSemesterDate = endSemesterDate.replaceAll("[ ]", "_");
         endSemesterDate = endSemesterDate.replaceAll("[,]", "");
-        initSerializeProblemSet(context);
+        assign = Integer.valueOf(getIntent().getStringExtra("assign"));
+        assign_question = Integer.valueOf(getIntent().getStringExtra("assign_question"));
 
         question.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -29,16 +29,21 @@ public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.
     private static Button dueSetup;
     private static Button endSetup;
 
+    private static int assign = 0;
+    private static int assign_question = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_due_date_setup);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         releaseSetup = (Button) findViewById(R.id.picDate);
         dueSetup = (Button) findViewById(R.id.picDate2);
         endSetup = (Button) findViewById(R.id.picDate3);
+        assign = Integer.valueOf(getIntent().getStringExtra("assign"));
+        assign_question = Integer.valueOf(getIntent().getStringExtra("assign_question"));
 
         releaseSetup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +76,8 @@ public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.
                 Snackbar.make(view, "Date Setup complete", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Intent i = new Intent(DueDateSetup.this, Editor.class);
+                i.putExtra("assign", String.valueOf(assign));
+                i.putExtra("assign_question", String.valueOf(assign_question));
                 i.putExtra("releaseDate", releaseDate);
                 i.putExtra("dueDate", dueDate);
                 i.putExtra("endSemesterDate", endSemesterDate);
