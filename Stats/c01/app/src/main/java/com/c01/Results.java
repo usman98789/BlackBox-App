@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import Database.DatabaseDriver.DatabaseInsertHelper;
 
 public class Results extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class Results extends AppCompatActivity {
     private static TextView fifthQuestion;
     private static String[] feedback;
     private static Button back;
+    private static int total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class Results extends AppCompatActivity {
         Intent intent = getIntent();
         feedback = intent.getStringArrayExtra("feedback");
 
+        int Fracmark = 0;
+        double mark = 0.0;
 
         for (int i = 0; i < 5; i++) {
             if (i < feedback.length) {
@@ -44,6 +48,20 @@ public class Results extends AppCompatActivity {
                 questions[i].setText("");
             }
         }
+
+        Fracmark = 0;
+        for (int i = 0; i < 5; i++){
+            if (feedback[i].contains("correct")){
+                Fracmark += 1;
+                total += 1;
+            } else if (feedback[i].contains("incorrect")){
+                total += 1;
+            }
+        }
+
+        mark = Fracmark/total * 100;
+        int id = getIntent().getIntExtra("userId", 0);
+        DatabaseInsertHelper.insertFeedBackMark(id, mark, getApplicationContext());
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

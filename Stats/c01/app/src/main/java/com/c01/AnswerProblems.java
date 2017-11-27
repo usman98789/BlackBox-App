@@ -112,9 +112,10 @@ public class AnswerProblems extends AppCompatActivity {
                         }
                         counter = 0;
                         feedbackCounter = 0;
-
+                        int id = getIntent().getIntExtra("userId", 0);
                         Intent i = new Intent(AnswerProblems.this, Results.class);
                         i.putExtra("feedback", feedbackArr);
+                        i.putExtra("userId", id);
                         startActivity(i);
                     } else {
                         if (answer.equals(correctAnswer)) {

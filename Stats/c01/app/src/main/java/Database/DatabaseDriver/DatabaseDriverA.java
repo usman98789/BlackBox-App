@@ -55,6 +55,10 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
             + "(USERID INTEGER NOT NULL,"
             + "MARKS REAL NOT NULL,"
             + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
+    sqLiteDatabase.execSQL("CREATE TABLE FeedBackMark"
+            + "(USERID INTEGER NOT NULL,"
+            + "MARKS REAL NOT NULL,"
+            + "FOREIGN KEY(USERID) REFERENCES USER(ID))");
 
   }
 
@@ -69,7 +73,7 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS A2MARK");
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS A3MARK");
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS A4MARK");
-
+    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS FeedBackMark");
     onCreate(sqLiteDatabase);
   }
 
@@ -118,6 +122,15 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
     sqLiteDatabase.insert("USERPW", null, contentValues);
   }
 
+
+  public void insertFeedBackMark(int userId, double mark){
+    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put("USERID", userId);
+    contentValues.put("MARKS", mark);
+    sqLiteDatabase.insert("FeedBackMark", null, contentValues);
+  }
+
   public void insertAssignmentMark(int userId, double mark, int aNum){
     SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
     ContentValues contentValues = new ContentValues();
@@ -135,6 +148,17 @@ public class DatabaseDriverA extends SQLiteOpenHelper {
   }
 
   //SELECT METHODS
+
+  public double getFeedBackMark(int userId) {
+    SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+    Cursor cursor = sqLiteDatabase.rawQuery("SELECT MARKS FROM FeedBackMark WHERE USERID = ?",
+            new String[]{String.valueOf(userId)});
+    cursor.moveToFirst();
+    double value = cursor.getDouble(cursor.getColumnIndex("MARKS"));
+    cursor.close();
+    return value;
+  }
 
   public double getAssignmentMark(int userId, int aNum) {
     SQLiteDatabase sqLiteDatabase = getReadableDatabase();

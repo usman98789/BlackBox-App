@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import user.Student;
+
 
 public class StudentMenu extends AppCompatActivity {
 
@@ -83,7 +85,9 @@ public class StudentMenu extends AppCompatActivity {
         assignment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(StudentMenu.this, AssignmentChoice.class);
+                i.putExtra("userId", id);
                 startActivity(i);
             }
         });

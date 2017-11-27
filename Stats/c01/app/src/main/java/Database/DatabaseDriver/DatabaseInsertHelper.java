@@ -88,6 +88,12 @@ public class DatabaseInsertHelper extends HttpServlet {
         return success;
     }
 
+    public static void insertFeedBackMark(int userId, double mark, Context context) {
+        DatabaseDriverA mydb = new DatabaseDriverA(context);
+        mydb.insertFeedBackMark(userId, mark);
+        mydb.close();
+    }
+
     public static void insertAssignmentMark (int userId, double mark, int aNum, Context context) throws InvalidMarkException, InvalidIdException, InvalidAssignmentException {
         if ((mark < 0) || (mark > 100)) {
             throw new InvalidMarkException();

@@ -91,6 +91,18 @@ public class DatabaseSelectHelper {
     return ids;
   }
 
+  public static double getFeedBackMark(int userId, Context context) {
+    DatabaseDriverA mydb = new DatabaseDriverA(context);
+    double mark = -1;
+    try {
+      mark = mydb.getFeedBackMark(userId);
+    } catch (Exception e) {
+
+    }
+    mydb.close();
+    return mark;
+  }
+
   public static double getAssignmentMark (int userId, int aNum, Context context) {
     DatabaseDriverA mydb = new DatabaseDriverA(context);
     double mark = -1;
