@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     String studentName;
     String profName;
 
-
-
     /**
     * Starts the activity.
     * @param savedInstanceState The data it most recently supplied on
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-    * Check if userID is authorized.
+    * Creates a user.
     * @param context The context
     * @return boolean True if userID and password match.
     */
@@ -119,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-    * Check if login.
+    * Login.
     * @param context The context
     * @return boolean True if login.
     */
@@ -182,6 +180,10 @@ public class MainActivity extends AppCompatActivity {
         myAlert.show();
     }
 
+    /**
+    * Gets creds.
+    * @return No return value
+    */
     public void getCreds() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LinearLayout layout = new LinearLayout(this);
@@ -199,10 +201,15 @@ public class MainActivity extends AppCompatActivity {
         dialog.setView(layout);
 
         dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param dialogInterface The dialog that received the click
+            * @param i The button that was clicked or the position of the item clicked
+            * @return No return value
+            */
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-//                id = Integer.parseInt(idBox.getText().toString());
-//                password = passwordBox.getText().toString();
             }
         });
         dialog.show();
