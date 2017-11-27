@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* The activity for student file inbox.
+*/
 public class StudentFileInbox extends AppCompatActivity {
 
     private static ListAdapter myAdapter;
@@ -76,7 +79,6 @@ public class StudentFileInbox extends AppCompatActivity {
             */
             @Override
             public void run() {
-
                 try {
                     getFiles();
                 } catch (Exception e) {
@@ -97,8 +99,6 @@ public class StudentFileInbox extends AppCompatActivity {
             }
 
             fileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-
                 /**
                 * Responds when an item in AdapterView has been clicked.
                 * @param parent The AdapterView where the click happened
@@ -108,6 +108,7 @@ public class StudentFileInbox extends AppCompatActivity {
                 * @exception e Any FileNotFoundException, IOException
                 * @return No return value
                 */
+                @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String fileName = fileList.getItemAtPosition(position).toString();
 
@@ -115,7 +116,7 @@ public class StudentFileInbox extends AppCompatActivity {
                     String[] tokenNotReadable = fileName.split(delimNotReadable);
                     if (tokenNotReadable[tokenNotReadable.length - 1].compareTo("txt") == 0) {
 
-                        // remove cache extension from file name and parse file name
+                        // Removes cache extension from file name and parse file name
                         String delim = "[_.]";
                         String[] tokens = fileName.split(delim);
                         String text = "";
@@ -156,6 +157,12 @@ public class StudentFileInbox extends AppCompatActivity {
         });
     }
 
+    /**
+    * Gets selected file.
+    * @param fileName The name of the file
+    * @exception e FileNotFoundException, IOException
+    * @return String The returned string
+    */
     private String getSelectedFile(String fileName) {
         try {
             File fileQuestion = new File("/sdcard/Android/data/com.c01/files/Download/" + fileName);
@@ -177,6 +184,11 @@ public class StudentFileInbox extends AppCompatActivity {
         return "File was corrupted. " + "Please download this file again.";
     }
 
+    /**
+    * Gets file.
+    * @exception e Any exception
+    * @return No return value
+    */
     private void getFiles() {
         try {
             String dir = "/sdcard/Android/data/com.c01/files/Download";
@@ -192,16 +204,28 @@ public class StudentFileInbox extends AppCompatActivity {
         }
     }
 
+    /**
+    * Views file.
+    * @return No return value
+    */
     private void ViewFile(String text) {
         Intent i = new Intent(StudentFileInbox.this, FileView.class);
         i.putExtra("text", text);
         startActivity(i);
     }
 
+    /**
+    * Displays toast error message.
+    * @return No return value
+    */
     private void displayToastErrorMessage() {
         Toast.makeText(context.getApplicationContext(), "File cannot be read", Toast.LENGTH_LONG).show();
     }
 
+    /**
+    * Displays toast message.
+    * @return No return value
+    */
     private void displayToastMessage(String string) {
         Toast.makeText(context.getApplicationContext(), string, Toast.LENGTH_LONG).show();
     }
