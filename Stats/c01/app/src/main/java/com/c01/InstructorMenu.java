@@ -61,10 +61,6 @@ public class InstructorMenu extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        TextView text = (TextView) findViewById(R.id.profText);
-//        String name = getIntent().getStringExtra("name");
-//        text.setText("Welcome " + name);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
@@ -123,16 +119,15 @@ public class InstructorMenu extends AppCompatActivity
     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handles action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // Noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -144,7 +139,7 @@ public class InstructorMenu extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handles navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_view_lecture_notes) {
@@ -159,14 +154,13 @@ public class InstructorMenu extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             Intent i = new Intent(InstructorMenu.this, MainActivity.class);
             startActivity(i);
-
         } else if (id == R.id.nav_add_student) {
             Intent i = new Intent(InstructorMenu.this, addStudent.class);
             startActivity(i);
         } else if (id == R.id.nav_add_lecture_notes) {
             //Check the phone to see if it has permission to access files
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
                 } else {
                     canDo = true;
@@ -227,7 +221,7 @@ public class InstructorMenu extends AppCompatActivity
                 public void run() {
                     String path = "";
 
-                    // get the extension of the file to upload so we can generate it's mime type
+                    // Gets the extension of the file to upload so we can generate it's mime type
                     // and get it's url to create a file object
                     Uri uri = data.getData();
                     path = data.getData().getPath().toString();
@@ -247,7 +241,7 @@ public class InstructorMenu extends AppCompatActivity
                     File f = new File(path);
                     Log.d("supertest", path);
 
-                    // Start building an http post request to send the file to the server
+                    // Starts building an http post request to send the file to the server
                     OkHttpClient client = new OkHttpClient();
                     if (content_type == null) {
                         Log.d("supertest", "null");
@@ -266,7 +260,7 @@ public class InstructorMenu extends AppCompatActivity
                             .post(request_body)
                             .build();
 
-                    // Send the file to the server
+                    // Sends the file to the server
                     try {
                         Log.d("warblegarble", "running request");
                         Response response = client.newCall(request).execute();
