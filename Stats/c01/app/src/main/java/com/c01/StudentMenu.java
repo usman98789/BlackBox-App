@@ -29,9 +29,6 @@ public class StudentMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_menu);
-//        TextView text = (TextView) findViewById(R.id.studentTitle);
-//        final String name = getIntent().getStringExtra("name");
-//        text.setText("Welcome " + name);
         id = getIntent().getStringExtra("id");
         System.out.println("Menu ID : " + id);
         viewNotes = (Button) findViewById(R.id.viewNotesButton);
@@ -116,9 +113,13 @@ public class StudentMenu extends AppCompatActivity {
 
         Button assignment = (Button) findViewById(R.id.addAssignmentButton);
         assignment.setOnClickListener(new View.OnClickListener() {
+            /**
+            * Responds when a click happened.
+            * @param v The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View v) {
-
                 Intent i = new Intent(StudentMenu.this, AssignmentChoice.class);
                 i.putExtra("userId", Integer.valueOf(id));
                 startActivity(i);
