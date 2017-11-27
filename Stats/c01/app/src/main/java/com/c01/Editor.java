@@ -51,6 +51,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+* The activity of editor.
+*/
 public class Editor extends AppCompatActivity {
 
     private static MathView mathView;
@@ -64,6 +67,11 @@ public class Editor extends AppCompatActivity {
     private static File f;
     private static InputStream is;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,16 +86,12 @@ public class Editor extends AppCompatActivity {
         String path = "/data/data/com.c01/files/";
 
         text.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+            
+            /**
+            * Notifies when text has been changed within s.
+            * @param s An editable
+            * @return No return value
+            */
             @Override
             public void afterTextChanged(Editable s) {
                 mathView.setText(text.getText().toString());
@@ -96,6 +100,13 @@ public class Editor extends AppCompatActivity {
         });
 
         question.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @exception e IOException, FileNotFoundException
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Toast.makeText(context.getApplicationContext(), "Creating problem",
@@ -139,7 +150,7 @@ public class Editor extends AppCompatActivity {
 
                 assign_question++;
 
-                //Uploading txt to server
+                // Uploading txt to server
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ActivityCompat.checkSelfPermission(Editor.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
@@ -155,6 +166,12 @@ public class Editor extends AppCompatActivity {
 
                         Log.d("supertest", "in cache dir");
                         Thread t = new Thread(new Runnable() {
+                            
+                            /**
+                            * Warblegarble request.
+                            * @exception e IOException
+                            * @return No return value
+                            */
                             @Override
                             public void run() {
                                 String content_type = getMimeType(f.getPath());
@@ -200,6 +217,12 @@ public class Editor extends AppCompatActivity {
         });
 
         problemSet.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 assign_question = 1;
@@ -210,6 +233,11 @@ public class Editor extends AppCompatActivity {
         });
     }
 
+    /**
+    * Get the list of files.
+    * @param parentDir The parent directory
+    * @return List of files
+    */
     private List<File> getListFiles(File parentDir) {
         ArrayList<File> inFiles = new ArrayList<File>();
         File[] files = parentDir.listFiles();
@@ -225,6 +253,13 @@ public class Editor extends AppCompatActivity {
         return inFiles;
     }
 
+    /**
+    * Callback for the result from requesting permissions.
+    * @param requestCode The request code passed in
+    * @param permissions The requested permissions
+    * @param grantResults The corresponding permissions
+    * @return No return value
+    */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 100 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -236,13 +271,21 @@ public class Editor extends AppCompatActivity {
         }
     }
 
-
+    /**
+    * Return one of the possible clip MIME types.
+    * @param path The path
+    * @return One of the possible clip MIME types
+    */
     private String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
 
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(Editor.this, CreateProblemSet.class);
