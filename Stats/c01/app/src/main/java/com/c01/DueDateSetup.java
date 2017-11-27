@@ -18,6 +18,9 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+* The activity for due date setup.
+*/
 public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.OnDateSetListener  {
 
     private static String releaseDate = "";
@@ -32,6 +35,11 @@ public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.
     private static int assign = 0;
     private static int assign_question = 0;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +53,12 @@ public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.
         assign_question = Integer.valueOf(getIntent().getStringExtra("assign_question"));
 
         releaseSetup.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 buttonSelect = "Release";
@@ -53,6 +67,11 @@ public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.
         });
 
         dueSetup.setOnClickListener(new View.OnClickListener() {
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 buttonSelect = "Due";
@@ -61,6 +80,11 @@ public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.
         });
 
         endSetup.setOnClickListener(new View.OnClickListener() {
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 buttonSelect = "End";
@@ -70,6 +94,11 @@ public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Date Setup complete", Snackbar.LENGTH_LONG)
@@ -85,30 +114,61 @@ public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.
         });
     }
 
+    /**
+    * Selects release date.
+    * @param view The content to be displayed
+    * @return No return value
+    */
     public void datePickerReleaseDate(View view){
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.show(getSupportFragmentManager(), "date");
     }
 
+    /**
+    * Selects due date.
+    * @param view The content to be displayed
+    * @return No return value
+    */
     public void datePickerDueDate(View view){
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.show(getSupportFragmentManager(), "date");
     }
 
+    /**
+    * Selects date of end of semester.
+    * @param view The content to be displayed
+    * @return No return value
+    */
     public void datePickerEndOfSemester(View view){
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.show(getSupportFragmentManager(), "date");
     }
 
+    /**
+    * Sets release date.
+    * @param view The content to be displayed
+    * @return No return value
+    */
     private void setDateOnRelease(final Calendar calendar) {
         final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
         releaseDate = dateFormat.format(calendar.getTime()).toString();
     }
 
+    /**
+    * Sets due date.
+    * @param view The content to be displayed
+    * @return No return value
+    */
     private void setDateOnDueDate(final Calendar calendar) {
         final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
         dueDate = dateFormat.format(calendar.getTime()).toString();
     }
+    
+    /**
+    * Sets date of end of semester.
+    * @param view The content to be displayed
+    * @return No return value
+    */
     private void setDateOnEndSemester(final Calendar calendar) {
         final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
         endSemesterDate = dateFormat.format(calendar.getTime()).toString();
@@ -152,6 +212,10 @@ public class DueDateSetup extends AppCompatActivity implements DatePickerDialog.
 
     }
 
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(DueDateSetup.this, CreateProblemSet.class);
