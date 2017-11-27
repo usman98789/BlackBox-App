@@ -121,6 +121,10 @@ public class ViewNotes extends AppCompatActivity {
 
     }
 
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(ViewNotes.this, StudentMenu.class);
