@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -16,6 +17,7 @@ import com.nishant.math.MathView;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +34,7 @@ public class AnswerProblems extends AppCompatActivity {
     private static String correctAnswer, feedback;
     private static String[] feedbackArr = new String[5];
     private static String[] tempFilesPath = new String[5];
-
+    private static int num;
     private static MathView mathView;
 
     @Override
@@ -49,6 +51,13 @@ public class AnswerProblems extends AppCompatActivity {
         String path = "/sdcard/Android/data/com.c01/files/Download/";
         File f = new File(path);
         File file[] = f.listFiles();
+        file = filterList(file);
+
+        for (int i = 0; i < file.length; i++) {
+            Log.d("supertest", file[i].getAbsolutePath());
+        }
+
+
         int size = 0;
         if (file == null) {
             showAlert();
@@ -116,12 +125,13 @@ public class AnswerProblems extends AppCompatActivity {
                         Intent i = new Intent(AnswerProblems.this, Results.class);
                         i.putExtra("feedback", feedbackArr);
                         i.putExtra("userId", id);
+                        i.putExtra("num", num);
                         startActivity(i);
                     } else {
                         if (answer.equals(correctAnswer)) {
                             feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is correct";
                         } else {
-                            feedbackArr[feedbackCounter] = "Wrong: " + feedback;
+                            feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is wrong: " + feedback;
                         }
                         feedbackCounter++;
 
@@ -181,9 +191,35 @@ public class AnswerProblems extends AppCompatActivity {
         }
     }
 
+    public File[] filterList(File[] files) {
+        List<File> templist = Arrays.asList(files);
+        List<File> newList = new ArrayList<File>();
+        Intent intent = getIntent();
+        num = intent.getIntExtra("num", 0);
+        int newSize = 0;
+        String temp2;
+        String temp;
+        int index = 0;
+        while (index != templist.size()){
+            temp = templist.get(index).getName();
+            temp2 = temp.substring(12, 13);
+            if (( temp2.equals(String.valueOf(num))) && !(newList.contains(temp))) {
+                newList.add(templist.get(index));
+                newSize++;
+            }
+            index++;
+        }
+        File[] filtered = new File[newSize];
+        newList.toArray(filtered);
+        return filtered;
+    }
+
     public String[] setInformation(String[] infoArr) {
         String[] temp = {infoArr[1], infoArr[2], infoArr[3]};
         Collections.shuffle(Arrays.asList(temp));
         return temp;
     }
+
+
+
 }

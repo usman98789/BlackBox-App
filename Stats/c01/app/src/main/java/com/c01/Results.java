@@ -25,11 +25,13 @@ public class Results extends AppCompatActivity {
     private static String[] feedback;
     private static Button back;
     private static int total;
+    private static int num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+        Intent intent = getIntent();
 
         title = (EditText) findViewById(R.id.resultsText);
         firstQuestion = (TextView) findViewById(R.id.first);
@@ -39,8 +41,8 @@ public class Results extends AppCompatActivity {
         fifthQuestion = (TextView) findViewById(R.id.fifth);
         TextView[] questions = {firstQuestion, secondQuestion, thirdQuestion, fourthQuestion, fifthQuestion};
         back = (Button) findViewById(R.id.backToMain);
+        num = intent.getIntExtra("num", 0);
 
-        Intent intent = getIntent();
         feedback = intent.getStringArrayExtra("feedback");
         double Fracmark = 0;
         double mark = 0.0;
@@ -65,7 +67,7 @@ public class Results extends AppCompatActivity {
         mark = (Fracmark/total) * 100;
         int id = getIntent().getIntExtra("userId", 0);
         try {
-            DatabaseInsertHelper.insertAssignmentMark(id, mark, 1, getApplicationContext());
+            DatabaseInsertHelper.insertAssignmentMark(id, mark, num, getApplicationContext());
             Toast.makeText(getApplicationContext(), String.valueOf(mark), Toast.LENGTH_LONG).show();
         } catch (InvalidMarkException e) {
             Toast.makeText(getApplicationContext(), "Student added1", Toast.LENGTH_LONG).show();
