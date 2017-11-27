@@ -21,17 +21,30 @@ import generics.EnumMapRoles;
 import generics.Roles;
 import user.*;
 
+/**
+* The activity for main activity
+*/
 public class MainActivity extends AppCompatActivity {
 
     String strUsernum;
     String strPass;
     Context context;
 
-
+    /**
+    * Shows alert when id or password incorrect.
+    * @return No return value
+    */
     public void showAlert() {
         final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
         myAlert.setMessage("ID or password was incorrect")
                 .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                    
+                    /**
+                    * Responds when a click happened.
+                    * @param dialogInterface The displaying dialog interface
+                    * @param i The button or position of item that was clicked
+                    * @return No return value
+                    */
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -40,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
         myAlert.show();
     }
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @exception e InvalidNameException
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Intent nextpage;
@@ -83,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+    * Check if userID is authorized.
+    * @param context The context
+    * @return boolean True if userID and password match.
+    */
     private boolean useridauthen1(Context context) {
         EditText etUserName = (EditText) findViewById(R.id.loginInput);
         strUsernum = etUserName.getText().toString();
@@ -105,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
         return (passed);
     }
 
+    /**
+    * Check if login.
+    * @param context The context
+    * @return boolean True if login.
+    */
     private boolean login(Context context) {
         int id = 0;
         String pass;
@@ -144,10 +179,12 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
-
-
-
+    
+    /**
+    * To display information.
+    * @param info The information to be displayed
+    * @return No return value
+    */
     public void displayInformation(String info) {
         final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
         myAlert.setMessage(info);
@@ -159,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         });
         myAlert.show();
     }
-
+    
     public void getCreds() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LinearLayout layout = new LinearLayout(this);
@@ -186,9 +223,14 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
-        // Do Here what ever you want do on back press;
+        Intent i = new Intent(Editor.this, CreateProblemSet.class);
+        startActivity(i);
     }
 }
 
