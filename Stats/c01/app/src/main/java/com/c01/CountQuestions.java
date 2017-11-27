@@ -9,12 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+* The activity for counting questions.
+*/
 public class CountQuestions extends AppCompatActivity {
     Context context;
     String name;
     private static int problem_set_number = 0;
     private static int question_number = 0;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +49,10 @@ public class CountQuestions extends AppCompatActivity {
         });
     }
 
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(CountQuestions.this, CreateProblemSet.class);
