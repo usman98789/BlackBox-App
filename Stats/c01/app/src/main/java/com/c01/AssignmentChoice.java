@@ -14,6 +14,11 @@ public class AssignmentChoice extends AppCompatActivity {
 
     private static int num = 0;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,15 +26,23 @@ public class AssignmentChoice extends AppCompatActivity {
 
         Button attemptRand = (Button) findViewById(R.id.attemptRandom);
         attemptRand.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param v The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View v) {
                 getCreds();
-
-
             }
         });
     }
 
+    /**
+    * Gets creds.
+    * @return No return value
+    */
     public void getCreds() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LinearLayout layout = new LinearLayout(this);
@@ -39,10 +52,16 @@ public class AssignmentChoice extends AppCompatActivity {
         numBox.setHint("Enter assignment number");
         layout.addView(numBox);
 
-
         dialog.setView(layout);
 
         dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param dialogInterface The dialog that received the click
+            * @param i The button that was clicked or the position of the item clicked
+            * @return No return value
+            */
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 num = Integer.parseInt(numBox.getText().toString());
