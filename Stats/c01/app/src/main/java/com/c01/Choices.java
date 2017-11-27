@@ -54,9 +54,7 @@ public class Choices extends AppCompatActivity {
     private static InputStream is;
 
     private static String text;
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

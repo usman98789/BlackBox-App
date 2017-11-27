@@ -102,47 +102,9 @@ public class EditFileContent extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 System.out.println("Problem set -> " + assign + " Question Number -> " + assign_question);
-                Snackbar.make(view, "Editted Finalized Edit", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                Toast.makeText(context.getApplicationContext(), "Editing problem",
-                        Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), oldFileName,
-                        Toast.LENGTH_LONG).show();
-                try {
-                    name = oldFileName;
-                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(oldFileName, Context.MODE_PRIVATE));
-                    outputStreamWriter.write(content.getText().toString());
-                    outputStreamWriter.close();
-
-                } catch (IOException e) {
-                    Log.e("Exception", "File write failed: " + e.toString());
-                }
-
-                String ret = "";
-                try {
-                    InputStream inputStream = context.openFileInput(oldFileName);
-                    is = inputStream;
-                    if (inputStream != null) {
-                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                        String receiveString = "";
-                        StringBuilder stringBuilder = new StringBuilder();
-
-                        while ((receiveString = bufferedReader.readLine()) != null) {
-                            stringBuilder.append(receiveString);
-                        }
-
-                        inputStream.close();
-                        ret = stringBuilder.toString();
-                        Toast.makeText(context.getApplicationContext(), ret,
-                                Toast.LENGTH_LONG).show();
-                    }
-                } catch (FileNotFoundException e) {
-                    Log.e("login activity", "File not found: " + e.toString());
-                } catch (IOException e) {
-                    Log.e("login activity", "Can not read file: " + e.toString());
-                }
+                printBanner(view);
+                writeToFile();
+                readFile();
                 deleteFile();
                 assign_question++;
 
@@ -218,6 +180,49 @@ public class EditFileContent extends AppCompatActivity {
         }
     }
 
+    private void printBanner(View view) {
+        Snackbar.make(view, "Editted Finalized Edit", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        Toast.makeText(context.getApplicationContext(), "Editing problem", Toast.LENGTH_LONG).show();
+        Toast.makeText(context.getApplicationContext(), oldFileName, Toast.LENGTH_LONG).show();
+    }
+
+    private void writeToFile() {
+        try {
+            name = oldFileName;
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(oldFileName, Context.MODE_PRIVATE));
+            outputStreamWriter.write(content.getText().toString());
+            outputStreamWriter.close();
+
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    private void readFile() {
+        try {
+            InputStream inputStream = context.openFileInput(oldFileName);
+            is = inputStream;
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                String ret = stringBuilder.toString();
+                Toast.makeText(context.getApplicationContext(), ret,
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+    }
 
     private String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
