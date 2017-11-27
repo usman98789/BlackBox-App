@@ -229,8 +229,7 @@ public class MainActivity extends AppCompatActivity {
     */
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(Editor.this, CreateProblemSet.class);
-        startActivity(i);
+        // Do Here what ever you want do on back press;
     }
 }
 
