@@ -192,12 +192,23 @@ public class CreateProblemSet extends AppCompatActivity {
         });
     }
 
+    /**
+    * Checks if file exists.
+    * @param fileName The name of the file
+    * @return boolean True if file exists
+    */
     private boolean fileExist (String fileName) {
         String dir = "/sdcard/Android/data/com.c01/files/Download/" + fileName;
         File file = new File(dir);
         return file.exists();
     }
 
+    /**
+    * Reads file.
+    * @param fileName The name of the file
+    * @exception e FileNotFoundException, IOException
+    * @return No return value
+    */
     private void readFile (String fileName) {
         try {
             File fileQuestion = new File("/sdcard/Android/data/com.c01/files/Download/" + fileName);
@@ -219,6 +230,11 @@ public class CreateProblemSet extends AppCompatActivity {
         }
     }
 
+    /**
+    * Edits file.
+    * @param fileName The name of the file
+    * @return No return value
+    */
     private void editFile (String fileName) {
         Intent i = new Intent(CreateProblemSet.this, EditFileContent.class);
         i.putExtra("assign", assign);
@@ -230,6 +246,11 @@ public class CreateProblemSet extends AppCompatActivity {
         startActivity(i);
     }
 
+    /**
+    * Downloads file.
+    * @param fileName The name of the file
+    * @return No return value
+    */
     private void downloadFile (int position) {
         downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
         Uri uri = Uri.parse("https://shev:Biscut123@megumin.ga/stats/assignments/" + fileList.getItemAtPosition(position).toString());
@@ -240,6 +261,12 @@ public class CreateProblemSet extends AppCompatActivity {
         registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 
+    /**
+    * Waits for file download.
+    * @param fileName The name of the file
+    * @exception e InterruptedException
+    * @return No return value
+    */
     private void waitForFileDownload(String fileName) {
         while (fileExist(fileName)) {}
         try {
@@ -250,6 +277,13 @@ public class CreateProblemSet extends AppCompatActivity {
     }
 
     private static BroadcastReceiver onComplete = new BroadcastReceiver() {
+      
+        /**
+        * Called when receiving an Intent broadcast
+        * @param context The Context in which the receiver is running
+        * @param intent The intent being received
+        * @return No return value
+        */ 
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
