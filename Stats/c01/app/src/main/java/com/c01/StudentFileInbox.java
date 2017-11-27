@@ -125,10 +125,9 @@ public class StudentFileInbox extends AppCompatActivity {
                             System.out.println("File text : " + fileName);
                             int assign = Integer.parseInt(tokens[2]);
                             int assign_question = Integer.parseInt(tokens[4]);
-                            System.out.println("Problem Set -> " + assign + " Question Number -> " + assign_question);
                             text = getSelectedFile(fileName);
                         } else if (tokens[3].compareTo(isNoteFile) == 0) {
-                            System.out.println("File text : " + fileName);
+                            System.out.println("NOTES HERE File text : " + fileName);
                             text = getSelectedFile(fileName);
                         }
                         ViewFile(text);
@@ -173,7 +172,12 @@ public class StudentFileInbox extends AppCompatActivity {
                 while ((receiveString = bufferedReader.readLine()) != null) {
                     stringBuilder.append(receiveString);
                 }
-                displayToastMessage(stringBuilder.toString());
+                String fileText = stringBuilder.toString();
+                String delim = "[_]";
+                String[] tokens = fileText.split(delim);
+                String fileTextFiltered = tokens[0];
+
+                displayToastMessage(fileTextFiltered);
                 return stringBuilder.toString();
             }
         } catch (FileNotFoundException e) {

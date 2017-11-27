@@ -42,7 +42,12 @@ public class FileView extends AppCompatActivity {
 
         MathView mathView = (MathView) findViewById(R.id.view_math);
         String text = i.getStringExtra("text");
-        mathView.setText(text);
+
+        String delim = "[_]";
+        String[] tokens = text.split(delim);
+        String question = tokens[0];
+
+        mathView.setText(question);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
