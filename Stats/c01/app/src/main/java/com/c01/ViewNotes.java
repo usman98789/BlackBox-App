@@ -19,8 +19,10 @@ import java.net.URL;
 import java.util.List;
 import org.apache.ivy.util.url.ApacheURLLister;
 
+/**
+* The activity for viewing notes.
+*/
 public class ViewNotes extends AppCompatActivity {
-
 
     private static ListAdapter myAdapter;
     private static ApacheURLLister lister;
@@ -29,6 +31,10 @@ public class ViewNotes extends AppCompatActivity {
     private static DownloadManager downloadManager;
     private static Context context;
 
+    /**
+    * Shows an alert when ID or password incorrect.
+    * @return No return value
+    */
     public void showAlert() {
         final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
         myAlert.setMessage("ID or password was incorrect")
@@ -41,6 +47,11 @@ public class ViewNotes extends AppCompatActivity {
         myAlert.show();
     }
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +59,14 @@ public class ViewNotes extends AppCompatActivity {
         context = getApplicationContext();
 
         Thread t = new Thread(new Runnable() {
+            
+            /**
+            * Gets proper file url.
+            * @exception e Any exception
+            * @return No return value
+            */
             @Override
             public void run() {
-
 
                 try {
                     URL url = new URL("https://shev:Biscut123@megumin.ga/stats/notes");
@@ -79,6 +95,16 @@ public class ViewNotes extends AppCompatActivity {
             fileList.setAdapter(myAdapter);
 
             fileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                
+                /**
+                * Responds when an item in AdapterView has been clicked.
+                * @param parent The AdapterView where the click happened
+                * @param view The view whin the AdapterView that was clicked
+                * @param position The position of the view in the adapter
+                * @param id The row id of the item that was clicked
+                * @exception e Any exception
+                * @return No return value
+                */
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);

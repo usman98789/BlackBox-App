@@ -45,6 +45,9 @@ import java.net.URL;
 import java.util.List;
 import org.apache.ivy.util.url.ApacheURLLister;
 
+/**
+  The activity for creating problem sets.
+*/
 public class CreateProblemSet extends AppCompatActivity {
 
     private static ListAdapter myAdapter;
@@ -55,6 +58,10 @@ public class CreateProblemSet extends AppCompatActivity {
     private static ApacheURLLister lister;
     private static Context context;
 
+    /**
+    * Shows alert when id or password incorrect.
+    * @return No return value
+    */
     public void showAlert() {
         final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
         myAlert.setMessage("ID or password was incorrect")
@@ -67,6 +74,11 @@ public class CreateProblemSet extends AppCompatActivity {
         myAlert.show();
     }
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +95,13 @@ public class CreateProblemSet extends AppCompatActivity {
 
         Thread t = new Thread(new Runnable() {
             @Override
+            
+            /**
+            * Lists files' name properly.
+            * @exception e Any exception
+            * @return No return value
+            */
             public void run() {
-
 
                 try {
                     URL url = new URL("https://shev:Biscut123@megumin.ga/stats/assignments");
@@ -96,7 +113,6 @@ public class CreateProblemSet extends AppCompatActivity {
                         temp = temp.replace("https://megumin.ga/stats/assignments/", "");
                         System.out.println(temp);
                         serverDir.set(i, temp);
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -116,6 +132,16 @@ public class CreateProblemSet extends AppCompatActivity {
             }
 
             fileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                
+                /**
+                * Responds when an item in AdapterView has been clicked.
+                * @param parent The AdapterView where the click happened
+                * @param view The view whin the AdapterView that was clicked
+                * @param position The position of the view in the adapter
+                * @param id The row id of the item that was clicked
+                * @exception FileNotFoundException, IOException
+                * @return No return value
+                */
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int assign;
@@ -163,6 +189,12 @@ public class CreateProblemSet extends AppCompatActivity {
         }
 
         fab.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Staring Up LaTeX file", Snackbar.LENGTH_LONG)
@@ -172,6 +204,11 @@ public class CreateProblemSet extends AppCompatActivity {
             }
         });
     }
+    
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(CreateProblemSet.this, InstructorMenu.class);

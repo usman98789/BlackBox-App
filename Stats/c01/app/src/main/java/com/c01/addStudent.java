@@ -15,7 +15,9 @@ import Exceptions.InvalidNameException;
 import generics.EnumMapRoles;
 import generics.Roles;
 
-
+/**
+* The activity for adding student.
+*/
 public class addStudent extends AppCompatActivity {
 
     Context context;
@@ -24,6 +26,11 @@ public class addStudent extends AppCompatActivity {
     String add;
     String pass;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +40,11 @@ public class addStudent extends AppCompatActivity {
         context = this.getApplicationContext();
         button.setOnClickListener(new View.OnClickListener() {
 
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             public void onClick(View view) {
                 if (useridauthen1(context)) {
                     Intent i = new Intent(addStudent.this, MainMenu.class);
@@ -43,6 +55,11 @@ public class addStudent extends AppCompatActivity {
         });
     }
 
+    /**
+    * Creates a new student.
+    * @param context The context
+    * @return boolean True if succeeded
+    */
     public boolean useridauthen1(Context context) {
         boolean useridAuthen = true;
         boolean passwordAuthen = true;
@@ -81,6 +98,11 @@ public class addStudent extends AppCompatActivity {
         return (passed);
     }
 
+    /**
+    * Inserts a user.
+    * @param context The context
+    * @return boolean True if succeeded
+    */
     private boolean insertUser(Context context) {
 
         int success = -1;
@@ -100,7 +122,6 @@ public class addStudent extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
             return true;
         }
-
 
     }
 }

@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+* The activity for viewing problems.
+*/
 public class ViewProblems extends AppCompatActivity {
 
     private static ListAdapter myAdapter;
@@ -32,6 +35,11 @@ public class ViewProblems extends AppCompatActivity {
     private static List newList = new ArrayList();
     private static Context context;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +52,11 @@ public class ViewProblems extends AppCompatActivity {
             @Override
             public void run() {
 
-
+                /**
+                * Gets random problems.
+                * @exception e Any exception
+                * @return No return value
+                */
                 try {
                     URL url = new URL("https://shev:Biscut123@megumin.ga/stats/assignments");
                     lister = new ApacheURLLister();
@@ -87,6 +99,16 @@ public class ViewProblems extends AppCompatActivity {
             fileList.setAdapter(myAdapter);
 
             fileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                
+                /**
+                * Responds when an item in AdapterView has been clicked.
+                * @param parent The AdapterView where the click happened
+                * @param view The view whin the AdapterView that was clicked
+                * @param position The position of the view in the adapter
+                * @param id The row id of the item that was clicked
+                * @exception e Any exception
+                * @return No return value
+                */
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
@@ -99,6 +121,11 @@ public class ViewProblems extends AppCompatActivity {
             });
         }
     }
+    
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(ViewProblems.this, WhichProblemSet.class);

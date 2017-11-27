@@ -16,6 +16,9 @@ import java.util.List;
 import Database.DatabaseDriver.DatabaseSelectHelper;
 import Database.DatabaseDriver.DatabaseUpdateHelper;
 
+/**
+* The activity for viewing announcements. 
+*/
 public class ViewAnnouncements extends AppCompatActivity {
 
     private ListView mainListView;
@@ -24,6 +27,11 @@ public class ViewAnnouncements extends AppCompatActivity {
     int id = -1;
     ArrayList<String> accountBalance = new ArrayList<>();
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +42,8 @@ public class ViewAnnouncements extends AppCompatActivity {
         id = Integer.valueOf(getIntent().getStringExtra("id"));
 
         List<String> messages = new ArrayList<>();
-        // get a list of all of this user's message ids
+        // Get a list of all of this user's message ids
         List<Integer> messageIds = DatabaseSelectHelper.getAllMessageIds(id, context);
-        //Toast.makeText(getApplicationContext(), String.valueOf(messageIds.size()), Toast.LENGTH_LONG).show();
         messages.add("  ");
         for (Integer iD : messageIds) {
             messages.add(DatabaseSelectHelper.getSpecificMessage(iD, context));
@@ -52,6 +59,11 @@ public class ViewAnnouncements extends AppCompatActivity {
         Button Exit = (Button) findViewById(R.id.Exit1);
         Exit.setOnClickListener(new View.OnClickListener() {
 
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             public void onClick(View view) {
                 Intent i = new Intent(ViewAnnouncements.this, MainMenu.class);
                 i.putExtra("id", String.valueOf(id));
@@ -60,6 +72,5 @@ public class ViewAnnouncements extends AppCompatActivity {
         });
 
     }
-
 
 }

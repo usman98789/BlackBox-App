@@ -22,6 +22,11 @@ import user.User;
 
 public class StudentGrades extends AppCompatActivity {
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,12 @@ public class StudentGrades extends AppCompatActivity {
         displayMarks(context);
     }
 
+    /**
+    * Displays marks.
+    * @param context The context containing the things being created
+    * @exception e Any exception
+    * @return No return value
+    */
     public void displayMarks(Context context){
         int id = getIntent().getIntExtra("userId", 0);
 

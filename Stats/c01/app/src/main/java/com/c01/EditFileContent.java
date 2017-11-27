@@ -39,6 +39,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+  The activity for editting file contect.
+*/
 public class EditFileContent extends AppCompatActivity {
 
     private static TextView content;
@@ -53,6 +56,11 @@ public class EditFileContent extends AppCompatActivity {
     private static String path;
     private static Intent i;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,15 +84,12 @@ public class EditFileContent extends AppCompatActivity {
         mathView.setText(content.getText().toString());
 
         content.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+            /**
+            * Notifies when text has been changed within s.
+            * @param s An editable
+            * @return No return value
+            */
             @Override
             public void afterTextChanged(Editable s) {
                 mathView.setText(content.getText().toString());
@@ -94,6 +99,13 @@ public class EditFileContent extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+          
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @exception e IOException, FileNotFoundException
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 System.out.println("Problem set -> " + assign + " Question Number -> " + assign_question);
@@ -141,7 +153,7 @@ public class EditFileContent extends AppCompatActivity {
 
                 assign_question++;
 
-                //Uploading txt to server
+                // Uploading txt to server
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ActivityCompat.checkSelfPermission(EditFileContent.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
@@ -157,6 +169,12 @@ public class EditFileContent extends AppCompatActivity {
 
                         Log.d("supertest", "in cache dir");
                         Thread t = new Thread(new Runnable() {
+                          
+                            /**
+                            * Warblegarble request.
+                            * @exception e IOException
+                            * @return No return value
+                            */
                             @Override
                             public void run() {
                                 String content_type = getMimeType(f.getPath());
@@ -202,6 +220,13 @@ public class EditFileContent extends AppCompatActivity {
         });
     }
 
+    /**
+    * Callback for the result from requesting permissions.
+    * @param requestCode The request code passed in
+    * @param permissions The requested permissions
+    * @param grantResults The corresponding permissions
+    * @return No return value
+    */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 100 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -213,13 +238,20 @@ public class EditFileContent extends AppCompatActivity {
         }
     }
 
-
+    /**
+    * Return one of the possible clip MIME types.
+    * @param path The path
+    * @return One of the possible clip MIME types
+    */
     private String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
-
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(EditFileContent.this, CreateProblemSet.class);

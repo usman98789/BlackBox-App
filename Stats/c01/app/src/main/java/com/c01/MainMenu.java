@@ -14,7 +14,9 @@ import Database.DatabaseDriver.DatabaseSelectHelper;
 import Exceptions.InvalidNameException;
 import user.Student;
 
-
+/**
+* The activity for main menu.
+*/
 public class MainMenu extends AppCompatActivity {
     String name;
     String address;
@@ -26,20 +28,26 @@ public class MainMenu extends AppCompatActivity {
     Button viewNotes;
     Intent nextpage;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
         id = getIntent().getStringExtra("id");
-
         viewNotes = (Button) findViewById(R.id.viewNotesButton);
-
-
-
-
         Button inbox = (Button) findViewById(R.id.email);
         inbox.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainMenu.this, ViewAnnouncements.class);
@@ -49,16 +57,27 @@ public class MainMenu extends AppCompatActivity {
         });
 
         viewNotes.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param v The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View v) {
                 nextpage = new Intent(MainMenu.this, ViewNotes.class);
                 startActivity(nextpage);
-
             }
         });
 
         Button logout = (Button) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainMenu.this, MainActivity.class);
@@ -68,6 +87,12 @@ public class MainMenu extends AppCompatActivity {
 
         Button set = (Button) findViewById(R.id.ProblemSet);
         set.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainMenu.this, StudentFileInbox.class);
@@ -77,6 +102,12 @@ public class MainMenu extends AppCompatActivity {
 
         Button myGrades = (Button) findViewById(R.id.CheckGradesButton);
         myGrades.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainMenu.this, StudentGrades.class);
@@ -85,11 +116,12 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
-
     }
 
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;

@@ -20,8 +20,16 @@ import generics.EnumMapRoles;
 import generics.Roles;
 import user.User;
 
+/**
+* The activity for viewing marks.
+*/
 public class ViewMark extends AppCompatActivity {
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +39,12 @@ public class ViewMark extends AppCompatActivity {
 
     }
 
+    /**
+    * Displays marks.
+    * @param context The context containing the things being created
+    * @exception e Any exception
+    * @return No return value
+    */
     public void displayMarks(Context context){
         EnumMapRoles roleMap = new EnumMapRoles(context);
         ArrayList<String> displayer = new ArrayList<>();

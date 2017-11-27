@@ -18,8 +18,16 @@ import generics.EnumMapRoles;
 import generics.Roles;
 import user.User;
 
+/**
+* The activity for problem set list.
+*/
 public class ProblemSetList extends AppCompatActivity {
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,12 @@ public class ProblemSetList extends AppCompatActivity {
 
     }
 
+    /**
+    * Displays marks.
+    * @param context The context containing the things being created
+    * @exception e Any exception
+    * @return No return value
+    */
     public void displayMarks(Context context){
         String userName;
         userName = getIntent().getStringExtra("name");
@@ -64,6 +78,15 @@ public class ProblemSetList extends AppCompatActivity {
         ListView view = (ListView) findViewById(R.id.ProblemSetList);
         view.setAdapter(adapter);
         view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            
+            /**
+            * Called when an item in the AdapterView has been clicked.
+            * @param parent The AdapterView where the click happened
+            * @param view The view being clicked
+            * @param position The position of the view in the adapter
+            * @param l The row id of the item that was clicked
+            * @return No return value
+            */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(view.getContext(), DialogMarks.class);

@@ -16,12 +16,20 @@ import android.widget.TextView;
 
 import com.nishant.math.MathView;
 
+/**
+* The activity for file viewing.
+*/
 public class FileView extends AppCompatActivity {
 
     private static TextView content;
     private static Button changeFile;
     private static Context context;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +46,12 @@ public class FileView extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Editted Finalized Edit", Snackbar.LENGTH_LONG)
@@ -45,6 +59,11 @@ public class FileView extends AppCompatActivity {
             }
         });
     }
+    
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(FileView.this, StudentFileInbox.class);

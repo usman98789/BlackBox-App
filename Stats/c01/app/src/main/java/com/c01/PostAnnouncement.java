@@ -19,11 +19,19 @@ import generics.EnumMapRoles;
 import generics.Roles;
 import user.User;
 
+/**
+* The activity for posting announcement.
+*/
 public class PostAnnouncement extends AppCompatActivity {
 
     Context context;
     String announcement;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +41,22 @@ public class PostAnnouncement extends AppCompatActivity {
         context = this.getApplicationContext();
         button.setOnClickListener(new View.OnClickListener() {
 
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             public void onClick(View view) {
                 checkEmpty(context);
             }
         });
     }
 
+    /**
+    * Check if empty.
+    * @param context The context
+    * @return boolean True if empty, or false otherwise
+    */
     public boolean checkEmpty(Context context) {
         boolean empty = false;
 
@@ -57,6 +75,12 @@ public class PostAnnouncement extends AppCompatActivity {
         return passed;
     }
 
+    /**
+    * Make a post.
+    * @param context The context
+    * @exception e Any exception
+    * @return No return value
+    */
     public void post(Context context) {
         EditText text = (EditText) findViewById(R.id.announceText);
         announcement = text.getText().toString();
@@ -76,7 +100,5 @@ public class PostAnnouncement extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Announcement posted to all students", Toast.LENGTH_LONG).show();
         }
-
-
     }
 }
