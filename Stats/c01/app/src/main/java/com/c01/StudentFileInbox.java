@@ -33,6 +33,7 @@ public class StudentFileInbox extends AppCompatActivity {
     private static File files;
     private static File[] localDir;
     private static Context context;
+    private static int num = 0;
 
     private static final String isQuestionFile = "Q";
     private static final String isNoteFile = "N";
@@ -177,6 +178,8 @@ public class StudentFileInbox extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(StudentFileInbox.this, StudentMenu.class);
+        num = getIntent().getIntExtra("userId", 0);
+        i.putExtra("id", "" + num + "");
         startActivity(i);
     }
 

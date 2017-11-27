@@ -3,6 +3,7 @@ package com.c01;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
@@ -28,6 +29,7 @@ public class ViewNotes extends AppCompatActivity {
     private static ListView fileList;
     private static DownloadManager downloadManager;
     private static Context context;
+    private static int num;
 
     public void showAlert() {
         final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
@@ -91,5 +93,13 @@ public class ViewNotes extends AppCompatActivity {
             });
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(ViewNotes.this, StudentMenu.class);
+        num = getIntent().getIntExtra("userId", 0);
+        i.putExtra("id", "" + num + "");
+        startActivity(i);
     }
 }

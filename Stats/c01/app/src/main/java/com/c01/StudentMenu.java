@@ -47,6 +47,7 @@ public class StudentMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nextpage = new Intent(StudentMenu.this, ViewNotes.class);
+                nextpage.putExtra("userId", Integer.valueOf(id));
                 startActivity(nextpage);
 
             }
@@ -66,6 +67,8 @@ public class StudentMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(StudentMenu.this, StudentFileInbox.class);
+
+                i.putExtra("userId", Integer.valueOf(id));
                 startActivity(i);
             }
         });
@@ -75,7 +78,6 @@ public class StudentMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(StudentMenu.this, StudentGrades.class);
-
                 i.putExtra("userId", id);
                 startActivity(i);
             }
