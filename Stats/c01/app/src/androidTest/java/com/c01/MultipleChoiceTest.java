@@ -182,16 +182,50 @@ public class MultipleChoiceTest {
                                 3)));
         appCompatButton6.perform(scrollTo(), click());
 
-        ViewInteraction appCompatRadioButton = onView(
-                allOf(withId(R.id.choiceOne), withText("Edges"),
-                        childAtPosition(
-                                allOf(withId(R.id.choices),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.RelativeLayout")),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        appCompatRadioButton.perform(click());
+        try {
+            ViewInteraction appCompatRadioButton = onView(
+                    allOf(withId(R.id.choiceOne), withText("Edges"),
+                            childAtPosition(
+                                    allOf(withId(R.id.choices),
+                                            childAtPosition(
+                                                    withClassName(is("android.widget.RelativeLayout")),
+                                                    0)),
+                                    0),
+                            isDisplayed()));
+            appCompatRadioButton.perform(click());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ViewInteraction appCompatRadioButton = onView(
+                    allOf(withId(R.id.choiceOne), withText("Face"),
+                            childAtPosition(
+                                    allOf(withId(R.id.choices),
+                                            childAtPosition(
+                                                    withClassName(is("android.widget.RelativeLayout")),
+                                                    0)),
+                                    0),
+                            isDisplayed()));
+            appCompatRadioButton.perform(click());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ViewInteraction appCompatRadioButton = onView(
+                    allOf(withId(R.id.choiceOne), withText("Contraction"),
+                            childAtPosition(
+                                    allOf(withId(R.id.choices),
+                                            childAtPosition(
+                                                    withClassName(is("android.widget.RelativeLayout")),
+                                                    0)),
+                                    0),
+                            isDisplayed()));
+            appCompatRadioButton.perform(click());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         ViewInteraction appCompatButton7 = onView(
                 allOf(withId(R.id.nextButton), withText("Next"),
