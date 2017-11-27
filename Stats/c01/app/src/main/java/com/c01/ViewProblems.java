@@ -62,7 +62,7 @@ public class ViewProblems extends AppCompatActivity {
                         temp = temp.replace("https://megumin.ga/stats/assignments/", "");
 
                         serverDir.set(i, temp);
-                        if (canBeDisplayed(temp)) {
+                        if (canBeDisplayed(temp) && verifyFile(temp)) {
                             serverDirFiltered.add(serverDir.get(i));
                         }
                         System.out.println(temp);
@@ -128,7 +128,7 @@ public class ViewProblems extends AppCompatActivity {
         Date current = calendar.getTime();
 
         Date releaseFile = null;
-        Date dueFile = null;
+        Date endOfTerm = null;
         SimpleDateFormat formatter = new SimpleDateFormat("MMMM/dd/yyyy");
 
         String delim = "[_.]";
@@ -145,28 +145,29 @@ public class ViewProblems extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        dueMonth = tokens[8];
-        dueDay = Integer.parseInt(tokens[9]);
-        dueYear = Integer.parseInt(tokens[10]);
+        dueMonth = tokens[11];
+        dueDay = Integer.parseInt(tokens[12]);
+        dueYear = Integer.parseInt(tokens[13]);
 
         String dueDateSet = dueMonth + "/" + dueDay + "/" + dueYear;
         try {
-            dueFile = formatter.parse(dueDateSet);
+            endOfTerm = formatter.parse(dueDateSet);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-System.out.println(current);
+
+        System.out.println(current);
         System.out.println(releaseFile);
-        System.out.println(dueFile);
+        System.out.println(endOfTerm);
         System.out.println(current.after(releaseFile));
-        System.out.println(current.before(dueFile));
-        return current.after(releaseFile) && current.before(dueFile);
+        System.out.println(current.before(endOfTerm));
+        return current.after(releaseFile) && current.before(endOfTerm);
     }
 
     private boolean verifyFile(String fileName) {
         String delim = "[_.]";
         String[] tokens = fileName.split(delim);
-        if (((tokens[3].compareTo(isQuestionFile) == 0) && (tokens.length == 14))
+        if (((tokens[3].compareTo(isQuestionFile) == 0) && (tokens.length == 15))
                 || (tokens[3].compareTo(isNoteFile) == 0)) {
             return true;
         }
