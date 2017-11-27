@@ -24,7 +24,7 @@ import generics.Roles;
 import user.User;
 
 /**
-  The activity for displaying marks.
+* The activity for displaying marks.
 */
 public class DialogMarks extends AppCompatActivity {
 
@@ -42,10 +42,10 @@ public class DialogMarks extends AppCompatActivity {
     }
 
     /**
-      Displays marks.
-      @param context The context containing the things being created
-      @exception InvalidMarkException, InvalidIdException, InvalidAssignmentException
-      @return No return value
+    * Displays marks.
+    * @param context The context containing the things being created
+    * @exception InvalidMarkException, InvalidIdException, InvalidAssignmentException
+    * @return No return value
     */
     public void displayMarks(Context context){
         int aNum = getIntent().getIntExtra("aNum", 0);
