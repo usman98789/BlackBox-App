@@ -1,6 +1,7 @@
 package com.c01;
 
 
+import android.content.Context;
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
@@ -9,13 +10,20 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
@@ -37,11 +45,35 @@ import static org.hamcrest.Matchers.is;
 @RunWith(AndroidJUnit4.class)
 public class MultipleChoiceTest {
 
+    private static ListAdapter myAdapter;
+    private static List<String> serverDir;
+    private static ListView fileList;
+    private static File files;
+    private static File[] localDir;
+    private static Context context;
+    private static int num = 0;
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    public void setUp() {
+        try {
+            String dir = "/sdcard/Android/data/com.c01/files/Download";
+            files = new File(dir);
+            localDir = files.listFiles();
+            serverDir = new ArrayList<String>();
+
+            for (File file : localDir) {
+                file.delete();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void multipleChoiceTest() {
+        setUp();
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.loginInput),
                         childAtPosition(
