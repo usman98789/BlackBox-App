@@ -18,10 +18,6 @@
             android:icon="@drawable/ic_add_people"
             android:title="Add Student" />
 
-        <item
-            android:id="@+id/nav_add_lecture"
-            android:icon="@drawable/ic_powerpoint_box"
-            android:title="Add Lecture" />
 
         <item
             android:id="@+id/nav_add_lecture_notes"
@@ -29,19 +25,10 @@
             android:title="Add Lecture Notes" />
 
         <item
-            android:id="@+id/nav_add_notes"
-            android:icon="@drawable/ic_add_notes2"
-            android:title="Add Notes" />
-
-        <item
             android:id="@+id/nav_add_assignments"
             android:icon="@drawable/ic_add_assignments"
             android:title="Add Assignments" />
 
-        <item
-            android:id="@+id/nav_view_lecture_slides"
-            android:icon="@drawable/ic_pdf"
-            android:title="View Posted Lecture" />
 
         <item
             android:id="@+id/nav_view_lecture_notes"

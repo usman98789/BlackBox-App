@@ -35,7 +35,7 @@
         android:layout_height="564dp">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/profText"
             android:layout_width="262dp"
             android:layout_height="45dp"
             android:layout_marginBottom="435dp"
@@ -66,7 +66,7 @@
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/profText" />
 
         <ImageView
             android:id="@+id/imageView2"

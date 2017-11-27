@@ -1,13 +1,18 @@
 package com.c01;
 
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -35,6 +40,7 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -43,6 +49,8 @@ import java.util.List;
 
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.ivy.util.url.ApacheURLLister;
 
 /**
@@ -50,11 +58,14 @@ import org.apache.ivy.util.url.ApacheURLLister;
 */
 public class CreateProblemSet extends AppCompatActivity {
 
+    private static int assign;
+    private static int assign_question;
+    private static String text = "";
+
+    private static DownloadManager downloadManager;
     private static ListAdapter myAdapter;
     private static List serverDir;
     private static ListView fileList;
-    private static File files;
-    private static File[] localDir;
     private static ApacheURLLister lister;
     private static Context context;
 
@@ -95,14 +106,13 @@ public class CreateProblemSet extends AppCompatActivity {
 
         Thread t = new Thread(new Runnable() {
             @Override
-            
+
             /**
             * Lists files' name properly.
             * @exception e Any exception
             * @return No return value
             */
             public void run() {
-
                 try {
                     URL url = new URL("https://shev:Biscut123@megumin.ga/stats/assignments");
                     lister = new ApacheURLLister();
@@ -132,7 +142,7 @@ public class CreateProblemSet extends AppCompatActivity {
             }
 
             fileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                
+
                 /**
                 * Responds when an item in AdapterView has been clicked.
                 * @param parent The AdapterView where the click happened
@@ -144,52 +154,29 @@ public class CreateProblemSet extends AppCompatActivity {
                 */
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    int assign;
-                    int assign_question;
-
                     String fileName = fileList.getItemAtPosition(position).toString();
+
+                    // remove cache from file name
                     String delim = "[_.]";
                     String[] tokens = fileName.split(delim);
-                    String text = "";
                     assign = Integer.parseInt(tokens[2]);
                     assign_question = Integer.parseInt(tokens[4]);
 
                     System.out.println("Problem Set -> " + assign + " Question Number -> " + assign_question);
-
-                    try {
-                        InputStream inputStream = context.openFileInput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt");
-                        if (inputStream != null) {
-                            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                            String receiveString = "";
-                            StringBuilder stringBuilder = new StringBuilder();
-
-                            while ((receiveString = bufferedReader.readLine()) != null) {
-                                stringBuilder.append(receiveString);
-                            }
-
-                            text = stringBuilder.toString();
-                            inputStream.close();
-                            Toast.makeText(context.getApplicationContext(), stringBuilder.toString(),
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    } catch (FileNotFoundException e) {
-                        Log.e("login activity", "File not found: " + e.toString());
-                    } catch (IOException e) {
-                        Log.e("login activity", "Can not read file: " + e.toString());
+                    System.out.println(fileName);
+                    if (fileExist(fileName) == false) {
+                        printToast(context, "Please wait, receiving problem set file ...");
+                        downloadFile(position);
+                        waitForFileDownload(fileName);
                     }
-
-                    Intent i = new Intent(CreateProblemSet.this, EditFileContent.class);
-                    i.putExtra("assign", assign);
-                    i.putExtra("assign_question", assign_question);
-                    i.putExtra("text", text);
-                    startActivity(i);
+                    readFile(fileName);
+                    editFile (fileName);
                 }
             });
         }
 
         fab.setOnClickListener(new View.OnClickListener() {
-            
+
             /**
             * Responds when a click happened.
             * @param view The content to display
@@ -199,12 +186,81 @@ public class CreateProblemSet extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Staring Up LaTeX file", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent i = new Intent(CreateProblemSet.this, Editor.class);
+                Intent i = new Intent(CreateProblemSet.this, CountQuestions.class);
                 startActivity(i);
             }
         });
     }
-    
+
+    private boolean fileExist (String fileName) {
+        String dir = "/sdcard/Android/data/com.c01/files/Download/" + fileName;
+        File file = new File(dir);
+        return file.exists();
+    }
+
+    private void readFile (String fileName) {
+        try {
+            File fileQuestion = new File("/sdcard/Android/data/com.c01/files/Download/" + fileName);
+            if (fileQuestion != null) {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(fileQuestion));
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+                bufferedReader.close();
+                text = stringBuilder.toString();
+                Toast.makeText(context.getApplicationContext(), text, Toast.LENGTH_LONG).show();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+    }
+
+    private void editFile (String fileName) {
+        Intent i = new Intent(CreateProblemSet.this, EditFileContent.class);
+        i.putExtra("assign", assign);
+        i.putExtra("assign_question", assign_question);
+        i.putExtra("text", text);
+        i.putExtra("fileName", fileName);
+        String dir = "/sdcard/Android/data/com.c01/files/Download/" + fileName;
+        i.putExtra("oldFile", dir);
+        startActivity(i);
+    }
+
+    private void downloadFile (int position) {
+        downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse("https://shev:Biscut123@megumin.ga/stats/assignments/" + fileList.getItemAtPosition(position).toString());
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(context.getApplicationContext(), Environment.DIRECTORY_DOWNLOADS ,fileList.getItemAtPosition(position).toString());
+        Long reference = downloadManager.enqueue(request);
+        registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+    }
+
+    private void waitForFileDownload(String fileName) {
+        while (fileExist(fileName)) {}
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static BroadcastReceiver onComplete = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {}
+        }
+    };
+
+    private void printToast(Context context, String string) {
+        Toast.makeText(context.getApplicationContext(), string, Toast.LENGTH_LONG).show();
+    }
+
     /**
     * Responds when user presses the back key.
     * @return No return value

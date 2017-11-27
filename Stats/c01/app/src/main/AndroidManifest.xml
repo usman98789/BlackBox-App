@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenu" />
+        <activity android:name=".StudentMenu" />
         <activity android:name=".addStudent" />
         <activity
             android:name=".InstructorMenu"
@@ -45,10 +45,6 @@
         <activity android:name=".EditGrades" />
         <activity android:name=".ProblemSetList" />
         <activity android:name=".DialogMarks" />
-        <activity
-            android:name=".ViewMark"
-            android:label="@string/title_activity_view_mark"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ViewProblems" />
         <activity android:name=".WhichProblemSet" />
         <activity
@@ -68,9 +64,17 @@
             android:label="@string/title_activity_student_grades"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".DueDateSetup"
+            android:label="@string/title_activity_due_date_setup" />
+        <activity
             android:name=".addProfessor"
             android:label="@string/title_activity_add_professor"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AnswerProblems" />
+        <activity android:name=".Choices" />
+        <activity android:name=".CountQuestions" />
+        <activity android:name=".Results" />
+        <activity android:name=".AssignmentChoice"></activity>
     </application>
 
 </manifest>

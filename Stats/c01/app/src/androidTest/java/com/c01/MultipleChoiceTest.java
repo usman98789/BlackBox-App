@@ -1,6 +1,7 @@
 package com.c01;
 
 
+import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -12,35 +13,35 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class TestAddStudent {
+public class MultipleChoiceTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void testAddStudent() {
+    public void multipleChoiceTest() {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.loginInput),
                         childAtPosition(
@@ -49,9 +50,19 @@ public class TestAddStudent {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("1"), closeSoftKeyboard());
+        appCompatEditText.perform(click());
 
         ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.loginInput),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatEditText2.perform(replaceText("2"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.passwordInput),
                         childAtPosition(
                                 childAtPosition(
@@ -59,7 +70,17 @@ public class TestAddStudent {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("123"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("123"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.passwordInput), withText("123"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatEditText4.perform(pressImeActionButton());
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.loginButton), withText("Login"),
@@ -71,116 +92,135 @@ public class TestAddStudent {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("android.support.design.widget.AppBarLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
-
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.design_navigation_view),
-                                childAtPosition(
-                                        withId(R.id.nav_view),
-                                        0)),
-                        3),
-                        isDisplayed()));
-        navigationMenuItemView.perform(click());
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.name),
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.ProblemSet), withText("Problem Set"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText3.perform(replaceText("Gagan"), closeSoftKeyboard());
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        1),
+                                5)));
+        appCompatButton2.perform(scrollTo(), click());
 
-        ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.Age),
+        ViewInteraction floatingActionButton = onView(
+                allOf(withId(R.id.fab),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatEditText5.perform(replaceText("19"), closeSoftKeyboard());
+        floatingActionButton.perform(click());
 
-        ViewInteraction appCompatEditText6 = onView(
-                allOf(withId(R.id.password),
+        ViewInteraction appCompatEditText5 = onView(
+                allOf(withId(R.id.enterNumber),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                3),
+                                1),
                         isDisplayed()));
-        appCompatEditText6.perform(replaceText("123"), closeSoftKeyboard());
-
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.addStudent), withText("Add Student"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                4),
-                        isDisplayed()));
-        appCompatButton2.perform(click());
+        appCompatEditText5.perform(replaceText("1"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.logout), withText("Logout"),
+                allOf(withId(R.id.enter), withText("Enter"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        appCompatButton3.perform(click());
+
+        DataInteraction appCompatTextView = onData(anything())
+                .inAdapterView(allOf(withId(R.id.fileListView),
+                        childAtPosition(
+                                withId(R.id.relativeLayout),
+                                0)))
+                .atPosition(0);
+        appCompatTextView.perform(click());
+
+        pressBack();
+
+        pressBack();
+
+        pressBack();
+
+        ViewInteraction appCompatButton4 = onView(
+                allOf(withId(R.id.addAssignmentButton), withText("Upload Assignment"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
                                         1),
-                                8)));
-        appCompatButton3.perform(scrollTo(), click());
+                                0)));
+        appCompatButton4.perform(scrollTo(), click());
 
-        ViewInteraction appCompatEditText7 = onView(
-                allOf(withId(R.id.loginInput),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.support.constraint.ConstraintLayout")),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText7.perform(replaceText("3"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText8 = onView(
-                allOf(withId(R.id.passwordInput),
+        ViewInteraction appCompatButton5 = onView(
+                allOf(withId(R.id.attemptRandom), withText("Attempt up to 5 Random Problems"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.support.constraint.ConstraintLayout")),
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText8.perform(replaceText("123"), closeSoftKeyboard());
+        appCompatButton5.perform(click());
 
-        ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.loginButton), withText("Login"),
+        ViewInteraction editText = onView(
+                allOf(childAtPosition(
+                        childAtPosition(
+                                withId(R.id.custom),
+                                0),
+                        0),
+                        isDisplayed()));
+        editText.perform(replaceText("1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton6 = onView(
+                allOf(withId(android.R.id.button1), withText("OK"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.buttonPanel),
+                                        0),
+                                3)));
+        appCompatButton6.perform(scrollTo(), click());
+
+        ViewInteraction appCompatRadioButton = onView(
+                allOf(withId(R.id.choiceOne), withText("Edges"),
+                        childAtPosition(
+                                allOf(withId(R.id.choices),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.RelativeLayout")),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        appCompatRadioButton.perform(click());
+
+        ViewInteraction appCompatButton7 = onView(
+                allOf(withId(R.id.nextButton), withText("Next"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        0),
+                                2),
+                        isDisplayed()));
+        appCompatButton7.perform(click());
+
+        ViewInteraction appCompatButton8 = onView(
+                allOf(withId(R.id.backToMain), withText("Back To Main Menu"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        0),
+                                6),
+                        isDisplayed()));
+        appCompatButton8.perform(click());
+
+        ViewInteraction appCompatButton9 = onView(
+                allOf(withId(R.id.logout), withText("Logout"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
-                                        2),
-                                0),
-                        isDisplayed()));
-        appCompatButton4.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.studentTitle), withText("Welcome Student"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("Welcome Student")));
+                                        1),
+                                8)));
+        appCompatButton9.perform(scrollTo(), click());
 
     }
 

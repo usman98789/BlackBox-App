@@ -8,13 +8,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import Database.DatabaseDriver.DatabaseSelectHelper;
-import Database.DatabaseDriver.DatabaseUpdateHelper;
 
 /**
 * The activity for viewing announcements. 
@@ -47,9 +45,7 @@ public class ViewAnnouncements extends AppCompatActivity {
         messages.add("  ");
         for (Integer iD : messageIds) {
             messages.add(DatabaseSelectHelper.getSpecificMessage(iD, context));
-            DatabaseUpdateHelper.updateUserMessageState(iD, context);
         }
-        Toast.makeText(getApplicationContext(), "Each announcement's status has been changed", Toast.LENGTH_LONG).show();
 
         listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, messages);
 
@@ -65,7 +61,7 @@ public class ViewAnnouncements extends AppCompatActivity {
             * @return No return value
             */
             public void onClick(View view) {
-                Intent i = new Intent(ViewAnnouncements.this, MainMenu.class);
+                Intent i = new Intent(ViewAnnouncements.this, StudentMenu.class);
                 i.putExtra("id", String.valueOf(id));
                 startActivity(i);
             }

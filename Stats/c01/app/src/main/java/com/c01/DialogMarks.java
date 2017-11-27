@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import Database.DatabaseDriver.DatabaseInsertHelper;
 import Database.DatabaseDriver.DatabaseSelectHelper;
+import Database.DatabaseDriver.DatabaseUpdateHelper;
 import Exceptions.InvalidAssignmentException;
 import Exceptions.InvalidIdException;
 import Exceptions.InvalidMarkException;
@@ -73,7 +74,11 @@ public class DialogMarks extends AppCompatActivity {
                                 } else {
                                     Double mark = Double.parseDouble(Mark);
                                     try {
-                                        DatabaseInsertHelper.insertAssignmentMark(user.getId(), mark, aNum, getApplicationContext());
+                                        if (DatabaseSelectHelper.getAssignmentMark(user.getId(), aNum, getApplicationContext()) == -1){
+                                            DatabaseInsertHelper.insertAssignmentMark(user.getId(), mark, aNum, getApplicationContext());
+                                        } else {
+                                            DatabaseUpdateHelper.updateAssignmentMark(user.getId(), mark, aNum, getApplicationContext());
+                                        }
                                     } catch (InvalidMarkException e) {
                                         e.printStackTrace();
                                     } catch (InvalidIdException e) {

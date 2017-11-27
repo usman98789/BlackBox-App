@@ -23,7 +23,6 @@ public class addStudent extends AppCompatActivity {
     Context context;
     String name;
     int age;
-    String add;
     String pass;
 
     /**
@@ -47,7 +46,7 @@ public class addStudent extends AppCompatActivity {
             */
             public void onClick(View view) {
                 if (useridauthen1(context)) {
-                    Intent i = new Intent(addStudent.this, MainMenu.class);
+                    Intent i = new Intent(addStudent.this, StudentMenu.class);
                     Toast.makeText(getApplicationContext(), "Student added", Toast.LENGTH_LONG).show();
                     startActivity(i);
                 }
@@ -64,14 +63,11 @@ public class addStudent extends AppCompatActivity {
         boolean useridAuthen = true;
         boolean passwordAuthen = true;
         boolean ageAuthen = true;
-        boolean addressAuthen = true;
 
         EditText etUserName = (EditText) findViewById(R.id.name);
         name = etUserName.getText().toString();
         EditText etAge = (EditText) findViewById(R.id.Age);
         age = Integer.valueOf(etAge.getText().toString());
-        EditText etAddress = (EditText) findViewById(R.id.address);
-        add = etAddress.getText().toString();
         EditText etPassword = (EditText) findViewById(R.id.password);
         pass = etPassword.getText().toString();
 
@@ -83,16 +79,12 @@ public class addStudent extends AppCompatActivity {
             etAge.setError("No age");
             ageAuthen = false;
         }
-        if (TextUtils.isEmpty(add)) {
-            etAddress.setError("No Address");
-            addressAuthen = false;
-        }
         if (TextUtils.isEmpty(pass)) {
             etPassword.setError("No password");
             passwordAuthen = false;
         }
         boolean passed = false;
-        if (useridAuthen && passwordAuthen && ageAuthen && addressAuthen) {
+        if (useridAuthen && passwordAuthen && ageAuthen) {
             passed = insertUser(context);
         }
         return (passed);
@@ -109,7 +101,7 @@ public class addStudent extends AppCompatActivity {
         EnumMapRoles roleMap = new EnumMapRoles(context);
         // Insert info into database
         try {
-            success = DatabaseInsertHelper.insertNewUser(name, age, add, roleMap.get(Roles.STUDENT), pass, context);
+            success = DatabaseInsertHelper.insertNewUser(name, age, roleMap.get(Roles.STUDENT), pass, context);
         } catch (InvalidNameException e) {
             e.printStackTrace();
         }

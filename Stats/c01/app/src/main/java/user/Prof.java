@@ -16,34 +16,30 @@ public class Prof extends User {
    * create a Prof.
    * 
    * @param id which is the integer given
-   * @param name of the admin
-   * @param age of admin
-   * @param address of admin
+   * @param name of the prof
+   * @param age of prof
    */
-  public Prof(int id, String name, int age, String address, Context context) {
+  public Prof(int id, String name, int age, Context context) {
     // set id,name,address and get role id.
     this.setId(id);
     this.setName(name);
     this.setAge(age);
-    this.address = address;
     this.roleId = DatabaseSelectHelper.getUserRole(id, context);
   }
 
   /**
-   * already authenticated new admin.
+   * already authenticated new prof.
    * 
-   * @param id which is the id of admin
-   * @param name of admin
-   * @param age of admin
-   * @param address of admin
-   * @param authenticated of admin
+   * @param id which is the id of prof
+   * @param name of prof
+   * @param age of prof
+   * @param authenticated of prof
    */
-  public Prof(int id, String name, int age, String address, boolean authenticated,
+  public Prof(int id, String name, int age, boolean authenticated,
               Context context) {
     this.setId(id);
     this.setName(name);
     this.setAge(age);
-    this.address = address;
     this.roleId = DatabaseSelectHelper.getUserRole(id, context);
   }
 
@@ -53,9 +49,4 @@ public class Prof extends User {
     return this.roleId;
   }
 
-  @Override
-  public String getAddress() {
-    // return the string which is the address
-    return this.address;
-  }
 }

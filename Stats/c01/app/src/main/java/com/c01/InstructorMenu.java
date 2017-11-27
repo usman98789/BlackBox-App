@@ -1,8 +1,6 @@
 package com.c01;
 
 import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -29,21 +27,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.MimeTypeMap;
+import android.widget.TextView;
 
-import com.nbsp.materialfilepicker.MaterialFilePicker;
-import com.nbsp.materialfilepicker.ui.FilePickerActivity;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.ivy.util.FileUtil;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLDecoder;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -72,9 +61,13 @@ public class InstructorMenu extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//        TextView text = (TextView) findViewById(R.id.profText);
+//        String name = getIntent().getStringExtra("name");
+//        text.setText("Welcome " + name);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-        
+
             /**
             * Responds when a click happened.
             * @param view The content to display
@@ -154,15 +147,7 @@ public class InstructorMenu extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_add_lecture) {
-
-        } else if (id == R.id.nav_add_lecture_notes) {
-            Intent i = new Intent(InstructorMenu.this, Browsing.class);
-            startActivity(i);
-        } else if (id == R.id.nav_view_lecture_slides) {
-            Intent i = new Intent(InstructorMenu.this, Browsing.class);
-            startActivity(i);
-        } else if (id == R.id.nav_view_lecture_notes) {
+        if (id == R.id.nav_view_lecture_notes) {
             Intent i = new Intent(InstructorMenu.this, Browsing.class);
             startActivity(i);
         } else if (id == R.id.nav_add_assignments) {
@@ -178,9 +163,8 @@ public class InstructorMenu extends AppCompatActivity
         } else if (id == R.id.nav_add_student) {
             Intent i = new Intent(InstructorMenu.this, addStudent.class);
             startActivity(i);
-        } else if (id == R.id.nav_add_notes) {
-
-            // Check the phone to see if it has permission to access files
+        } else if (id == R.id.nav_add_lecture_notes) {
+            //Check the phone to see if it has permission to access files
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
@@ -188,7 +172,7 @@ public class InstructorMenu extends AppCompatActivity
                     canDo = true;
                 }
             }
-            
+
             // If permission is granted open file explorer to choose file to upload
             if(canDo) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -261,7 +245,7 @@ public class InstructorMenu extends AppCompatActivity
                     String temp = path.substring(path.lastIndexOf("."));
                     String content_type = getMimeType("temp" + temp);
                     File f = new File(path);
-
+                    Log.d("supertest", path);
 
                     // Start building an http post request to send the file to the server
                     OkHttpClient client = new OkHttpClient();

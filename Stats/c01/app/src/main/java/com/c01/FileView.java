@@ -46,7 +46,7 @@ public class FileView extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            
+
             /**
             * Responds when a click happened.
             * @param view The content to display
@@ -54,12 +54,12 @@ public class FileView extends AppCompatActivity {
             */
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Editted Finalized Edit", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Email Contact", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
-    
+
     /**
     * Responds when user presses the back key.
     * @return No return value

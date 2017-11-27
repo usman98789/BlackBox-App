@@ -42,7 +42,7 @@ public class StudentGrades extends AppCompatActivity {
     * @return No return value
     */
     public void displayMarks(Context context){
-        int id = getIntent().getIntExtra("userId", 0);
+        int id = Integer.valueOf(getIntent().getStringExtra("userId"));
 
         EnumMapRoles roleMap = new EnumMapRoles(context);
         ArrayList<String> displayer = new ArrayList<>();

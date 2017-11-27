@@ -64,7 +64,7 @@ public class TestDatabaseA {
     public void testInsertUser() throws Exception {
         User user = null;
         int userId = 0;
-        userId = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+        userId = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
         Cursor results = mydb.getUserDetails(userId);
         // for each result get the user details
         while (results.moveToNext()) {
@@ -74,24 +74,21 @@ public class TestDatabaseA {
             // check which user it is and create the users
             if (role.equals("PROF")) {
                 user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }  else if (role.equals("STUDENT")) {
                 user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }
         }
         results.close();
         assertEquals("gagan", user.getName());
         assertEquals(19, user.getAge());
-        assertEquals("123street", user.getAddress());
     }
 
     @Test
     public void testInsertMessage() throws Exception {
         int id = 0;
-        id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+        id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
         int msgId = (int)mydb.insertMessage(id, "hello");
         String msg = mydb.getSpecificMessage(msgId);
         assertEquals("hello", msg);
@@ -100,7 +97,7 @@ public class TestDatabaseA {
     @Test
     public void testInsertMark() throws Exception {
         int id = 0;
-        id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+                id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
         mydb.insertAssignmentMark(id, 50, 1);
         double mark = mydb.getAssignmentMark(id, 1);
         assertEquals(50, mark , 0);
@@ -131,7 +128,7 @@ public class TestDatabaseA {
     @Test
     public void testGetUserRoleStudent() throws Exception {
         int id = 0;
-        id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+        id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
         int expected = roleMap.get(Roles.STUDENT).intValue();
         assertEquals(expected,         mydb.getUserRole(id));
     }
@@ -139,7 +136,7 @@ public class TestDatabaseA {
     @Test
     public void testGetUserRoleProf() throws Exception {
         int id = 0;
-        id = (int)mydb.insertNewUser("KC", 24, "UTSC", roleMap.get(Roles.PROF), "123");;
+        id = (int)mydb.insertNewUser("KC", 24, roleMap.get(Roles.PROF), "123");;
         int expected = roleMap.get(Roles.PROF).intValue();
         assertEquals(expected,         mydb.getUserRole(id));
     }
@@ -147,7 +144,7 @@ public class TestDatabaseA {
     @Test
     public void testPassword() throws Exception {
         int id = 0;
-        id = (int)mydb.insertNewUser("KC", 24, "UTSC", roleMap.get(Roles.PROF), "WOOOO");
+        id = (int)mydb.insertNewUser("KC", 24, roleMap.get(Roles.PROF), "WOOOO");
         String pass = PasswordHelpers.passwordHash("WOOOO");
         assertEquals(pass,         mydb.getPassword(id));
     }
@@ -157,8 +154,8 @@ public class TestDatabaseA {
         User user = null;
         int userId = 0;
         int id = 0;
-        id = (int)mydb.insertNewUser("KC", 24, "UTSC", roleMap.get(Roles.PROF), "WOOOO");
-        userId = (int)mydb.insertNewUser("bob", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+        id = (int)mydb.insertNewUser("KC", 24, roleMap.get(Roles.PROF), "WOOOO");
+        userId = (int)mydb.insertNewUser("bob", 19, roleMap.get(Roles.STUDENT), "123");
 
         int msgId = (int)mydb.insertMessage(userId, "hello");
         int msgId2 = (int)mydb.insertMessage(userId, "I need help with problem set 1 question 2");
