@@ -21,7 +21,6 @@ import Exceptions.InvalidMarkException;
 */
 public class Results extends AppCompatActivity {
 
-    private static EditText title;
     private static TextView firstQuestion;
     private static TextView secondQuestion;
     private static TextView thirdQuestion;
@@ -44,7 +43,6 @@ public class Results extends AppCompatActivity {
         setContentView(R.layout.activity_results);
         Intent intent = getIntent();
 
-        title = (EditText) findViewById(R.id.resultsText);
         firstQuestion = (TextView) findViewById(R.id.first);
         secondQuestion = (TextView) findViewById(R.id.second);
         thirdQuestion = (TextView) findViewById(R.id.third);
