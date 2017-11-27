@@ -94,7 +94,7 @@ public class TestEditGrade {
                                 childAtPosition(
                                         withId(R.id.nav_view),
                                         0)),
-                        9),
+                        7),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
 

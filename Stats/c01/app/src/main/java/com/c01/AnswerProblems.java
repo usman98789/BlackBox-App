@@ -53,17 +53,12 @@ public class AnswerProblems extends AppCompatActivity {
         File file[] = f.listFiles();
         file = filterList(file);
 
-        for (int i = 0; i < file.length; i++) {
-            Log.d("supertest", file[i].getAbsolutePath());
-        }
-
 
         int size = 0;
         if (file == null) {
             showAlert();
 
         } else {
-            Log.d("supertest", file.length + "");
             if (file.length > 5) {
                 List<File> temp = Arrays.asList(file);
                 Collections.shuffle(temp);
