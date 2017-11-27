@@ -15,7 +15,9 @@ import Exceptions.InvalidNameException;
 import generics.EnumMapRoles;
 import generics.Roles;
 
-
+/**
+* The activity for adding professor.
+*/
 public class addProfessor extends AppCompatActivity {
 
     Context context;
@@ -24,6 +26,11 @@ public class addProfessor extends AppCompatActivity {
     String add;
     String pass;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +40,11 @@ public class addProfessor extends AppCompatActivity {
         context = this.getApplicationContext();
         button.setOnClickListener(new View.OnClickListener() {
 
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             public void onClick(View view) {
                 if (useridauthen1(context)) {
                     Intent i = new Intent(addProfessor.this, InstructorMenu.class);
@@ -43,6 +55,11 @@ public class addProfessor extends AppCompatActivity {
         });
     }
 
+    /**
+    * Check if userID is authorized.
+    * @param context The context
+    * @return boolean True if succeeded
+    */
     public boolean useridauthen1(Context context) {
         boolean useridAuthen = true;
         boolean passwordAuthen = true;
@@ -81,6 +98,11 @@ public class addProfessor extends AppCompatActivity {
         return (passed);
     }
 
+    /**
+    * Inserts a user.
+    * @param context The context
+    * @return boolean True if succeeded
+    */
     private boolean insertUser(Context context) {
 
         int success = -1;
@@ -101,6 +123,5 @@ public class addProfessor extends AppCompatActivity {
             return true;
         }
     }
-
 
 }
