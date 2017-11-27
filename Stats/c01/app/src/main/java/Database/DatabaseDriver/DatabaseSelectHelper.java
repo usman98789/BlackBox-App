@@ -102,7 +102,7 @@ public class DatabaseSelectHelper {
     mydb.close();
     return mark;
   }
-  
+
   public static double getAssignmentMark (int userId, int aNum, Context context) {
     DatabaseDriverA mydb = new DatabaseDriverA(context);
     double mark = -1;

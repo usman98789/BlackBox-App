@@ -68,7 +68,6 @@ public class Results extends AppCompatActivity {
         int id = getIntent().getIntExtra("userId", 0);
         DatabaseInsertHelper.insertFeedBackMark(id, mark, getApplicationContext());
 
-        Toast.makeText(getApplicationContext(), "user mark is " + DatabaseSelectHelper.getFeedBackMark(id, getApplicationContext()), Toast.LENGTH_LONG).show();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
