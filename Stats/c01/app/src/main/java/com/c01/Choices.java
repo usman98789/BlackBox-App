@@ -37,6 +37,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+* The activity for choices.
+*/
 public class Choices extends AppCompatActivity {
 
     private static Button question;
@@ -55,6 +58,11 @@ public class Choices extends AppCompatActivity {
 
     private static String text;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +81,7 @@ public class Choices extends AppCompatActivity {
         dueDate = getIntent().getStringExtra("dueDate");
         dueDate = dueDate.replaceAll("[ ]", "_");
         dueDate = dueDate.replaceAll("[,]", "");
-//Prove the claim :$$V-E+F=2$$
+        
         endSemesterDate = getIntent().getStringExtra("endSemesterDate");
         endSemesterDate = endSemesterDate.replaceAll("[ ]", "_");
         endSemesterDate = endSemesterDate.replaceAll("[,]", "");
@@ -81,6 +89,11 @@ public class Choices extends AppCompatActivity {
         assign_question = Integer.valueOf(getIntent().getStringExtra("assign_question"));
 
         question.setOnClickListener(new View.OnClickListener() {
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View view) {
                 if (!check()) {
@@ -114,7 +127,7 @@ public class Choices extends AppCompatActivity {
                     readQuestionFile(context);
                     assign_question++;
 
-                    //Uploading txt to server
+                    // Uploads txt to server
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (ActivityCompat.checkSelfPermission(Choices.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
@@ -179,6 +192,13 @@ public class Choices extends AppCompatActivity {
 
     }
 
+    /**
+    * Callback for the result from requesting permissions
+    * @param requestCode The request code passed in
+    * @param permissions The requested permissions
+    * @param grantResults The grant results for the corresponding permissions
+    * @return No return type
+    */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 100 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -190,10 +210,13 @@ public class Choices extends AppCompatActivity {
         }
     }
 
-
+    /**
+    * Returns MIME type.
+    * @param path The path
+    * @return String The MIME type
+    */   
     private String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
-
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 
@@ -242,7 +265,12 @@ public class Choices extends AppCompatActivity {
         return (passed);
     }
 
-
+    /**
+    * Read the question file.
+    * @param context The context
+    * @exception e FileNotFoundException, IOException
+    * @return No return value
+    */
     private void readQuestionFile(Context context) {
         try {
             InputStream inputStream = context.openFileInput("Problem_Set_" + assign + "_Q_"
@@ -268,6 +296,12 @@ public class Choices extends AppCompatActivity {
         }
     }
 
+    /**
+    * Writes question to file.
+    * @param context The context
+    * @exception e IOException
+    * @return No return value
+    */
     private void writeQuestionToFile(Context context) {
         try {
             name = "Problem_Set_" + assign + "_Q_" + assign_question + "_" + releaseDate + "_" + dueDate + "_" + endSemesterDate + ".txt";
@@ -281,6 +315,12 @@ public class Choices extends AppCompatActivity {
         }
     }
 
+    /**
+    * Serializes problem set initially.
+    * @param context The context
+    * @exception e FileNotFoundException, IOException
+    * @return No return value
+    */
     private void initSerializeProblemSet(Context context) {
         try {
             InputStream inputStream = context.openFileInput(serializeQuestionSet);
@@ -308,16 +348,33 @@ public class Choices extends AppCompatActivity {
         }
     }
 
+    /**
+    * Prints editor banner.
+    * @param context The context
+    * @return No return value
+    */
     private void printEditorBanner(Context context) {
         Toast.makeText(context.getApplicationContext(), "Creating problem", Toast.LENGTH_LONG).show();
         Toast.makeText(context.getApplicationContext(), "Problem_Set_" + assign + "_Q_"
                 + assign_question + "_" + releaseDate + "_" + dueDate + "_" + endSemesterDate + ".txt", Toast.LENGTH_LONG).show();
     }
 
+    /**
+    * Prints toast.
+    * @param context The context
+    * @param string The string to be printed
+    * @return No return value
+    */
     private void printToast(Context context, String string) {
         Toast.makeText(context.getApplicationContext(), string, Toast.LENGTH_LONG).show();
     }
 
+    /**
+    * Serializes problem set.
+    * @param context The context
+    * @exception e, IOException
+    * @return No return value
+    */
     private void serializeProblemSet(Context context) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(serializeQuestionSet, Context.MODE_PRIVATE));
@@ -328,6 +385,10 @@ public class Choices extends AppCompatActivity {
         }
     }
 
+    /**
+    * Responds when user presses the back key.
+    * @return No return value
+    */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(Choices.this, Editor.class);
