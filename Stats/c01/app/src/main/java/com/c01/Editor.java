@@ -62,6 +62,16 @@ public class Editor extends AppCompatActivity {
 
         text.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
             /**
             * Notifies when text has been changed within s.
             * @param s An editable

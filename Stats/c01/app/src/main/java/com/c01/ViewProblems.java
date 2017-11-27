@@ -60,7 +60,6 @@ public class ViewProblems extends AppCompatActivity {
 
             /**
             * Gets random problems.
-            * @exception e Any exception
             * @return No return value
             */
             @Override
@@ -70,7 +69,7 @@ public class ViewProblems extends AppCompatActivity {
                     lister = new ApacheURLLister();
                     serverDir = lister.listFiles(url);
                     parseFileName();
-                    individulizeProblem();
+                    individualizeProblem();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -94,7 +93,6 @@ public class ViewProblems extends AppCompatActivity {
                 * @param view The view whin the AdapterView that was clicked
                 * @param position The position of the view in the adapter
                 * @param id The row id of the item that was clicked
-                * @exception e Any exception
                 * @return No return value
                 */
                 @Override
@@ -110,7 +108,6 @@ public class ViewProblems extends AppCompatActivity {
     /**
     * Checks if fileTile can be displayed
     * @param fileTile
-    * @exception e ParseException
     * @return boolean True if can be displayed
     */
     private boolean canBeDisplayed(String fileTile) {
@@ -181,12 +178,12 @@ public class ViewProblems extends AppCompatActivity {
     * Individualizes problem.
     * @return No return value
     */
-    private void individulizeProblem() {
+    private void individualizeProblem() {
         Random randomGenerator = new Random();
         int index = 0;
         String temp;
         String temp2;
-        while ((newList.size() < 2) && !(serverDirFiltered.size() == 0)){
+        while ((newList.size() < 5) && !(serverDirFiltered.size() == 0)){
             index = randomGenerator.nextInt(serverDirFiltered.size());
             temp = serverDirFiltered.get(index).toString();
             temp2 = temp.substring(12, 13);

@@ -78,19 +78,23 @@ public class Results extends AppCompatActivity {
         mark = (Fracmark/total) * 100;
         int id = getIntent().getIntExtra("userId", 0);
         try {
-            if (DatabaseSelectHelper.getAssignmentMark(id, num, getApplicationContext()) == -1){
+            double markRecent = DatabaseSelectHelper.getAssignmentMark(id, num, getApplicationContext());
+            if (markRecent == -1){
                 DatabaseInsertHelper.insertAssignmentMark(id, mark, num, getApplicationContext());
             } else {
-                DatabaseUpdateHelper.updateAssignmentMark(id, mark, num, getApplicationContext());
+                if (markRecent < mark) {
+                    DatabaseUpdateHelper.updateAssignmentMark(id, mark, num, getApplicationContext());
+                } else {
+                    Toast.makeText(getApplicationContext(), "Your mark is lower than what you had previously, therefore your mark was not updated", Toast.LENGTH_LONG).show();
+                }
             }
-            Toast.makeText(getApplicationContext(), String.valueOf(mark), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Your mark is : " + String.valueOf(mark), Toast.LENGTH_LONG).show();
         } catch (InvalidMarkException e) {
-            Toast.makeText(getApplicationContext(), "Student added1", Toast.LENGTH_LONG).show();
         } catch (InvalidIdException e) {
-            Toast.makeText(getApplicationContext(), "Student added2", Toast.LENGTH_LONG).show();
         } catch (InvalidAssignmentException e) {
-            Toast.makeText(getApplicationContext(), "Student added3", Toast.LENGTH_LONG).show();
         }
+        total = 0;
+        Fracmark = 0;
         System.out.println("id " + id);
         
         back.setOnClickListener(new View.OnClickListener() {

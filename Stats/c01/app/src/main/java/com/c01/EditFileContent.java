@@ -89,6 +89,16 @@ public class EditFileContent extends AppCompatActivity {
 
         content.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
             /**
             * Notifies when text has been changed within s.
             * @param s An editable
@@ -107,7 +117,6 @@ public class EditFileContent extends AppCompatActivity {
             /**
             * Responds when a click happened.
             * @param view The content to display
-            * @exception e IOException, FileNotFoundException
             * @return No return value
             */
             @Override
@@ -138,7 +147,6 @@ public class EditFileContent extends AppCompatActivity {
 
                             /**
                             * Warblegarble request.
-                            * @exception e IOException
                             * @return No return value
                             */
                             @Override
@@ -217,7 +225,6 @@ public class EditFileContent extends AppCompatActivity {
 
     /**
     * Writes to file.
-    * @exception e IOException
     * @return No return value
     */
     private void writeToFile() {
@@ -234,7 +241,6 @@ public class EditFileContent extends AppCompatActivity {
 
     /**
     * Reads file.
-    * @exception e FileNotFoundException, IOException
     * @return No return value
     */
     private void readFile() {

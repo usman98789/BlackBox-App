@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
 * The activity for assignment choice.
@@ -67,16 +68,35 @@ public class AssignmentChoice extends AppCompatActivity {
             */
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                num = Integer.parseInt(numBox.getText().toString());
+                String temp = numBox.getText().toString();
 
-                Intent nextpage = new Intent(AssignmentChoice.this, AnswerProblems.class);
-                int id = getIntent().getIntExtra("userId", 0);
-                nextpage.putExtra("userId", id);
-                nextpage.putExtra("num", num);
-                startActivity(nextpage);
+                if (isNumeric(temp)) {
+                    num = Integer.parseInt(temp);
+                    if ((num > 0) && ( num < 5)) {
+                        Intent nextpage = new Intent(AssignmentChoice.this, AnswerProblems.class);
+                        int id = getIntent().getIntExtra("userId", 0);
+                        nextpage.putExtra("userId", id);
+                        nextpage.putExtra("num", num);
+                        startActivity(nextpage);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Enter a number between 1 and 4", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Enter a number", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         dialog.show();
+    }
+
+    public static boolean isNumeric(String str) {
+        try{
+            int i = Integer.parseInt(str);
+        } catch (NumberFormatException ne) {
+            return false;
+        }
+        return true;
     }
 
 }
