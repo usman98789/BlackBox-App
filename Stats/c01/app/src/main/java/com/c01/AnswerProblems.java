@@ -25,6 +25,9 @@ import java.util.Random;
 
 import FileOperations.TextFileReader;
 
+/**
+* The activity for answering problems.
+*/
 public class AnswerProblems extends AppCompatActivity {
 
     private static EditText questionText;
@@ -97,8 +100,7 @@ public class AnswerProblems extends AppCompatActivity {
                 for (int i = 0; i < choices.getChildCount(); i++) {
                     ((RadioButton) choices.getChildAt(i)).setText(temp[i]);
                 }
-
-                //questionText.setText(contents[0]);
+                
                 mathView.setText(contents[0].toString());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -121,7 +123,7 @@ public class AnswerProblems extends AppCompatActivity {
                     String answer = r.getText().toString();
 
                     if (counter == tempFilesPath.length) {
-                        //assignment complete get results
+                        // Assignment complete get results
                         if (answer.equals(correctAnswer)) {
                             feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is correct";
                         } else {
@@ -153,8 +155,6 @@ public class AnswerProblems extends AppCompatActivity {
                             for (int i = 0; i < choices.getChildCount(); i++) {
                                 ((RadioButton) choices.getChildAt(i)).setText(temp[i]);
                             }
-
-                            //questionText.setText(contents[0]);
                             mathView.setText(contents[0].toString());
                         } catch (IOException e) {
                             e.printStackTrace();
