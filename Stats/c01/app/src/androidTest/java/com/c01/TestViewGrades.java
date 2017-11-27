@@ -96,7 +96,7 @@ public class TestViewGrades {
                                 childAtPosition(
                                         withId(R.id.nav_view),
                                         0)),
-                        9),
+                        7),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
 
@@ -157,7 +157,7 @@ public class TestViewGrades {
                                 childAtPosition(
                                         withId(R.id.nav_view),
                                         0)),
-                        10),
+                        8),
                         isDisplayed()));
         navigationMenuItemView2.perform(click());
 
