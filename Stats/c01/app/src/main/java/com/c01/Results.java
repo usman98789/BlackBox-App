@@ -42,7 +42,7 @@ public class Results extends AppCompatActivity {
 
         Intent intent = getIntent();
         feedback = intent.getStringArrayExtra("feedback");
-        int Fracmark = 0;
+        double Fracmark = 0;
         double mark = 0.0;
 
         for (int i = 0; i < 5; i++) {
@@ -54,15 +54,15 @@ public class Results extends AppCompatActivity {
         }
 
         Fracmark = 0;
-        for (int i = 0; i < 5; i++){
-            if (feedback[i].contains("incorrect")){
-                total += 1;
-            } else if (feedback[i].contains("correct")){
+        for (int i = 0; i < feedback.length; i++){
+            if (feedback[i].contains("correct")){
                 Fracmark += 1;
-                total += 1;
             }
+            total += 1;
         }
-        mark = Fracmark/total * 100;
+        System.out.println("frac" + Fracmark);
+        System.out.println("total" + total);
+        mark = (Fracmark/total) * 100;
         int id = getIntent().getIntExtra("userId", 0);
         try {
             DatabaseInsertHelper.insertAssignmentMark(id, mark, 1, getApplicationContext());
@@ -74,12 +74,13 @@ public class Results extends AppCompatActivity {
         } catch (InvalidAssignmentException e) {
             Toast.makeText(getApplicationContext(), "Student added3", Toast.LENGTH_LONG).show();
         }
-
+        System.out.println("id " + id);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Results.this, StudentMenu.class);
-                i.putExtra("userId",id);
+                int id2 = getIntent().getIntExtra("userId", 0);
+                i.putExtra("userId",String.valueOf(id2));
                 startActivity(i);
             }
         });

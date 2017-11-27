@@ -108,7 +108,7 @@ public class AnswerProblems extends AppCompatActivity {
                         if (answer.equals(correctAnswer)) {
                             feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is correct";
                         } else {
-                            feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is incorrect: " + feedback;
+                            feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is wrong: " + feedback;
                         }
                         counter = 0;
                         feedbackCounter = 0;
@@ -121,7 +121,7 @@ public class AnswerProblems extends AppCompatActivity {
                         if (answer.equals(correctAnswer)) {
                             feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is correct";
                         } else {
-                            feedbackArr[feedbackCounter] = "Incorrect: " + feedback;
+                            feedbackArr[feedbackCounter] = "Wrong: " + feedback;
                         }
                         feedbackCounter++;
 

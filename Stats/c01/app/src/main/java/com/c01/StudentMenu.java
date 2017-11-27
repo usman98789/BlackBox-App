@@ -27,7 +27,7 @@ public class StudentMenu extends AppCompatActivity {
 //        final String name = getIntent().getStringExtra("name");
 //        text.setText("Welcome " + name);
         id = getIntent().getStringExtra("id");
-
+        System.out.println("Menu ID : " + id);
         viewNotes = (Button) findViewById(R.id.viewNotesButton);
 
 
@@ -75,8 +75,8 @@ public class StudentMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(StudentMenu.this, StudentGrades.class);
-                int userId = Integer.parseInt(id);
-                i.putExtra("userId", userId);
+
+                i.putExtra("userId", id);
                 startActivity(i);
             }
         });
@@ -87,7 +87,7 @@ public class StudentMenu extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i = new Intent(StudentMenu.this, AssignmentChoice.class);
-                i.putExtra("userId", id);
+                i.putExtra("userId", Integer.valueOf(id));
                 startActivity(i);
             }
         });

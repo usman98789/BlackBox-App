@@ -73,14 +73,17 @@ public class ViewProblems extends AppCompatActivity {
                     String temp;
                     String temp2;
                     System.out.println(serverDirFiltered.size());
-                    while (newList.size() <= 1){
+                    int limit = serverDirFiltered.size();
+                    while ((newList.size() < 2) && !(serverDirFiltered.size() == 0)){
                         index = randomGenerator.nextInt(serverDirFiltered.size());
                         temp = serverDirFiltered.get(index).toString();
 
                         temp2 = temp.substring(12, 13);
                         if (( temp2.equals(num)) && !(newList.contains(temp))) {
                             newList.add(temp);
+
                         }
+                        serverDirFiltered.remove(index);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -177,6 +180,7 @@ public class ViewProblems extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(ViewProblems.this, WhichProblemSet.class);
+        newList.clear();
         startActivity(i);
     }
 }
