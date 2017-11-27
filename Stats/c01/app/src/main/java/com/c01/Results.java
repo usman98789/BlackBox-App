@@ -16,6 +16,9 @@ import Exceptions.InvalidAssignmentException;
 import Exceptions.InvalidIdException;
 import Exceptions.InvalidMarkException;
 
+/**
+* The activity for results.
+*/
 public class Results extends AppCompatActivity {
 
     private static EditText title;
@@ -29,6 +32,12 @@ public class Results extends AppCompatActivity {
     private static int total;
     private static int num;
 
+    /**
+    * Starts the activity.
+    * @param savedInstanceState The data it most recently supplied on
+    * @exception e InvalidMarkException, InvalidIDException, InvalidAssignmentException
+    * @return No return value
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +92,13 @@ public class Results extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Student added3", Toast.LENGTH_LONG).show();
         }
         System.out.println("id " + id);
+        
         back.setOnClickListener(new View.OnClickListener() {
+            /**
+            * Responds when a click happened.
+            * @param view The content to display
+            * @return No return value
+            */
             @Override
             public void onClick(View v) {
                 Intent newi = new Intent(Results.this, StudentMenu.class);
