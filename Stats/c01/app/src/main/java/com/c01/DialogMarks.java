@@ -66,6 +66,11 @@ public class DialogMarks extends AppCompatActivity {
                         context = this.getApplicationContext();
                         button.setOnClickListener(new View.OnClickListener() {
 
+                            /**
+                            * Responds when a click happened.
+                            * @param view The content to display
+                            * @return No return value
+                            */
                             public void onClick(View view) {
                                 final EditText edit =  (EditText) findViewById(R.id.NewMark);
                                 String Mark = (String) edit.getText().toString();
