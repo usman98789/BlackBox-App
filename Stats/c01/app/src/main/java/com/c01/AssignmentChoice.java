@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+/**
+* The activity for assignment choice.
+*/
 public class AssignmentChoice extends AppCompatActivity {
 
     private static int num = 0;
