@@ -66,7 +66,7 @@ public class MultipleChoiceTest {
             for (File file : localDir) {
                 file.delete();
             }
-        } catch (Exception e) {g
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
