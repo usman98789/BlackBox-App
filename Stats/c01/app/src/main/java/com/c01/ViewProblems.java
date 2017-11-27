@@ -107,6 +107,12 @@ public class ViewProblems extends AppCompatActivity {
 
     }
 
+    /**
+    * Checks if fileTile can be displayed
+    * @param fileTile
+    * @exception e ParseException
+    * @return boolean True if can be displayed
+    */
     private boolean canBeDisplayed(String fileTile) {
         String releaseMonth;
         int releaseDay;
@@ -117,7 +123,6 @@ public class ViewProblems extends AppCompatActivity {
         int dueYear;
 
         Calendar calendar = Calendar.getInstance();
-        //calendar.set(2017, 0, 1); // used to quickly manually test
         Date current = calendar.getTime();
 
         Date releaseFile = null;
@@ -157,6 +162,10 @@ public class ViewProblems extends AppCompatActivity {
         return current.after(releaseFile) && current.before(endOfTerm);
     }
 
+    /**
+    * Parses file name.
+    * @return No return value
+    */
     private void parseFileName() {
         for (int i = 0; i < serverDir.size(); i++) {
             String temp = serverDir.get(i).toString();
@@ -168,6 +177,10 @@ public class ViewProblems extends AppCompatActivity {
         }
     }
 
+    /**
+    * Individualizes problem.
+    * @return No return value
+    */
     private void individulizeProblem() {
         Random randomGenerator = new Random();
         int index = 0;
@@ -185,6 +198,11 @@ public class ViewProblems extends AppCompatActivity {
         }
     }
 
+    /**
+    * Downloads file.
+    * @param position The position
+    * @return No return value
+    */
     private void downloadFile(int position) {
         downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
         Uri uri = Uri.parse("https://shev:Biscut123@megumin.ga/stats/assignments/" + fileList.getItemAtPosition(position).toString());
@@ -195,6 +213,11 @@ public class ViewProblems extends AppCompatActivity {
         Long reference = downloadManager.enqueue(request);
     }
 
+    /**
+    * Verifies file.
+    * @param fileName The name of the file
+    * @return boolean True if can be verified
+    */
     private boolean verifyFile(String fileName) {
         String delim = "[_.]";
         String[] tokens = fileName.split(delim);
