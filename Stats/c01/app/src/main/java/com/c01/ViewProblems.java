@@ -55,35 +55,8 @@ public class ViewProblems extends AppCompatActivity {
                     URL url = new URL("https://shev:Biscut123@megumin.ga/stats/assignments");
                     lister = new ApacheURLLister();
                     serverDir = lister.listFiles(url);
-
-                    for (int i = 0; i < serverDir.size(); i++) {
-                        String temp = serverDir.get(i).toString();
-                        temp = temp.replace("https://megumin.ga/stats/assignments/", "");
-
-                        serverDir.set(i, temp);
-                        if (canBeDisplayed(temp) && verifyFile(temp)) {
-                            serverDirFiltered.add(serverDir.get(i));
-                        }
-                        System.out.println(temp);
-                    }
-
-                    Random randomGenerator = new Random();
-                    int index = 0;
-                    String temp;
-                    String temp2;
-                    System.out.println(serverDirFiltered.size());
-                    int limit = serverDirFiltered.size();
-                    while ((newList.size() < 2) && !(serverDirFiltered.size() == 0)){
-                        index = randomGenerator.nextInt(serverDirFiltered.size());
-                        temp = serverDirFiltered.get(index).toString();
-
-                        temp2 = temp.substring(12, 13);
-                        if (( temp2.equals(num)) && !(newList.contains(temp))) {
-                            newList.add(temp);
-
-                        }
-                        serverDirFiltered.remove(index);
-                    }
+                    parseFileName();
+                    individulizeProblem();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -102,13 +75,7 @@ public class ViewProblems extends AppCompatActivity {
             fileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
-                    Uri uri = Uri.parse("https://shev:Biscut123@megumin.ga/stats/assignments/" + fileList.getItemAtPosition(position).toString());
-                    DownloadManager.Request request = new DownloadManager.Request(uri);
-                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                    request.setDestinationInExternalFilesDir(context.getApplicationContext(), Environment.DIRECTORY_DOWNLOADS, fileList.getItemAtPosition(position).toString());
-                    System.out.println(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString());
-                    Long reference = downloadManager.enqueue(request);
+                    downloadFile(position);
                     serverDirFiltered.clear();
                 }
             });
@@ -164,6 +131,44 @@ public class ViewProblems extends AppCompatActivity {
         System.out.println(current.after(releaseFile));
         System.out.println(current.before(endOfTerm));
         return current.after(releaseFile) && current.before(endOfTerm);
+    }
+
+    private void parseFileName() {
+        for (int i = 0; i < serverDir.size(); i++) {
+            String temp = serverDir.get(i).toString();
+            temp = temp.replace("https://megumin.ga/stats/assignments/", "");
+            serverDir.set(i, temp);
+            if (canBeDisplayed(temp) && verifyFile(temp)) {
+                serverDirFiltered.add(serverDir.get(i));
+            }
+        }
+    }
+
+    private void individulizeProblem() {
+        Random randomGenerator = new Random();
+        int index = 0;
+        String temp;
+        String temp2;
+        while ((newList.size() < 2) && !(serverDirFiltered.size() == 0)){
+            index = randomGenerator.nextInt(serverDirFiltered.size());
+            temp = serverDirFiltered.get(index).toString();
+            temp2 = temp.substring(12, 13);
+            if (( temp2.equals(num)) && !(newList.contains(temp))) {
+                newList.add(temp);
+
+            }
+            serverDirFiltered.remove(index);
+        }
+    }
+
+    private void downloadFile(int position) {
+        downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse("https://shev:Biscut123@megumin.ga/stats/assignments/" + fileList.getItemAtPosition(position).toString());
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(context.getApplicationContext(), Environment.DIRECTORY_DOWNLOADS, fileList.getItemAtPosition(position).toString());
+        System.out.println(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString());
+        Long reference = downloadManager.enqueue(request);
     }
 
     private boolean verifyFile(String fileName) {
