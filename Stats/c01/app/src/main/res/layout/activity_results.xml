@@ -10,17 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
+        <TextView
             android:id="@+id/resultsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="27dp"
             android:layout_marginTop="21dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Problem Set Results" />
+            android:text="Problem Set Results"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/first"
@@ -29,7 +30,9 @@
             android:layout_alignStart="@+id/resultsText"
             android:layout_below="@+id/resultsText"
             android:layout_marginTop="28dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
 
         <TextView
             android:id="@+id/second"
@@ -38,7 +41,9 @@
             android:layout_alignEnd="@+id/first"
             android:layout_below="@+id/first"
             android:layout_marginTop="30dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
 
         <TextView
             android:id="@+id/third"
@@ -47,25 +52,31 @@
             android:layout_alignStart="@+id/second"
             android:layout_below="@+id/second"
             android:layout_marginTop="35dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
 
         <TextView
             android:id="@+id/fourth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/third"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/third"
-            android:layout_marginTop="45dp"
-            android:text="TextView" />
+            android:layout_marginTop="38dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
 
         <TextView
             android:id="@+id/fifth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/fourth"
+            android:layout_alignStart="@+id/fourth"
             android:layout_below="@+id/fourth"
-            android:layout_marginTop="54dp"
-            android:text="TextView" />
+            android:layout_marginTop="38dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
 
         <Button
             android:id="@+id/backToMain"

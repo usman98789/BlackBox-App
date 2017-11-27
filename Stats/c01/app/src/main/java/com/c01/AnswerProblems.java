@@ -61,7 +61,6 @@ public class AnswerProblems extends AppCompatActivity {
         String path = "/sdcard/Android/data/com.c01/files/Download/";
         File f = new File(path);
         File file[] = f.listFiles();
-        file = filterList(file);
 
 
         int size = 0;
@@ -71,106 +70,113 @@ public class AnswerProblems extends AppCompatActivity {
         } else if (file.length == 0){
             showAlert();
         } else {
-            if (file.length > 5) {
-                List<File> temp = Arrays.asList(file);
-                Collections.shuffle(temp);
-                temp.toArray(file);
-                for (int i = 0; i < 5; i++) {
-                    tempFilesPath[i] = file[i].getAbsolutePath();
-                }
-
+            file = filterList(file);
+            if (file == null) {
+                showAlert();
+            } else if (file.length == 0) {
+                showAlert();
             } else {
-                size = file.length;
-                tempFilesPath = new String[size];
-                feedbackArr = new String[size];
-                for (int i = 0; i < tempFilesPath.length; i++) {
-                    tempFilesPath[i] = file[i].getAbsolutePath();
+                if (file.length > 5) {
+                    List<File> temp = Arrays.asList(file);
+                    Collections.shuffle(temp);
+                    temp.toArray(file);
+                    for (int i = 0; i < 5; i++) {
+                        tempFilesPath[i] = file[i].getAbsolutePath();
+                    }
+
+                } else {
+                    size = file.length;
+                    tempFilesPath = new String[size];
+                    feedbackArr = new String[size];
+                    for (int i = 0; i < tempFilesPath.length; i++) {
+                        tempFilesPath[i] = file[i].getAbsolutePath();
+                    }
                 }
-            }
 
-            counter = 0;
-            feedbackCounter = 0;
-            TextFileReader t = new TextFileReader();
+                counter = 0;
+                feedbackCounter = 0;
+                TextFileReader t = new TextFileReader();
 
 
-            try {
-                String[] contents = t.readFile(tempFilesPath[counter]);
-                counter ++;
-                String [] temp;
-                correctAnswer = contents[4];
-                feedback = contents[5];
-                temp = setInformation(contents);
-                for (int i = 0; i < choices.getChildCount(); i++) {
-                    ((RadioButton) choices.getChildAt(i)).setText(temp[i]);
+                try {
+                    String[] contents = t.readFile(tempFilesPath[counter]);
+                    counter ++;
+                    String [] temp;
+                    correctAnswer = contents[4];
+                    feedback = contents[5];
+                    temp = setInformation(contents);
+                    for (int i = 0; i < choices.getChildCount(); i++) {
+                        ((RadioButton) choices.getChildAt(i)).setText(temp[i]);
+                    }
+
+                    mathView.setText(contents[0].toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                
-                mathView.setText(contents[0].toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-            next.setOnClickListener(new View.OnClickListener() {
-                
-                /**
-                * Responds when a click happened.
-                * @param v The content to display
-                * @exception e IOException
-                * @return No return value
-                */
-                @Override
-                public void onClick(View v) {
-                    int radioID = choices.getCheckedRadioButtonId();
-                    View radioButton = choices.findViewById(radioID);
-                    int idx = choices.indexOfChild(radioButton);
-                    RadioButton r = (RadioButton) choices.getChildAt(idx);
+                next.setOnClickListener(new View.OnClickListener() {
+
+                    /**
+                     * Responds when a click happened.
+                     * @param v The content to display
+                     * @exception e IOException
+                     * @return No return value
+                     */
+                    @Override
+                    public void onClick(View v) {
+                        int radioID = choices.getCheckedRadioButtonId();
+                        View radioButton = choices.findViewById(radioID);
+                        int idx = choices.indexOfChild(radioButton);
+                        RadioButton r = (RadioButton) choices.getChildAt(idx);
 
 
-                    if (r == null) {
-                        Toast.makeText(getApplicationContext(), "Choose an option", Toast.LENGTH_LONG).show();
-                    } else {
-                        if (counter == tempFilesPath.length) {
-                            String answer = r.getText().toString();
-                            // Assignment complete get results
-                            if (answer.equals(correctAnswer)) {
-                                feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is correct";
-                            } else {
-                                feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is wrong: " + feedback;
-                            }
-                            counter = 0;
-                            feedbackCounter = 0;
-                            int id = getIntent().getIntExtra("userId", 0);
-                            Intent i = new Intent(AnswerProblems.this, Results.class);
-                            i.putExtra("feedback", feedbackArr);
-                            i.putExtra("userId", id);
-                            i.putExtra("num", num);
-                            startActivity(i);
+                        if (r == null) {
+                            Toast.makeText(getApplicationContext(), "Choose an option", Toast.LENGTH_LONG).show();
                         } else {
-                            String answer = r.getText().toString();
-                            if (answer.equals(correctAnswer)) {
-                                feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is correct";
-                            } else {
-                                feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is wrong: " + feedback;
-                            }
-                            feedbackCounter++;
-
-                            try {
-                                String[] contents = t.readFile(tempFilesPath[counter]);
-                                counter++;
-                                String[] temp;
-                                correctAnswer = contents[4];
-                                feedback = contents[5];
-                                temp = setInformation(contents);
-                                for (int i = 0; i < choices.getChildCount(); i++) {
-                                    ((RadioButton) choices.getChildAt(i)).setText(temp[i]);
+                            if (counter == tempFilesPath.length) {
+                                String answer = r.getText().toString();
+                                // Assignment complete get results
+                                if (answer.equals(correctAnswer)) {
+                                    feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is correct";
+                                } else {
+                                    feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is wrong: " + feedback;
                                 }
-                                mathView.setText(contents[0].toString());
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                counter = 0;
+                                feedbackCounter = 0;
+                                int id = getIntent().getIntExtra("userId", 0);
+                                Intent i = new Intent(AnswerProblems.this, Results.class);
+                                i.putExtra("feedback", feedbackArr);
+                                i.putExtra("userId", id);
+                                i.putExtra("num", num);
+                                startActivity(i);
+                            } else {
+                                String answer = r.getText().toString();
+                                if (answer.equals(correctAnswer)) {
+                                    feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is correct";
+                                } else {
+                                    feedbackArr[feedbackCounter] = "Question " + (feedbackCounter + 1) + " is wrong: " + feedback;
+                                }
+                                feedbackCounter++;
+
+                                try {
+                                    String[] contents = t.readFile(tempFilesPath[counter]);
+                                    counter++;
+                                    String[] temp;
+                                    correctAnswer = contents[4];
+                                    feedback = contents[5];
+                                    temp = setInformation(contents);
+                                    for (int i = 0; i < choices.getChildCount(); i++) {
+                                        ((RadioButton) choices.getChildAt(i)).setText(temp[i]);
+                                    }
+                                    mathView.setText(contents[0].toString());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                     }
-                }
-            });
+                });
+            }
         }
 
     }
