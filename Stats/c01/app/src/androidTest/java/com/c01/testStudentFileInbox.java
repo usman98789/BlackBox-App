@@ -399,7 +399,7 @@ public class testStudentFileInbox {
                         childAtPosition(
                                 withId(R.id.relativeLayout),
                                 0)))
-                .atPosition(2);
+                .atPosition(0);
         appCompatTextView.perform(click());
 
         try {
@@ -413,7 +413,7 @@ public class testStudentFileInbox {
                         childAtPosition(
                                 withId(R.id.relativeLayout),
                                 0)))
-                .atPosition(4);
+                .atPosition(1);
         appCompatTextView2.perform(click());
 
         try {

@@ -139,7 +139,7 @@ public class TestViewAnnouncement {
                                 childAtPosition(
                                         withId(R.id.nav_view),
                                         0)),
-                        10),
+                        8),
                         isDisplayed()));
         navigationMenuItemView2.perform(click());
 

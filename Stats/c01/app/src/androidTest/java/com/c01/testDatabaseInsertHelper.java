@@ -57,7 +57,7 @@ public class testDatabaseInsertHelper {
     @Test
     public void testInsertNewUser() throws Exception {
         User user = null;
-        int userId = (int)mydb.insertNewUser("menu", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+        int userId = (int)mydb.insertNewUser("menu", 19, roleMap.get(Roles.STUDENT), "123");
         Cursor results = mydb.getUserDetails(userId);
         // for each result get the user details
         while (results.moveToNext()) {
@@ -67,24 +67,21 @@ public class testDatabaseInsertHelper {
             // check which user it is and create the users
             if (role.equals("PROF")) {
                 user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }  else if (role.equals("STUDENT")) {
                 user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }
         }
         results.close();
         assertEquals("menu", user.getName());
         assertEquals(19, user.getAge());
-        assertEquals("123street", user.getAddress());
     }
 
     @Test
     public void testInsertMaxAgeUser() throws Exception {
         User user = null;
-        int userId = (int)mydb.insertNewUser("menu", 2147483647, "123street", roleMap.get(Roles.STUDENT), "123");
+        int userId = (int)mydb.insertNewUser("menu", 2147483647, roleMap.get(Roles.STUDENT), "123");
         Cursor results = mydb.getUserDetails(userId);
         // for each result get the user details
         while (results.moveToNext()) {
@@ -94,24 +91,21 @@ public class testDatabaseInsertHelper {
             // check which user it is and create the users
             if (role.equals("PROF")) {
                 user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }  else if (role.equals("STUDENT")) {
                 user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }
         }
         results.close();
         assertEquals("menu", user.getName());
         assertEquals(2147483647, user.getAge());
-        assertEquals("123street", user.getAddress());
     }
 
     @Test
     public void testInsertZeroAgeUser() throws Exception {
         User user = null;
-        int userId = (int)mydb.insertNewUser("menu", 0, "123street", roleMap.get(Roles.STUDENT), "123");
+        int userId = (int)mydb.insertNewUser("menu", 0, roleMap.get(Roles.STUDENT), "123");
         Cursor results = mydb.getUserDetails(userId);
         // for each result get the user details
         while (results.moveToNext()) {
@@ -121,24 +115,21 @@ public class testDatabaseInsertHelper {
             // check which user it is and create the users
             if (role.equals("PROF")) {
                 user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }  else if (role.equals("STUDENT")) {
                 user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }
         }
         results.close();
         assertEquals("menu", user.getName());
         assertEquals(0, user.getAge());
-        assertEquals("123street", user.getAddress());
     }
 
     @Test
     public void testInsertMinNegativeAgeUser() throws Exception {
         User user = null;
-        int userId = (int)mydb.insertNewUser("menu", -2147483648, "123street", roleMap.get(Roles.STUDENT), "123");
+        int userId = (int)mydb.insertNewUser("menu", -2147483648, roleMap.get(Roles.STUDENT), "123");
         Cursor results = mydb.getUserDetails(userId);
         // for each result get the user details
         while (results.moveToNext()) {
@@ -148,24 +139,21 @@ public class testDatabaseInsertHelper {
             // check which user it is and create the users
             if (role.equals("PROF")) {
                 user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }  else if (role.equals("STUDENT")) {
                 user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }
         }
         results.close();
         assertEquals("menu", user.getName());
         assertEquals(-2147483648, user.getAge());
-        assertEquals("123street", user.getAddress());
     }
 
     @Test
     public void testInsertNegativeAgeUser() throws Exception {
         User user = null;
-        int userId = (int)mydb.insertNewUser("menu", -1, "123street", roleMap.get(Roles.STUDENT), "123");
+        int userId = (int)mydb.insertNewUser("menu", -1, roleMap.get(Roles.STUDENT), "123");
         Cursor results = mydb.getUserDetails(userId);
         // for each result get the user details
         while (results.moveToNext()) {
@@ -175,24 +163,21 @@ public class testDatabaseInsertHelper {
             // check which user it is and create the users
             if (role.equals("PROF")) {
                 user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }  else if (role.equals("STUDENT")) {
                 user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }
         }
         results.close();
         assertEquals("menu", user.getName());
         assertEquals(-1, user.getAge());
-        assertEquals("123street", user.getAddress());
     }
 
     @Test
     public void testInsertBlankNameUser() throws Exception {
         User user = null;
-        int userId = (int)mydb.insertNewUser("", 1, "123street", roleMap.get(Roles.STUDENT), "123");
+        int userId = (int)mydb.insertNewUser("", 1, roleMap.get(Roles.STUDENT), "123");
         Cursor results = mydb.getUserDetails(userId);
         // for each result get the user details
         while (results.moveToNext()) {
@@ -202,24 +187,21 @@ public class testDatabaseInsertHelper {
             // check which user it is and create the users
             if (role.equals("PROF")) {
                 user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }  else if (role.equals("STUDENT")) {
                 user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }
         }
         results.close();
         assertEquals("", user.getName());
         assertEquals(1, user.getAge());
-        assertEquals("123street", user.getAddress());
     }
 
     @Test
     public void testInsertBlankAddressUser() throws Exception {
         User user = null;
-        int userId = (int)mydb.insertNewUser("menu", 1, "", roleMap.get(Roles.STUDENT), "123");
+        int userId = (int)mydb.insertNewUser("menu", 1, roleMap.get(Roles.STUDENT), "123");
         Cursor results = mydb.getUserDetails(userId);
         // for each result get the user details
         while (results.moveToNext()) {
@@ -229,24 +211,21 @@ public class testDatabaseInsertHelper {
             // check which user it is and create the users
             if (role.equals("PROF")) {
                 user = new Prof(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }  else if (role.equals("STUDENT")) {
                 user = new Student(userId, results.getString(results.getColumnIndex("NAME")),
-                        results.getInt(results.getColumnIndex("AGE")),
-                        results.getString(results.getColumnIndex("ADDRESS")), context);
+                        results.getInt(results.getColumnIndex("AGE")), context);
             }
         }
         results.close();
         assertEquals("menu", user.getName());
         assertEquals(1, user.getAge());
-        assertEquals("", user.getAddress());
     }
 
     @Test
     public void testInsertBlankPassUser() throws Exception {
         try {
-            int userId = (int)mydb.insertNewUser("menu", 1, "123", roleMap.get(Roles.STUDENT), "");
+            int userId = (int)mydb.insertNewUser("menu", 1, roleMap.get(Roles.STUDENT), "");
             Log.e("Blank Password", "There is an user account without a password!");
         } catch (Exception e) {
         }
@@ -255,7 +234,7 @@ public class testDatabaseInsertHelper {
     @Test
     public void testInsertBlankUser() throws Exception {
         try {
-            int userId = (int)mydb.insertNewUser("", 1, "", roleMap.get(Roles.STUDENT), "");
+            int userId = (int)mydb.insertNewUser("", 1, roleMap.get(Roles.STUDENT), "");
             Log.e("Blank white account", "There is a blank user account");
         } catch (Exception e) {
         }
@@ -279,7 +258,7 @@ public class testDatabaseInsertHelper {
     @Test
     public void testInsertAssignmentMark() throws Exception {
         int id = 0;
-        id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+        id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
         mydb.insertAssignmentMark(id, 50, 1);
         double mark = mydb.getAssignmentMark(id, 1);
         assertEquals(50, mark , 0);
@@ -289,7 +268,7 @@ public class testDatabaseInsertHelper {
     public void testInsertAssignmentNegativeMark() throws Exception {
         try {
             int id = 0;
-            id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+            id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
             mydb.insertAssignmentMark(id, -50, 1);
             Log.e("Negative Mark", "There is a negative mark for an assignment");
         } catch (Exception e) {
@@ -300,7 +279,7 @@ public class testDatabaseInsertHelper {
     public void testInsertAssignmentOverMark() throws Exception {
         try {
             int id = 0;
-            id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+            id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
             mydb.insertAssignmentMark(id, 101, 1);
             Log.e("Mark", "There is a mark over 100% for an assignment");
         } catch (Exception e) {
@@ -311,7 +290,7 @@ public class testDatabaseInsertHelper {
     public void testInsertAssignmentOverMarkWithWrongId() throws Exception {
         try {
             int id = 0;
-            id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+            id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
             mydb.insertAssignmentMark(-1, 101, 1);
             Log.e("ID", "No such ID and assignment mark over 100%");
         } catch (Exception e) {
@@ -322,7 +301,7 @@ public class testDatabaseInsertHelper {
     public void testInsertAssignmentMarkWithWrongId() throws Exception {
         try {
             int id = 0;
-            id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+            id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
             mydb.insertAssignmentMark(-1, 100, 1);
             Log.e("ID", "No such ID and assignment mark over 100%");
         } catch (Exception e) {
@@ -332,7 +311,7 @@ public class testDatabaseInsertHelper {
     @Test
     public void testInsertAssignmentPerfectMark() throws Exception {
         int id = 0;
-        id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+        id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
         mydb.insertAssignmentMark(id, 100, 1);
         double mark = mydb.getAssignmentMark(id, 1);
         assertEquals(100, mark , 0);
@@ -342,7 +321,7 @@ public class testDatabaseInsertHelper {
     public void testInitInsertMessage() throws Exception {
         try {
             int id = 0;
-            id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+            id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
             int msgId = (int)mydb.insertMessage(id, "hello");
             String msg = mydb.getSpecificMessage(msgId);
             assertEquals("hello", msg);
@@ -354,7 +333,7 @@ public class testDatabaseInsertHelper {
     public void testInitInsertMessageWithWrongID() throws Exception {
         try {
             int id = 0;
-            id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+            id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
             int msgId = (int)mydb.insertMessage(id, "hello");
             String msg = mydb.getSpecificMessage(-1);
         } catch (Exception e) {
@@ -365,7 +344,7 @@ public class testDatabaseInsertHelper {
     public void testInitInsertMessageWithBlankMessage() throws Exception {
         try {
             int id = 0;
-            id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+            id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
             int msgId = (int)mydb.insertMessage(id, "");
             String msg = mydb.getSpecificMessage(id);
             assertEquals("", msg);
@@ -377,7 +356,7 @@ public class testDatabaseInsertHelper {
     public void testInitInsertMessageWithBlankMessageAndWrongId() throws Exception {
         try {
             int id = 0;
-            id = (int)mydb.insertNewUser("gagan", 19, "123street", roleMap.get(Roles.STUDENT), "123");
+            id = (int)mydb.insertNewUser("gagan", 19, roleMap.get(Roles.STUDENT), "123");
             int msgId = (int)mydb.insertMessage(id, "");
             String msg = mydb.getSpecificMessage(-1);
             assertEquals("", msg);

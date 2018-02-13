@@ -90,7 +90,7 @@ public class testEditQuestion {
                                 childAtPosition(
                                         withId(R.id.nav_view),
                                         0)),
-                        6),
+                        5),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
 
@@ -111,7 +111,7 @@ public class testEditQuestion {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("$Prove : \\(V - E + F = 2)\\$"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("$Prove : \\(V - E + F = 2)\\$_Contraction_Face_Edges_Contraction_Textbook"), closeSoftKeyboard());
 
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab),

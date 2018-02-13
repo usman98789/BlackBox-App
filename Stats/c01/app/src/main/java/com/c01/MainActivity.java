@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import Database.DatabaseDriver.DatabaseSelectHelper;
 import android.widget.Toast;
 import Database.DatabaseDriver.DatabaseInsertHelper;
@@ -29,29 +29,8 @@ public class MainActivity extends AppCompatActivity {
     String strUsernum;
     String strPass;
     Context context;
-
-    /**
-    * Shows alert when id or password incorrect.
-    * @return No return value
-    */
-    public void showAlert() {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("ID or password was incorrect")
-                .setPositiveButton("Close", new DialogInterface.OnClickListener() {
-                    
-                    /**
-                    * Responds when a click happened.
-                    * @param dialogInterface The displaying dialog interface
-                    * @param i The button or position of item that was clicked
-                    * @return No return value
-                    */
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-        myAlert.show();
-    }
+    String studentName;
+    String profName;
 
     /**
     * Starts the activity.
@@ -70,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
                 DatabaseInsertHelper.insertRole("PROF", this.getApplicationContext());
                 DatabaseInsertHelper.insertRole("STUDENT", this.getApplicationContext());
                 EnumMapRoles roleMap = new EnumMapRoles(this.getApplicationContext());
-                int id = DatabaseInsertHelper.insertNewUser("ProfA", 40, "123street", roleMap.get(Roles.PROF), "123", this.getApplicationContext());
-                int id4 = DatabaseInsertHelper.insertNewUser("Student1", 19, "123street", roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
-                int id5 = DatabaseInsertHelper.insertNewUser("Student2", 21, "losses", roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
+                int id = DatabaseInsertHelper.insertNewUser("ProfA", 40, roleMap.get(Roles.PROF), "123", this.getApplicationContext());
+                int id4 = DatabaseInsertHelper.insertNewUser("Student1", 19, roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
+                int id5 = DatabaseInsertHelper.insertNewUser("Student2", 21, roleMap.get(Roles.STUDENT), "123", this.getApplicationContext());
                 Toast.makeText(getApplicationContext(), "New", Toast.LENGTH_LONG).show();
             } catch (InvalidNameException e) {
                 Toast.makeText(getApplicationContext(), String.valueOf(e), Toast.LENGTH_LONG).show();
@@ -81,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
-            
+
             /**
             * Responds when a click happened.
             * @param view The content to display
@@ -97,10 +76,12 @@ public class MainActivity extends AppCompatActivity {
                     User user = DatabaseSelectHelper.getUserDetails(id, context);
                     if (user.getRoleId() == roleMap.get(Roles.PROF)) {
                         nextpage = new Intent(MainActivity.this, InstructorMenu.class);
+                        nextpage.putExtra("name", profName);
                         startActivity(nextpage);
                     } else if (user.getRoleId() == roleMap.get(Roles.STUDENT)) {
-                        nextpage = new Intent(MainActivity.this, MainMenu.class);
+                        nextpage = new Intent(MainActivity.this, StudentMenu.class);
                         nextpage.putExtra("id", etUserName.getText().toString());
+                        nextpage.putExtra("name", studentName);
                         startActivity(nextpage);
                     }
                 }
@@ -109,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-    * Check if userID is authorized.
+    * Creates a user.
     * @param context The context
     * @return boolean True if userID and password match.
     */
@@ -136,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-    * Check if login.
+    * Login.
     * @param context The context
     * @return boolean True if login.
     */
@@ -156,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             // Authenticate inputed password
             Prof prof = (Prof) DatabaseSelectHelper.getUserDetails
                     (id, context);
+            profName = prof.getName();
             boolean passed = prof.authenticate(pass, context);
             if (passed) {
                 // Allow Prof
@@ -167,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             // Authenticate inputed password
             Student student = (Student) DatabaseSelectHelper.getUserDetails
                     (id, context);
+            studentName = student.getName();
             boolean passed = student.authenticate(pass, context);
             if (passed) {
                 // Allow student
@@ -179,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-    
+
     /**
     * To display information.
     * @param info The information to be displayed
@@ -196,7 +179,11 @@ public class MainActivity extends AppCompatActivity {
         });
         myAlert.show();
     }
-    
+
+    /**
+    * Gets creds.
+    * @return No return value
+    */
     public void getCreds() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LinearLayout layout = new LinearLayout(this);
@@ -214,10 +201,15 @@ public class MainActivity extends AppCompatActivity {
         dialog.setView(layout);
 
         dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            
+            /**
+            * Responds when a click happened.
+            * @param dialogInterface The dialog that received the click
+            * @param i The button that was clicked or the position of the item clicked
+            * @return No return value
+            */
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-//                id = Integer.parseInt(idBox.getText().toString());
-//                password = passwordBox.getText().toString();
             }
         });
         dialog.show();
@@ -232,4 +224,3 @@ public class MainActivity extends AppCompatActivity {
         // Do Here what ever you want do on back press;
     }
 }
-

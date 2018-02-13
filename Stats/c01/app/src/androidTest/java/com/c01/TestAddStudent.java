@@ -88,7 +88,7 @@ public class TestAddStudent {
                                 childAtPosition(
                                         withId(R.id.nav_view),
                                         0)),
-                        2),
+                        3),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
 
@@ -102,23 +102,13 @@ public class TestAddStudent {
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("Gagan"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.address),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatEditText4.perform(replaceText("123Street"), closeSoftKeyboard());
-
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.Age),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                3),
+                                2),
                         isDisplayed()));
         appCompatEditText5.perform(replaceText("19"), closeSoftKeyboard());
 
@@ -128,7 +118,7 @@ public class TestAddStudent {
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                4),
+                                3),
                         isDisplayed()));
         appCompatEditText6.perform(replaceText("123"), closeSoftKeyboard());
 
@@ -139,7 +129,7 @@ public class TestAddStudent {
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                5),
+                                4),
                         isDisplayed()));
         appCompatButton2.perform(click());
 
@@ -183,7 +173,7 @@ public class TestAddStudent {
         appCompatButton4.perform(click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.adminTitle), withText("Welcome Student"),
+                allOf(withId(R.id.studentTitle), withText("Welcome Student"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),

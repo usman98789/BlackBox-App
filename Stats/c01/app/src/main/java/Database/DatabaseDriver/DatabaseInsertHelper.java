@@ -2,34 +2,24 @@ package Database.DatabaseDriver;
 
 
 import android.content.Context;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
 import Exceptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import java.math.BigDecimal;
 
 @WebServlet("/FileUpload")
 @MultipartConfig
@@ -42,14 +32,13 @@ public class DatabaseInsertHelper extends HttpServlet {
      *
      * @param name     the name of the user
      * @param age      the age of the user
-     * @param address  the address of the user
      * @param roleId   the roleId of the user
      * @param password the password of the user
      * @param context  is the context received from the activity
      * @return Id if successful, -1 otherwise
      * @throws InvalidNameException if the name is null
      */
-    public static int insertNewUser(String name, int age, String address, int roleId, String password,
+    public static int insertNewUser(String name, int age, int roleId, String password,
                                     Context context) throws InvalidNameException {
 
         if (password.length() < 1) {
@@ -72,7 +61,7 @@ public class DatabaseInsertHelper extends HttpServlet {
         }
         // insert new user
         int id = 0;
-        id = (int) mydb.insertNewUser(name, age, address, roleId, password);
+        id = (int) mydb.insertNewUser(name, age, roleId, password);
         mydb.close();
         return id;
     }
@@ -99,9 +88,9 @@ public class DatabaseInsertHelper extends HttpServlet {
         return success;
     }
 
-    public static void insertMark(int userId, double mark, Context context) {
+    public static void insertFeedBackMark(int userId, double mark, Context context) {
         DatabaseDriverA mydb = new DatabaseDriverA(context);
-        mydb.insertMark(userId, mark);
+        mydb.insertFeedBackMark(userId, mark);
         mydb.close();
     }
 

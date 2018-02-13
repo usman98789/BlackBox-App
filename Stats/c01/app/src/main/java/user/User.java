@@ -20,7 +20,6 @@ public abstract class User implements Authenticate, Serializable {
   // initialize variables
   private int id;
   private String name;
-  private String address;
   private int age;
   private int roleId;
   private boolean authenticated;
@@ -103,7 +102,4 @@ public abstract class User implements Authenticate, Serializable {
     return this.authenticated;
   }
 
-  public String getAddress() {
-    return this.address;
-  }
 }

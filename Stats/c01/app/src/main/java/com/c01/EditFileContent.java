@@ -53,7 +53,9 @@ public class EditFileContent extends AppCompatActivity {
     private static InputStream is;
     private static Boolean canDo = false;
     private static File f;
-    private static String path;
+    private static String path = "/data/data/com.c01/files/";
+    private static String oldProblemSetPath = "";
+    private static String oldFileName = "";
     private static Intent i;
 
     /**
@@ -79,11 +81,23 @@ public class EditFileContent extends AppCompatActivity {
         assign_question = i.getIntExtra("assign_question", 0);
         System.out.println("Problem set -> " + assign + " Question Number -> " + assign_question);
         String text = i.getStringExtra("text");
+        oldProblemSetPath = i.getStringExtra("oldFile");
+        oldFileName = i.getStringExtra("fileName");
 
         editText.setText(text);
         mathView.setText(content.getText().toString());
 
         content.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
 
             /**
             * Notifies when text has been changed within s.
@@ -99,58 +113,19 @@ public class EditFileContent extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-          
+
             /**
             * Responds when a click happened.
             * @param view The content to display
-            * @exception e IOException, FileNotFoundException
             * @return No return value
             */
             @Override
             public void onClick(View view) {
                 System.out.println("Problem set -> " + assign + " Question Number -> " + assign_question);
-                Snackbar.make(view, "Editted Finalized Edit", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                Toast.makeText(context.getApplicationContext(), "Editing problem",
-                        Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), "Problem_Set_" + assign + "_Q_" + assign_question + ".txt",
-                        Toast.LENGTH_LONG).show();
-                try {
-                    name = "Problem_Set_" + assign + "_Q_" + assign_question + ".txt";
-                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt", Context.MODE_PRIVATE));
-                    outputStreamWriter.write(content.getText().toString());
-                    outputStreamWriter.close();
-
-                } catch (IOException e) {
-                    Log.e("Exception", "File write failed: " + e.toString());
-                }
-
-                String ret = "";
-                try {
-                    InputStream inputStream = context.openFileInput("Problem_Set_" + assign + "_Q_" + assign_question + ".txt");
-                    is = inputStream;
-                    if (inputStream != null) {
-                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                        String receiveString = "";
-                        StringBuilder stringBuilder = new StringBuilder();
-
-                        while ((receiveString = bufferedReader.readLine()) != null) {
-                            stringBuilder.append(receiveString);
-                        }
-
-                        inputStream.close();
-                        ret = stringBuilder.toString();
-                        Toast.makeText(context.getApplicationContext(), ret,
-                                Toast.LENGTH_LONG).show();
-                    }
-                } catch (FileNotFoundException e) {
-                    Log.e("login activity", "File not found: " + e.toString());
-                } catch (IOException e) {
-                    Log.e("login activity", "Can not read file: " + e.toString());
-                }
-
+                printBanner(view);
+                writeToFile();
+                readFile();
+                deleteFile();
                 assign_question++;
 
                 // Uploading txt to server
@@ -169,10 +144,9 @@ public class EditFileContent extends AppCompatActivity {
 
                         Log.d("supertest", "in cache dir");
                         Thread t = new Thread(new Runnable() {
-                          
+
                             /**
                             * Warblegarble request.
-                            * @exception e IOException
                             * @return No return value
                             */
                             @Override
@@ -239,6 +213,63 @@ public class EditFileContent extends AppCompatActivity {
     }
 
     /**
+    * Prints banner.
+    * @param view The content to be displayed
+    * @return No return value
+    */
+    private void printBanner(View view) {
+        Snackbar.make(view, "Editted Finalized Edit", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        Toast.makeText(context.getApplicationContext(), "Editing problem", Toast.LENGTH_LONG).show();
+        Toast.makeText(context.getApplicationContext(), oldFileName, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+    * Writes to file.
+    * @return No return value
+    */
+    private void writeToFile() {
+        try {
+            name = oldFileName;
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(oldFileName, Context.MODE_PRIVATE));
+            outputStreamWriter.write(content.getText().toString());
+            outputStreamWriter.close();
+
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    /**
+    * Reads file.
+    * @return No return value
+    */
+    private void readFile() {
+        try {
+            InputStream inputStream = context.openFileInput(oldFileName);
+            is = inputStream;
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                String ret = stringBuilder.toString();
+                Toast.makeText(context.getApplicationContext(), ret,
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+    }
+
+    /**
     * Return one of the possible clip MIME types.
     * @param path The path
     * @return One of the possible clip MIME types
@@ -249,11 +280,21 @@ public class EditFileContent extends AppCompatActivity {
     }
 
     /**
+    * Deletes file.
+    * @return No return value
+    */
+    private void deleteFile() {
+        File oldProblemSet = new File (oldProblemSetPath);
+        oldProblemSet.delete();
+    }
+
+    /**
     * Responds when user presses the back key.
     * @return No return value
     */
     @Override
     public void onBackPressed() {
+        deleteFile();
         Intent i = new Intent(EditFileContent.this, CreateProblemSet.class);
         startActivity(i);
     }

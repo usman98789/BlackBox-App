@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.c01.AnswerProblems">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+            android:id="@+id/choices"
+            android:layout_width="335dp"
+            android:layout_height="279dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteY="102dp">
+
+            <RadioButton
+                android:id="@+id/choiceOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_weight="1"
+                android:text="Choice One"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteY="128dp" />
+
+            <RadioButton
+                android:id="@+id/choiceTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_weight="1"
+                android:text="Choice Two"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteY="208dp" />
+
+            <RadioButton
+                android:id="@+id/choiceThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_weight="1"
+                android:text="Choice Three"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.632" />
+
+        </RadioGroup>
+
+        <com.nishant.math.MathView
+            android:id="@+id/math_view_assignment"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.nishant.math.MathView>
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/choices"
+            android:layout_below="@+id/choices"
+            android:layout_marginTop="39dp"
+            android:text="Next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -69,7 +69,7 @@ public class TestStudentLogin {
         appCompatButton.perform(click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.adminTitle), withText("Welcome Student"),
+                allOf(withId(R.id.studentTitle), withText("Welcome Student"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
